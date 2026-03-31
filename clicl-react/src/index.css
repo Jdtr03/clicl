@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #F15A24;
+  --color-navy: #010521;
+  --color-navy-accent: #020836;
+  --color-navy-light: #050B3B;
+  --color-off-white: #F4F4F4;
+  --color-steel-blue: #4682B4;
+  --color-slate-blue: #1E293B;
+  --color-studio-gray: #D1D5DB;
+  
+  --font-family-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-display: "Plus Jakarta Sans", sans-serif;
+
+  --image-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+:root {
+    --primary-glow: rgba(241, 90, 36, 0.4);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    @apply bg-off-white text-navy antialiased overflow-x-hidden font-sans;
+    scroll-behavior: smooth;
+}
+
+/* Glassmorphism */
+.glass-panel {
+    @apply backdrop-blur-md border;
+    background: var(--glass-bg);
+    border-color: var(--glass-border);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-scrolled {
+    @apply bg-white/95 backdrop-blur-xl shadow-lg border-b border-navy/5 h-20;
+}
+
+.nav-link {
+    @apply transition-colors duration-200;
+}
+
+.text-stroke {
+    -webkit-text-stroke: 1px #F15A24;
+    color: transparent;
+    @apply transition-all duration-500;
+}
+
+.text-stroke:hover {
+    color: var(--color-primary);
+    -webkit-text-stroke: 1px transparent;
+}
+
+.logo-cloud img {
+    @apply grayscale brightness-0 opacity-30 transition-all duration-300;
+}
+
+.logo-cloud img:hover {
+    @apply grayscale-0 brightness-100 opacity-80 scale-105;
+}
+
+.floating-stats {
+    @apply translate-y-1/2 z-20;
+}
+
+.studio-texture {
+    @apply relative;
+}
+
+.studio-texture::before {
+    content: "";
+    @apply absolute inset-0 pointer-events-none opacity-5 z-[2];
+    background-image: var(--image-noise);
+}
+
+.mesh-gradient-studio {
+    background-color: #F4F4F4;
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(1, 5, 33, 0.03) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(70, 130, 180, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(1, 5, 33, 0.04) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(70, 130, 180, 0.03) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(255, 255, 255, 0.5) 0px, transparent 50%);
+}
+
+.btn-premium {
+    @apply relative overflow-hidden transition-all duration-300;
+}
+
+.btn-premium::after {
+    content: '';
+    @apply absolute top-1/2 left-1/2 w-0 h-0 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 transition-all duration-700;
+}
+
+.btn-premium:hover::after {
+    @apply w-[300%] h-[300%];
+}
+
+.btn-premium:hover {
+    @apply -translate-y-0.5;
+    box-shadow: 0 10px 20px -5px var(--primary-glow);
+}
+
+.char {
+    @apply inline-block;
+}
+
+.service-item {
+    @apply transition-all duration-300 cursor-default flex items-center gap-5;
+}
+
+.service-item:hover {
+    @apply text-primary translate-x-3;
+    text-shadow: 0 0 20px var(--primary-glow);
+}
+
+.stat-card {
+    @apply py-10 flex flex-col items-center justify-center text-center transition-all duration-300;
+}
+
+.stat-card:hover {
+    @apply bg-white/5;
+}
+
+.calendar-grid {
+    @apply grid grid-cols-7 gap-2;
+}
+
+.calendar-day {
+    @apply flex items-center justify-center aspect-square text-[10px] font-bold transition-all duration-300 border border-navy/5;
+}
+
+.day-active {
+    @apply bg-navy/5 text-navy hover:bg-primary hover:text-white cursor-pointer;
+    border-color: transparent;
+}
+
+.day-selected {
+    @apply bg-primary text-white scale-110 shadow-xl z-20;
+    box-shadow: 0 10px 20px -5px var(--primary-glow);
+    border-color: transparent;
+}
+
+.day-today {
+    @apply relative border-2 border-primary text-primary;
+}
+
+.day-today::after {
+    content: 'HOY';
+    @apply absolute -top-3 left-1/2 -translate-x-1/2 text-[6px] font-black bg-primary text-white px-1 py-0.5 rounded-sm;
+}
