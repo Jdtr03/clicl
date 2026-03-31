@@ -227,7 +227,7 @@ function App() {
                 <section className="min-h-screen flex items-center px-8 pt-24 bg-navy relative">
                     <div className="max-w-[1600px] mx-auto w-full pb-32 md:pb-48 relative z-10">
                         <div className="max-w-6xl reveal reveal-left">
-                            <h1 ref={heroTitleRef} className="text-primary text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-black leading-[1.1] md:leading-[1.15] tracking-tighter uppercase mb-8 md:mb-12">
+                            <h1 ref={heroTitleRef} className="text-primary text-5xl sm:text-7xl md:text-[6.5rem] lg:text-[8rem] font-black leading-[0.9] md:leading-none tracking-tighter uppercase mb-6 md:mb-10">
                                 VALIENTE.<br />CREATIVO.<br /><span className="text-white">IMPARABLE.</span>
                             </h1>
                             <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
@@ -268,12 +268,12 @@ function App() {
                     </div>
                 </section>
 
-                <section className="py-28 px-8 mesh-gradient-studio studio-texture overflow-hidden" id="ejecucion">
+                <section className="py-20 px-8 mesh-gradient-studio studio-texture overflow-hidden" id="ejecucion">
                     <div className="max-w-[1600px] mx-auto relative z-10">
                         <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16 reveal reveal-up">
                             <div className="max-w-4xl">
                                 <span className="text-primary font-black uppercase tracking-[0.4em] text-sm mb-6 block border-l-4 border-primary pl-4">Especialistas</span>
-                                <h2 className="text-7xl md:text-[9.5rem] font-black leading-[0.75] tracking-tighter uppercase text-navy">
+                                <h2 className="text-5xl md:text-[7.5rem] font-black leading-[0.75] tracking-tighter uppercase text-navy">
                                     Lo Que<br /><span className="text-primary">Ejecutamos.</span>
                                 </h2>
                             </div>
@@ -309,7 +309,7 @@ function App() {
                     </div>
                 </section>
 
-                <section className="py-28 px-8 mesh-gradient-studio studio-texture border-t border-navy/5" id="servicios">
+                <section className="py-20 px-8 mesh-gradient-studio studio-texture border-t border-navy/5" id="servicios">
                     <div className="max-w-[1600px] mx-auto relative z-10">
                         <div className="max-w-4xl mb-12 reveal reveal-left">
                             <span className="text-primary font-black uppercase tracking-[0.4em] text-sm mb-6 block border-l-4 border-primary pl-4">Ecosistema Completo</span>
@@ -350,7 +350,7 @@ function App() {
                     <div className="max-w-[1600px] mx-auto relative z-10">
                         <div className="text-center mb-14 reveal reveal-up">
                             <span className="text-primary font-black uppercase tracking-[0.4em] text-sm mb-6 block">Siguiente Paso</span>
-                            <h2 className="text-7xl md:text-[9.2rem] font-black text-navy uppercase tracking-tighter">RESERVA TU<br /><span className="text-primary">AUDITORÍA.</span></h2>
+                            <h2 className="text-5xl md:text-[7.2rem] font-black text-navy uppercase tracking-tighter">RESERVA TU<br /><span className="text-primary">AUDITORÍA.</span></h2>
                         </div>
                         <div className="bg-white shadow-[0_60px_120px_-20px_rgba(1,5,33,0.15)] max-w-6xl mx-auto flex flex-col md:flex-row min-h-[700px] overflow-hidden">
                             <div className="w-full md:w-1/3 bg-white p-6 md:p-12 border-r border-navy/5 flex flex-col">
