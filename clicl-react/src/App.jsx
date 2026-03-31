@@ -42,6 +42,7 @@ function App() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [bookingView, setBookingView] = useState('calendar');
     const [selectedDay, setSelectedDay] = useState(13);
+    const [hoveredService, setHoveredService] = useState(null);
     const heroTitleRef = useRef(null);
     const statsBarRef = useRef(null);
 
@@ -283,14 +284,23 @@ function App() {
                                 </p>
                             </div>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 border border-white/10 shadow-2xl reveal reveal-up">
+                        <div className="flex flex-col md:flex-row gap-px bg-white/10 border border-white/10 shadow-2xl reveal reveal-up overflow-hidden">
                             {[
                                 { id: '01', icon: 'movie_edit', title: 'Creación de\nContenido', desc: 'Producción de calidad cinematográfica adaptada a los algoritmos sociales modernos y al storytelling de marca de alta conversión.', items: ['Producción de video', 'Activos sociales'] },
                                 { id: '02', icon: 'groups_3', title: 'Departamento\nExterno', desc: 'Nos convertimos en tu departamento de marketing. Desde estrategia nivel CMO hasta despliegue diario y gestión de comunidad.', items: ['Integración de equipo', 'Resultados escalables'] },
                                 { id: '03', icon: 'ads_click', title: 'Crecimiento\ny Ads', desc: 'Campañas publicitarias orientadas al rendimiento que aprovechan nuestra creatividad personalizada para maximizar el ROAS.', items: ['Adquisición de pago', 'Optimización de funnel'] },
                             ].map(service => (
-                                <div key={service.id} className="bg-navy p-12 md:p-16 hover:bg-navy-accent transition-all group relative overflow-hidden">
-                                    <div className="absolute top-0 right-0 p-6 opacity-10">
+                                <div 
+                                    key={service.id} 
+                                    onMouseEnter={() => setHoveredService(service.id)}
+                                    onMouseLeave={() => setHoveredService(null)}
+                                    className={`
+                                        bg-navy p-12 md:p-16 transition-all duration-500 ease-in-out relative overflow-hidden flex-1 border-t-4
+                                        ${hoveredService === service.id ? 'md:flex-[1.4] bg-navy-accent z-10 shadow-[0_30px_60px_-15px_rgba(241,90,36,0.25)] scale-[1.03] border-primary' : 'border-white/10'}
+                                        ${hoveredService !== null && hoveredService !== service.id ? 'opacity-70 scale-[0.98]' : 'opacity-100'}
+                                    `}
+                                >
+                                    <div className="absolute top-0 right-0 p-6 opacity-20">
                                         <span className="text-8xl font-black text-white">{service.id}</span>
                                     </div>
                                     <span className="material-symbols-outlined text-primary text-6xl mb-12 group-hover:scale-110 transition-transform block">{service.icon}</span>
