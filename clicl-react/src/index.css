@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #F15A24;
-  --color-navy: #010521;
-  --color-navy-accent: #020836;
-  --color-navy-light: #050B3B;
-  --color-off-white: #F4F4F4;
-  --color-studio-gray: #ECECEC;
-  
-  --font-family-sans: "Inter", system-ui, sans-serif;
-  --font-family-display: "Space Grotesk", sans-serif;
-  --font-family-mono: "Source Code Pro", monospace;
+    --color-primary: #F15A24;
+    --color-navy: #010521;
+    --color-navy-accent: #020836;
+    --color-navy-light: #050B3B;
+    --color-off-white: #F4F4F4;
+    --color-studio-gray: #ECECEC;
 
-  /* Performance-optimized static noise texture */
-  --image-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)'/%3E%3C/svg%3E");
+    --font-family-sans: "Inter", system-ui, sans-serif;
+    --font-family-display: "Space Grotesk", sans-serif;
+    --font-family-mono: "Source Code Pro", monospace;
+
+    /* Performance-optimized static noise texture */
+    --image-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 html {
@@ -26,13 +26,25 @@ body {
 }
 
 /* Typography — Space Grotesk for headings, Inter for body text */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: "Space Grotesk", sans-serif;
     letter-spacing: -0.04em;
     font-weight: 900;
 }
 
-p, label, span, li, a, input, textarea, button {
+p,
+label,
+span,
+li,
+a,
+input,
+textarea,
+button {
     font-family: "Inter", sans-serif;
     letter-spacing: -0.01em;
 }
@@ -64,13 +76,6 @@ p, label, span, li, a, input, textarea, button {
     -webkit-text-stroke: 1px transparent;
 }
 
-.logo-cloud img {
-    @apply grayscale brightness-0 opacity-30 transition-all duration-300;
-}
-
-.logo-cloud img:hover {
-    @apply grayscale-0 brightness-100 opacity-80 scale-105;
-}
 
 .floating-stats {
     @apply translate-y-1/2 z-20;
@@ -97,19 +102,29 @@ p, label, span, li, a, input, textarea, button {
     transform: translate(0, 0) scale(1) !important;
 }
 
-.reveal-up { transform: translateY(40px); }
-.reveal-left { transform: translateX(-40px); }
-.reveal-right { transform: translateX(40px); }
+.reveal-up {
+    transform: translateY(40px);
+}
+
+.reveal-left {
+    transform: translateX(-40px);
+}
+
+.reveal-right {
+    transform: translateX(40px);
+}
 
 /* Optimize heavy elements for scroll */
-.stat-card, .service-item, .glass-panel {
+.stat-card,
+.service-item,
+.glass-panel {
     will-change: transform, opacity;
 }
 
 /* Slightly simplify mesh for performance */
 .mesh-gradient-studio {
     background-color: #F4F4F4;
-    background-image: 
+    background-image:
         radial-gradient(at 0% 0%, rgba(241, 90, 36, 0.03) 0px, transparent 50%),
         radial-gradient(at 100% 0%, rgba(1, 5, 33, 0.02) 0px, transparent 50%),
         radial-gradient(at 50% 50%, rgba(255, 255, 255, 0.8) 0px, transparent 50%);
@@ -214,8 +229,13 @@ body {
 }
 
 @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 .animate-marquee {
@@ -224,4 +244,25 @@ body {
 
 .animate-marquee:hover {
     animation-play-state: paused;
+}
+
+/* Premium Logo Styles */
+.logo-cloud-container {
+    /* Cambiamos flex-wrap por un grid para controlar mejor las filas */
+    @apply grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-8 md:gap-12 max-w-[1600px] mx-auto px-6 place-items-center;
+}
+
+.logo-item {
+    /* Eliminamos transiciones complejas si no las necesitas */
+    @apply relative flex items-center justify-center w-full p-2 md:p-4;
+}
+
+/* Si quieres mantener el efecto de crecimiento pero sin cambio de color */
+.logo-item:hover {
+    @apply scale-105;
+}
+
+.logo-img {
+    /* Eliminamos filtros de escala de grises si existieran y aseguramos el color real */
+    @apply h-36 md:h-48 w-auto object-contain grayscale-0 opacity-100;
 }

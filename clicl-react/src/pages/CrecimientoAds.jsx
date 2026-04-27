@@ -47,7 +47,7 @@ function CrecimientoAds() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        
+
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
         };
@@ -96,7 +96,7 @@ function CrecimientoAds() {
                     <Link to="/" className="flex items-center cursor-pointer">
                         <img src={clickLogo} alt="Click Productions Logo" className="h-16 w-auto object-contain" />
                     </Link>
-                    
+
                     <div className="hidden md:flex items-center gap-10">
                         <Link to="/" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Inicio</Link>
                         <Link to="/creacion-contenido" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Contenido</Link>
@@ -107,8 +107,8 @@ function CrecimientoAds() {
                         <Link to="/#auditoria" className="hidden sm:block btn-premium border border-white/20 text-white px-8 py-3.5 text-[11px] font-black transition-all uppercase tracking-[0.3em] hover:border-primary hover:bg-primary text-center">
                             Auditoría Gratuita
                         </Link>
-                        
-                        <button 
+
+                        <button
                             className="md:hidden flex flex-col gap-1.5 p-2"
                             onClick={() => setIsMenuOpen(true)}
                         >
@@ -124,11 +124,11 @@ function CrecimientoAds() {
             <div className={`fixed inset-0 z-[200] transition-all duration-700 ease-expo flex flex-col md:hidden overflow-y-auto ${isMenuOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
                 {/* Background overlay */}
                 <div className={`absolute inset-0 bg-navy transition-opacity duration-700 ${isMenuOpen ? 'opacity-100' : 'opacity-0'}`}></div>
-                
+
                 <div className={`relative flex flex-col h-full w-full transition-transform duration-700 ease-expo ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
                     <div className="flex items-center justify-between p-6 border-b border-white/5">
                         <img src={clickLogo} alt="Click Productions Logo" className="h-10 w-auto" />
-                        <button 
+                        <button
                             onClick={() => setIsMenuOpen(false)}
                             className="w-12 h-12 flex items-center justify-center rounded-full border border-white/10 hover:border-primary transition-colors"
                         >
@@ -156,7 +156,7 @@ function CrecimientoAds() {
                     </div>
 
                     <div className={`p-8 w-full mt-auto pb-12 transition-all duration-700 ease-out md:hidden ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} delay-300`}>
-                        <Link 
+                        <Link
                             to="/#auditoria"
                             onClick={() => setIsMenuOpen(false)}
                             className="block w-full py-6 bg-primary text-white font-black uppercase tracking-widest text-center shadow-2xl text-sm"
@@ -207,7 +207,7 @@ function CrecimientoAds() {
                             <div className="flex items-center gap-4 mb-16 border-l-4 border-primary pl-6">
                                 <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">Casos de <span className="text-primary italic">Éxito</span></h2>
                             </div>
-                            
+
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
                                 {[
                                     {
@@ -223,20 +223,20 @@ function CrecimientoAds() {
                                         img: case2
                                     },
                                     {
-                                        title: 'Bonsai Sushi',
+                                        title: 'Visualizacion de Marca',
                                         metrics: ['+687k Views', '+3.6k Clics'],
                                         description: 'Estrategia de contenido viral y ADS para posicionamiento de marca.',
                                         img: case3
                                     }
                                 ].map((caseStudy, i) => (
-                                    <div 
-                                        key={i} 
+                                    <div
+                                        key={i}
                                         onClick={() => setSelectedImage(caseStudy.img)}
                                         className="group bg-navy/20 border-t-4 border-white/10 overflow-hidden hover:border-primary transition-all duration-700 hover:-translate-y-2 cursor-pointer shadow-2xl"
                                     >
                                         <div className="aspect-[16/10] overflow-hidden relative">
-                                            <img 
-                                                src={caseStudy.img} 
+                                            <img
+                                                src={caseStudy.img}
                                                 alt={caseStudy.title}
                                                 className="w-full h-full object-cover transition-all duration-1000 scale-105 group-hover:scale-100"
                                                 onError={(e) => { e.target.src = 'https://placehold.co/800x500/111111/F15A24?text=Captura+Ads'; }}
@@ -279,26 +279,26 @@ function CrecimientoAds() {
 
             {/* Lightbox Modal */}
             {selectedImage && (
-                <div 
+                <div
                     className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12 animate-in fade-in duration-300"
                     onClick={() => setSelectedImage(null)}
                 >
                     <div className="absolute inset-0 bg-navy/95 backdrop-blur-xl"></div>
-                    
-                    <button 
+
+                    <button
                         className="absolute top-8 right-8 z-[110] text-white/50 hover:text-white transition-colors"
                         onClick={() => setSelectedImage(null)}
                     >
                         <span className="material-symbols-outlined text-4xl notranslate" translate="no">close</span>
                     </button>
 
-                    <div 
+                    <div
                         className="relative z-[110] max-w-full max-h-full animate-in zoom-in-95 duration-300"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <img 
-                            src={selectedImage} 
-                            alt="Resultados Ads" 
+                        <img
+                            src={selectedImage}
+                            alt="Resultados Ads"
                             className="rounded-2xl shadow-2xl border border-white/10 w-auto h-auto max-w-[90vw] max-h-[85vh] object-contain"
                         />
                         <div className="mt-6 flex justify-center">

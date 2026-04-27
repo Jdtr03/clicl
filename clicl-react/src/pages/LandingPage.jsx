@@ -1,8 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { animate, stagger } from 'animejs';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import clickLogo from '../assets/imagenes/logo click png N.png';
-import bonsaiLogo from '../assets/imagenes/logo-bonsai-sushi.webp';
+import clickLogo from '../assets/imagenes/logo click png N.png'
+import { brands } from '../assets/utils/getLogos.js';
+import carruzel1 from '../assets/imagenes/CARRUZEL 1.jpg';
+import carruzel2 from '../assets/imagenes/CARRUZEL2.jpeg';
+import carruzel3 from '../assets/imagenes/CARRUZEL3.jpeg';
+import carruzel4 from '../assets/imagenes/CARRUZEL4.jpeg';
+
 
 /**
  * Utility to split text into characters while preserving HTML structure
@@ -43,8 +49,10 @@ function splitText(element) {
 function LandingPage() {
     const [scrolled, setScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isBrandsExpanded, setIsBrandsExpanded] = useState(false);
     const [hoveredService, setHoveredService] = useState(null);
     const heroTitleRef = useRef(null);
+    const brandsSectionRef = useRef(null);
     const statsBarRef = useRef(null);
     const playerRef = useRef(null);
 
@@ -56,6 +64,25 @@ function LandingPage() {
         const offset = 96; // navbar height
         const top = section.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
+    };
+
+    const handleBrandsToggle = () => {
+        if (isBrandsExpanded) {
+            setIsBrandsExpanded(false);
+
+            // On mobile, the height change can confuse the scroll. 
+            // We scroll to the section's top after a tiny delay.
+            setTimeout(() => {
+                const section = brandsSectionRef.current;
+                if (section) {
+                    const yOffset = -120; // Navbar height
+                    const y = section.getBoundingClientRect().top + window.scrollY + yOffset;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+            }, 10);
+        } else {
+            setIsBrandsExpanded(true);
+        }
     };
 
     // Scroll effect
@@ -74,7 +101,7 @@ function LandingPage() {
                     const offset = 96;
                     const top = section.getBoundingClientRect().top + window.scrollY - offset;
                     window.scrollTo({ top, behavior: 'smooth' });
-                    
+
                     // Explicitly pause if hash exists to double check
                     if (playerRef.current && typeof playerRef.current.pauseVideo === 'function') {
                         playerRef.current.pauseVideo();
@@ -269,7 +296,7 @@ function LandingPage() {
 
 
     return (
-        <div className="text-navy antialiased font-sans bg-navy min-h-screen">
+        <div className="text-navy antialiased font-sans bg-navy min-h-screen overflow-x-hidden">
             {/* Header / Navbar at 100% */}
             <header className={`fixed top-0 w-full z-[100] transition-all duration-500 ${scrolled ? 'bg-navy/95 backdrop-blur-xl border-b border-white/5 py-4' : 'bg-navy/40 backdrop-blur-sm py-6 md:py-8'}`}>
                 <nav className="max-w-[1600px] mx-auto px-6 sm:px-8 flex items-center justify-between">
@@ -283,7 +310,7 @@ function LandingPage() {
                     </div>
 
                     <div className="flex items-center gap-6">
-                        <button 
+                        <button
                             onClick={(e) => handleNavClick(e, 'auditoria')}
                             className="hidden md:block btn-premium border border-white/20 text-white px-10 py-4 text-[11px] font-black transition-all uppercase tracking-[0.3em] hover:border-primary hover:bg-primary text-center"
                         >
@@ -306,7 +333,7 @@ function LandingPage() {
             <div className={`fixed inset-0 z-[200] transition-all duration-700 ease-expo flex flex-col md:hidden ${isMenuOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
                 {/* Background overlay */}
                 <div className={`absolute inset-0 bg-navy transition-opacity duration-700 ${isMenuOpen ? 'opacity-100' : 'opacity-0'}`}></div>
-                
+
                 {/* Menu Content */}
                 <div className={`relative flex flex-col h-full w-full transition-transform duration-700 ease-expo ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
                     <div className="flex justify-between items-center p-6 border-b border-white/5">
@@ -354,7 +381,7 @@ function LandingPage() {
                     </div>
 
                     <div className={`p-8 w-full mt-auto pb-12 transition-all duration-700 ease-out md:hidden ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} delay-300`}>
-                        <button 
+                        <button
                             onClick={(e) => {
                                 setIsMenuOpen(false);
                                 handleNavClick(e, 'auditoria');
@@ -367,26 +394,26 @@ function LandingPage() {
                 </div>
             </div>
 
-            <main>
+            <main className="md:pt-8" style={{ zoom: 0.9, MozTransform: 'scale(0.9)', MozTransformOrigin: 'top center' }}>
                 {/* Desktop and original structure remains unaffected down here */}
                 {/* Hero Section at 100% scale for stability */}
-                <section className="min-h-[80vh] flex flex-col justify-center px-6 sm:px-8 pt-36 md:pt-32 pb-20 md:pb-40 bg-navy relative overflow-x-clip overflow-y-visible">
+                <section className="min-h-[80vh] flex flex-col justify-center px-6 sm:px-8 pt-36 md:pt-48 pb-20 md:pb-40 bg-navy relative overflow-x-clip overflow-y-visible">
                     <div className="max-w-[1400px] mx-auto w-full relative z-10 flex-grow flex flex-col justify-center mt-10 md:mt-0">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                             <div className="reveal reveal-left flex flex-col justify-center items-center h-full text-center">
                                 <div className="max-w-[100vw] px-4 md:px-0 md:max-w-3xl w-full flex flex-col items-center overflow-visible">
                                     <h1 ref={heroTitleRef} className="text-primary text-[2rem] sm:text-[2.2rem] md:text-7xl lg:text-8xl xl:text-[7.2rem] font-black leading-tight md:leading-[0.9] tracking-tighter uppercase mb-6 md:mb-8 mx-auto whitespace-nowrap overflow-visible">
-                                        VALIENTE.<br />CREATIVO.<br /><span className="text-white">IMPARABLE.</span>
+                                        ESTRATEJICOS.<br />DISRUPTIVOS.<br /><span className="text-white">ESCALABLES.</span>
                                     </h1>
                                     <p className="text-white/80 text-base md:text-xl font-bold leading-tight uppercase mb-8 md:mb-10 tracking-tight max-w-xl mx-auto">
-                                        Somos Click Productions. Una agencia de alto impacto para marcas listas para dominar el panorama digital.
+                                        SOMOS CLICK PRODUCTIONS. NO HACEMOS RUIDO DIGITAL, TRANSFORMAMOS TU INVERSIÓN EN CRECIMIENTO COMERCIAL Y VENTAS.
                                     </p>
                                     <div className="flex gap-4 justify-center">
                                         <button
                                             onClick={(e) => handleNavClick(e, 'ejecucion')}
                                             className="btn-premium bg-primary text-white px-8 py-4 md:px-10 md:py-5 text-xs md:text-sm font-black uppercase tracking-widest hover:brightness-110 transition-all"
                                         >
-                                            Ver Portafolio
+                                            Lo que Ejecutamos
                                         </button>
                                     </div>
                                 </div>
@@ -396,7 +423,7 @@ function LandingPage() {
                                 <div className="relative group w-full max-w-[540px]">
                                     <div className="absolute -inset-1 bg-primary/20 rounded-[2rem] blur-xl group-hover:bg-primary/40 transition-all duration-700"></div>
                                     <div className="absolute -inset-8 bg-primary/5 rounded-[3rem] blur-3xl group-hover:opacity-100 transition-all duration-700"></div>
-                                    
+
                                     <div className="relative aspect-video bg-navy-accent rounded-2xl overflow-hidden shadow-[0_30px_80px_-20px_rgba(1,5,33,1),0_0_30px_rgba(241,90,36,0.2)] border border-white/10 group-hover:border-primary/30 transition-all duration-700">
                                         <div id="youtube-player" className="w-full h-full"></div>
                                     </div>
@@ -409,18 +436,18 @@ function LandingPage() {
                             <div className="grid grid-cols-1 md:grid-cols-3 py-8 md:py-8" ref={statsBarRef}>
                                 <div className="stat-card border-b md:border-b-0 md:border-r border-white/10 pb-8 md:pb-0 mb-8 md:mb-0">
                                     <span className="text-xs font-black tracking-[0.4em] text-white/30 uppercase mb-3 block">— 01 —</span>
-                                    <span className="stat-number text-5xl md:text-6xl font-black text-primary mb-3" data-target="250" data-suffix="+">250+</span>
-                                    <span className="text-[10px] font-bold tracking-[0.3em] text-white/40 uppercase">Proyectos Entregados</span>
+                                    <span className="stat-number text-5xl md:text-6xl font-black text-primary mb-3" data-target="70" data-suffix="+">70+</span>
+                                    <span className="text-[10px] font-bold tracking-[0.3em] text-white/40 uppercase">MARCAS HAN CONFIADO EN NUESTRO ADN </span>
                                 </div>
                                 <div className="stat-card border-b md:border-b-0 md:border-r border-white/10 pb-8 md:pb-0 mb-8 md:mb-0">
                                     <span className="text-xs font-black tracking-[0.4em] text-white/30 uppercase mb-3 block">— 02 —</span>
-                                    <span className="stat-number text-5xl md:text-6xl font-black text-primary mb-3" data-target="15" data-suffix="M+">15M+</span>
-                                    <span className="text-[10px] font-bold tracking-[0.3em] text-white/40 uppercase">Alcance Orgánico</span>
+                                    <span className="stat-number text-5xl md:text-6xl font-black text-primary mb-3" data-target="08" data-suffix="M+">08+</span>
+                                    <span className="text-[10px] font-bold tracking-[0.3em] text-white/40 uppercase">SECTORES COMERCIALES VALIDADOS</span>
                                 </div>
                                 <div className="stat-card md:pb-0 md:mb-0">
                                     <span className="text-xs font-black tracking-[0.4em] text-white/30 uppercase mb-3 block">— 03 —</span>
                                     <span className="stat-number text-5xl md:text-6xl font-black text-primary mb-3" data-target="100" data-suffix="%">100%</span>
-                                    <span className="text-[10px] font-bold tracking-[0.3em] text-white/40 uppercase">Retención de Clientes</span>
+                                    <span className="text-[10px] font-bold tracking-[0.3em] text-white/40 uppercase">ENFONQUE EN RENTABILIDAD</span>
                                 </div>
                             </div>
                         </div>
@@ -440,15 +467,15 @@ function LandingPage() {
                                 </div>
                                 <div className="md:border-l-4 border-navy/10 md:pl-12 py-4 max-w-sm">
                                     <p className="text-navy/80 text-lg uppercase leading-tight font-bold tracking-tight">
-                                        Un enfoque riguroso de estudio físico aplicado a la producción digital de vanguardia.
+                                        Ejecución disruptiva que une la creatividad con el análisis de negocio para potenciar tus resultados.
                                     </p>
                                 </div>
                             </div>
                             <div className="flex flex-col md:flex-row gap-4 md:gap-px bg-transparent md:bg-white/10 border-0 md:border md:border-white/10 shadow-none md:shadow-2xl reveal reveal-up overflow-hidden">
                                 {[
-                                    { id: '01', icon: 'movie_edit', title: 'Creación de\nContenido', desc: 'Producción de calidad cinematográfica adaptada a los algoritmos sociales modernos y al storytelling de marca de alta conversión.', items: ['Producción de video', 'Activos sociales'], link: '/creacion-contenido' },
-                                    { id: '02', icon: 'groups_3', title: 'Departamento\nExterno', desc: 'Nos convertimos en tu departamento de marketing. Desde estrategia nivel CMO hasta despliegue diario y gestión de comunidad.', items: ['Integración de equipo', 'Resultados escalables'] },
-                                    { id: '03', icon: 'ads_click', title: 'Crecimiento\ny Ads', desc: 'Campañas publicitarias orientadas al rendimiento que aprovechan nuestra creatividad personalizada para maximizar el ROAS.', items: ['Adquisición de pago', 'Optimización de funnel'], link: '/crecimiento-ads' },
+                                    { id: '01', icon: 'groups_3', title: 'Departamento\nde\nMarketing', desc: 'Diseñamos, ejecutamos y medimos. Nos hacemos cargo de toda tu presencia digital para que tú te enfoques en lo más importante: tu producto o servicio.', items: ['Planificación estratégica', 'crecimiento Digital'] },
+                                    { id: '02', icon: 'ads_click', title: 'Crecimiento\ny Ads', desc: 'Campañas publicitarias orientadas al rendimiento que aprovechan nuestra creatividad personalizada para maximizar el ROAS.', items: ['Adquisición de pago', 'Optimización de funnel'], link: '/crecimiento-ads' },
+                                    { id: '03', icon: 'movie_edit', title: 'Creación de\nContenido', desc: 'Contenido de alto nivel que traduce la esecnia de tu empresa en una presencia digital imponente y diferenciada', items: ['Producción de video', 'Activos sociales'], link: '/creacion-contenido' },
                                 ].map(service => (
                                     <div
                                         key={service.id}
@@ -473,10 +500,10 @@ function LandingPage() {
                                                 </li>
                                             ))}
                                         </ul>
-                                        
+
                                         {service.link && (
                                             <div className="mt-12">
-                                                <Link 
+                                                <Link
                                                     to={service.link}
                                                     className="inline-flex items-center gap-2 px-6 py-3 border border-primary/30 text-primary text-[10px] font-black uppercase tracking-[0.2em] hover:bg-primary hover:text-white transition-all duration-300 rounded-sm"
                                                 >
@@ -500,89 +527,267 @@ function LandingPage() {
                                 </h2>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8 border-t border-navy/10 pt-12 reveal reveal-up">
-                                {['Estrategia de Marca y Branding', 'Gestión de Redes Sociales', 'Publicidad Digital', 'SEO & Posicionamiento', 'Email y WhatsApp Marketing', 'Automatización', 'Producción de Contenido', 'Marketing de Influencers', 'Análisis de Datos', 'Organización de Eventos', 'Publicidad Fisica'].map(service => (
+                                {['Estrategia de Marca y Posicionamiento', 'Produccion audivisual', 'Gestión de Redes Sociales Media Multicanal', 'Publicidad Digital (ads)', 'diseño de embudo de ventas (funnels)', 'IMPLEMENTACIÓN Y CONFIGURACIÓN DE CRM', 'AUTOMATIZACIÓN DE PROCESOS Y RESPUESTAS', 'WHATSAPP Y EMAIL MARKETING', 'MARKETING DE INFLUENCERS', 'ASESORÍAS PERSONALIZADAS', 'PUBLICIDAD TRADICIONAL', 'GESTIÓN Y ORGANIZACIÓN DE EVENTOS'].map(service => (
                                     <div key={service} className="service-item">
                                         <span className="material-symbols-outlined text-primary font-bold text-3xl notranslate" translate="no">check_circle</span>
-                                        <span className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-navy">{service}</span>
+                                        <span className="text-2xl md:text-3xl font-black  text-navy uppercase tracking-tighter mb-10">{service}</span>
                                     </div>
                                 ))}
                             </div>
                         </div>
                     </section>
 
-                    <section className="py-20 px-8 bg-off-white studio-texture border-b border-navy/5" id="clientes">
-                        <div className="max-w-[1600px] mx-auto text-center relative z-10 reveal reveal-up">
-                            <h2 className="text-2xl md:text-3xl font-black text-navy uppercase tracking-tighter mb-10">Marcas con las que hemos trabajado</h2>
-                            <div className="logo-cloud grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-16 items-center justify-items-center">
-                                {[
-                                    { alt: 'Bonsai Sushi', src: bonsaiLogo },
-                                    { alt: 'Humboldt', src: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA3_8wLYzeXioOaFdgkNboXK89IPZnjHw2NSGQ9SYC35tHrl4m_ftRcZBFAGTtJGTiZmbYz5JjjOoEG2G9St1TcQCbUABSJGpz1y20zSzxvnL8qWJQXG67cv1nR9vTDrHhS_BHGKgsG3p1gEf7j_mANnWSZ2lpnOsCbfi0wgvuQyEnfr73vQNPYGEO0T8o_KIzMBASLBxO3rMfgCHljGV85vnslrkas9s0lS48t-M7KE5S8KvMDlgcTsz3KA4LYTG9xZtNNNnxGqHU' },
-                                    { alt: 'Crestoil', src: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDzZUQ1SJv3lUabYSjpyavNJIylUZm0yJiazoWn5Czma05ZjNDXkfTgZoGUjM46rA8T3-FdcmmtfzwgJgn35p5HFBY_95qlUBvjeb2Vo--7yqa5P4VgpPpbkv5fXmROVPOXDW3TYwjgNc0RZFCvTGZnu3Td-arHumJOQecp2q_oCcpxs8Att7vaaPa839B6jL9r3lZcnb4NnVN-ueD1ytuJ7kj46GMVasdWaqVRtmp1QVeGSnRyWB9XUE0fih73yeLqcPjPfd6qSpE' },
-                                    { alt: 'Digital Valley', src: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAFNJ5UA474JdCAs9zYn0hBWFi7piMcDzykPs0VHOqrn_cX1YYDQMwMv3WBAdkpet7hTiV50qFALophWxPTC2LlmhU2M3PERMDWH9GLWliIEVSFAaHfxkJVt3t9HgIx94t46sWZaQFo5AmsM-8EeSo1bmW9o_bDddQ1JMUEuE1iPotRLxVbWVA5-cChTp3nk6RdpfjGJ0Yl3KnhPqF32XjtuSNEqPwDwsuYDYVg0H6t-fWWFq8_UzTqk8r2xHdOZAAH2MG-Vj97eHA' },
-                                    { alt: 'Aruns', src: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAe2W6EKU8wKmRlUHNLfZwlK2U5LT7EeTBp_yy1YLZgyS06fm7Z_8IgjBMgDxD1imgj3GCzIEWFzTGmkFUqDjQPHGOq-va_y1TO5li25Yy8BGXSFOk_PNMGwA22SUsIuiNSyG3cxbDeyPCOj6vsM_ZLUW7yTU_kTFeGbJ4awvQmRF1KRi6BPQUR25MNpO7qo2tTRGRG3O7wAknexdw1AuPEMj4zgGd7Jn38PiIU0RBSVACEYNABslVsfIZqrc3el2fU9uINlSZhWso' },
-                                    { alt: 'Guds', src: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA0q3VAy4By_Dcw99AGwSvT2k92bgOdiZALv5pVJDid6TaySES4YuLwqKBmBs7CRBu3XHxAh5Ofy0l7KJICewCe9NBGnyhi1VvP6sgOBWDwMTZh2DrzbULjCHvqsesmnDEdc2n9RyNRGSbo74760NHgCmzmRNlrjI92bBAOqae6QG6ETiXvsh4oNA7Gv0rXtl9kuYpolgUEjAfjbT7pIRYzlHBkNTbWCOv-1Kg5MssBdEUYacXPFZ3Zzf_ZPZAamXWNrdpwsbkZWp4' }
-                                ].map(brand => (
-                                    <img key={brand.alt} alt={brand.alt} className="h-12 w-auto object-contain" src={brand.src} />
-                                ))}
+                    <section
+                        ref={brandsSectionRef}
+                        className="py-24 px-5 bg-off-white studio-texture border-b border-navy/5"
+                        id="clientes"
+                    >
+                        <div className="max-w-[1600px] mx-auto text-center relative z-10">
+                            <h2 className="text-2xl md:text-6xl font-black text-navy uppercase tracking-tighter mb-12 reveal reveal-up">
+                                Marcas con las que hemos trabajado
+                            </h2>
+
+                            <div
+                                className={`relative transition-all duration-1000 ease-in-out overflow-hidden ${isBrandsExpanded ? 'max-h-[3000px]' : 'max-h-[720px]'}`}
+                            >
+                                <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-10 md:gap-x-10 md:gap-y-10 reveal reveal-up">
+                                    {brands.map((brand) => (
+                                        <div
+                                            key={brand.alt}
+                                            className="flex justify-center items-center group w-[31%] md:w-[180px] lg:w-[180px]"
+                                        >
+                                            <img
+                                                src={brand.src}
+                                                alt={brand.alt}
+                                                className="h-35 md:h-50 w-auto object-contain transition-transform duration-500 ease-in-out group-hover:scale-110"
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* Gradient Overlay when collapsed */}
+                                {!isBrandsExpanded && (
+                                    <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-off-white via-off-white/80 to-transparent z-10 pointer-events-none"></div>
+                                )}
+                            </div>
+
+                            <div className="mt-12 reveal reveal-up">
+                                <button
+                                    onClick={handleBrandsToggle}
+                                    className="group inline-flex flex-col items-center gap-2"
+                                >
+                                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-navy/40 group-hover:text-primary transition-colors">
+                                        {isBrandsExpanded ? 'Ver Menos' : 'Ver Todos los Clientes'}
+                                    </span>
+                                    <div className={`w-10 h-10 rounded-full border border-navy/10 flex items-center justify-center group-hover:border-primary transition-all ${isBrandsExpanded ? 'rotate-180' : ''}`}>
+                                        <span className="material-symbols-outlined text-navy/20 group-hover:text-primary notranslate" translate="no">expand_more</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <section className="py-20 px-8 bg-navy studio-texture relative overflow-hidden" id="problematicas">
+                        <div className="max-w-[1600px] mx-auto relative z-10">
+                            <div className="text-center mb-12 reveal reveal-up">
+                                <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter">
+                                    ¿Te identificas con <span className="text-primary italic">estos problemas?</span>
+                                </h2>
+                            </div>
+
+                            <div className="max-w-3xl mx-auto bg-primary rounded-[1.5rem] p-6 md:p-12 shadow-[0_40px_100px_-20px_rgba(241,90,36,0.3)] reveal reveal-up border border-white/10 relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+                                    <span className="material-symbols-outlined text-[12rem] text-white notranslate" translate="no">help_center</span>
+                                </div>
+
+                                <div className="grid grid-cols-1 gap-5 md:gap-6 relative z-10">
+                                    {[
+                                        "Tienes estrategias improvisadas o sin dirección",
+                                        "Desconoces técnicas y procesos de marketing digital",
+                                        "No tienes tiempo para dedicarle a tu publicidad",
+                                        "El boca en boca ya no te funciona igual de bien",
+                                        "Has pagado a Agencias de Marketing y no te han dado resultados",
+                                        "Dificultad para diferenciarte de la competencia"
+                                    ].map((problem, idx) => (
+                                        <div key={idx} className="flex items-center gap-4 group">
+                                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/40 transition-all duration-300 transform group-hover:rotate-12">
+                                                <span className="material-symbols-outlined text-white text-lg md:text-xl notranslate" translate="no">cancel</span>
+                                            </div>
+                                            <p className="text-white text-base md:text-xl font-black uppercase tracking-tight leading-tight">
+                                                {problem}
+                                            </p>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="mt-12 text-center relative z-10">
+                                    <button
+                                        onClick={(e) => handleNavClick(e, 'auditoria')}
+                                        className="btn-premium bg-white text-navy px-8 py-4 md:px-12 md:py-6 text-xs md:text-sm font-black uppercase tracking-[0.2em] hover:bg-navy-accent hover:text-white transition-all shadow-2xl rounded-sm"
+                                    >
+                                        Reservar Auditoría Gratuita
+                                        <span className="block text-[8px] mt-1 font-bold opacity-50 tracking-widest">Cupos limitados</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </section>
 
                     <section className="py-20 px-8 mesh-gradient-studio studio-texture overflow-hidden" id="auditoria">
                         <div className="max-w-[1600px] mx-auto relative z-10">
-                            <div className="text-center mb-14 reveal reveal-up">
-                                <span className="text-primary font-black uppercase tracking-[0.4em] text-sm mb-6 block">Siguiente Paso</span>
-                                <h2 className="text-4xl md:text-[5.5rem] font-black text-navy uppercase tracking-tighter leading-[0.8]">SOLICITA TU<br /><span className="text-primary italic">AUDITORÍA.</span></h2>
-                            </div>
-                        <div className="bg-white shadow-[0_40px_80px_-20px_rgba(1,5,33,0.1)] max-w-7xl mx-auto flex flex-col md:flex-row min-h-[1000px] overflow-hidden rounded-2xl">
-                            <div className="w-full md:w-[35%] bg-white p-10 md:p-12 border-r border-navy/5 flex flex-col">
-                                <div className="space-y-8">
-                                    <h3 className="text-4xl font-black text-navy uppercase leading-[0.9] tracking-tighter">Auditoría de<br />Negocio</h3>
-                                    <div className="flex items-center gap-4 text-navy/40 font-bold uppercase tracking-widest text-xs">
-                                        <span className="material-symbols-outlined text-base notranslate" translate="no">calendar_today</span> 30 min
-                                    </div>
-                                    <div className="space-y-6 pt-8 border-t border-navy/5">
-                                        <p className="text-navy/70 text-sm font-medium uppercase leading-relaxed">
-                                            Selecciona una fecha y hora para su auditoría. Vamos a trazar el plan para escalar su marca.
-                                        </p>
 
-                                        <div className="pt-8">
-                                            <p className="text-navy/80 text-xs font-black uppercase tracking-wider mb-6">¿Qué te vas a llevar?</p>
-                                            <ul className="space-y-6">
-                                                {[
-                                                    { icon: 'support_agent', text: '30 min con un experto' },
-                                                    { icon: 'analytics', text: 'Diagnóstico de estrategia' },
-                                                    { icon: 'search_check', text: 'Auditoría de Ads, Web y RRSS' }
-                                                ].map(item => (
-                                                    <li key={item.text} className="flex items-start gap-5 text-navy/60 text-xs font-bold uppercase tracking-tight">
-                                                        <span className="material-symbols-outlined text-primary text-2xl flex-shrink-0 leading-none notranslate" translate="no">{item.icon}</span>
-                                                        <span className="pt-1">{item.text}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
+                            <div className="text-center max-w-5xl mx-auto mb-24 reveal reveal-up">
+                                <h2 className="text-3xl md:text-6xl font-black text-navy uppercase tracking-tighter mb-8 leading-[0.9]">
+                                    Reserva una <span className="text-primary italic">Auditoría Gratuita</span> para llenar tu Negocio de clientes en 12 semanas sin perder el tiempo
+                                </h2>
+                                <p className="text-navy/50 text-lg md:text-2xl font-bold uppercase tracking-tight max-w-3xl mx-auto">
+                                    Agenda tu auditoría y descubre cómo llenar tu agenda es más fácil de lo que creerías
+                                </p>
+                            </div>
+
+                            <div className="text-center mb-14 reveal reveal-up border-t border-navy/10 pt-16">
+                                <span className="text-primary font-black uppercase tracking-[0.4em] text-sm mb-6 block">Siguiente Paso</span>
+
+                            </div>
+                            <div className="bg-white shadow-[0_40px_80px_-20px_rgba(1,5,33,0.1)] max-w-7xl mx-auto flex flex-col md:flex-row min-h-[1000px] overflow-hidden rounded-2xl">
+                                <div className="w-full md:w-[35%] bg-white p-10 md:p-12 border-r border-navy/5 flex flex-col">
+                                    <div className="space-y-8">
+                                        <h3 className="text-4xl font-black text-navy uppercase leading-[0.9] tracking-tighter">Auditoría de<br />Negocio</h3>
+                                        <div className="flex items-center gap-4 text-navy/40 font-bold uppercase tracking-widest text-xs">
+                                            <span className="material-symbols-outlined text-base notranslate" translate="no">calendar_today</span> 30 min
+                                        </div>
+                                        <div className="space-y-6 pt-8 border-t border-navy/5">
+                                            <p className="text-navy/70 text-sm font-medium uppercase leading-relaxed">
+                                                Selecciona una fecha y hora para su auditoría. Vamos a trazar el plan para escalar su marca.
+                                            </p>
+
+                                            <div className="pt-8">
+                                                <p className="text-navy/80 text-xs font-black uppercase tracking-wider mb-6">¿Qué te vas a llevar?</p>
+                                                <ul className="space-y-6">
+                                                    {[
+                                                        { icon: 'support_agent', text: '30 min con un experto' },
+                                                        { icon: 'analytics', text: 'Diagnóstico de estrategia' },
+                                                        { icon: 'search_check', text: 'Auditoría de Ads, Web y RRSS' }
+                                                    ].map(item => (
+                                                        <li key={item.text} className="flex items-start gap-5 text-navy/60 text-xs font-bold uppercase tracking-tight">
+                                                            <span className="material-symbols-outlined text-primary text-2xl flex-shrink-0 leading-none notranslate" translate="no">{item.icon}</span>
+                                                            <span className="pt-1">{item.text}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div className="mt-auto pt-10">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-10 h-10 rounded-full bg-studio-gray"></div>
+                                            <div>
+                                                <p className="text-[11px] font-black uppercase text-navy">Nerio Mosquera</p>
+                                                <p className="text-[10px] font-bold uppercase text-navy/30 leading-none">CEO de Click Productions</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="mt-auto pt-10">
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-10 h-10 rounded-full bg-studio-gray"></div>
+                                <div className="w-full md:w-[65%] p-0 relative bg-[#f7f8f9] min-h-[1000px]">
+                                    <iframe
+                                        src="https://api.leadconnectorhq.com/widget/booking/58myzAfpJKhAYNOl22WJ"
+                                        style={{ width: '100%', height: '100%', minHeight: '1000px', border: 'none', overflow: 'hidden' }}
+                                        scrolling="no"
+                                        id="58myzAfpJKhAYNOl22WJ_1776451857130"
+                                        title="GoHighLevel Calendar"
+                                    ></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="py-16 bg-navy studio-texture relative overflow-hidden" id="testimonios">
+                        <div className="max-w-[1600px] mx-auto px-8 mb-10 reveal reveal-up">
+                            <span className="text-primary font-black uppercase tracking-[0.4em] text-sm mb-4 block border-l-4 border-primary pl-4">Testimonios</span>
+                            <h2 className="text-4xl md:text-5xl font-black leading-[0.8] tracking-tighter uppercase text-white mb-2">
+                                Lo Que<br /><span className="text-primary italic">Dicen.</span>
+                            </h2>
+                        </div>
+
+                        {/* Testimonials Marquee with Text Cards */}
+                        <div className="relative flex overflow-hidden group mb-8">
+                            <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-navy to-transparent z-20 pointer-events-none"></div>
+                            <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-navy to-transparent z-20 pointer-events-none"></div>
+
+                            <motion.div
+                                className="flex gap-6 py-6 cursor-grab active:cursor-grabbing"
+                                animate={{
+                                    x: [0, -1600],
+                                }}
+                                transition={{
+                                    x: {
+                                        repeat: Infinity,
+                                        repeatType: "loop",
+                                        duration: 60,
+                                        ease: "linear",
+                                    },
+                                }}
+                                drag="x"
+                                dragConstraints={{ left: -1600, right: 0 }}
+                                whileTap={{ cursor: "grabbing" }}
+                            >
+                                {[...Array(3)].flatMap((_, i) => [
+                                    {
+                                        name: "Carolina Muñoz",
+                                        role: "Gerente de Marketing",
+                                        avatar: carruzel1,
+                                        content: "Trabajar con Click Productions fue una experiencia increíble. Captaron la esencia de nuestra marca desde el primer momento y el video promocional superó nuestras expectativas. Gracias a su profesionalismo y creatividad, logramos conectar con nuestra audiencia como nunca antes."
+                                    },
+                                    {
+                                        name: "Alejandro Pérez",
+                                        role: "CEO",
+                                        avatar: carruzel2,
+                                        content: "El equipo de Click Productions transformó nuestras ideas en contenido visual que realmente generó impacto en redes sociales. Los clips cortos y las fotos de producto no solo se veían increíbles, sino que también incrementaron nuestro engagement un 40% en solo dos semanas."
+                                    },
+                                    {
+                                        name: "Sofía Torres",
+                                        role: "Directora de Eventos",
+                                        avatar: carruzel3,
+                                        content: "Nos encantó el profesionalismo y la dedicación de Click Productions. Desde la conceptualización hasta la entrega final, el proceso fue claro y organizado. El recap de nuestro evento corporativo fue dinámico y emocionante, y se convirtió en la pieza central de nuestra estrategia de redes."
+                                    },
+                                    {
+                                        name: "Yuleisi Hernández",
+                                        role: "Directora de Eventos",
+                                        avatar: carruzel4,
+                                        content: "¡Click Productions ha sido una bendición en mi vida! Desde el primer momento que los contacté tuvieron una combinación la cual sabía que serían los chicos perfectos para mi proyecto. Y eso es profesionalismo y empatía. Moisés y Laura son unos excelentes profesionales que aman lo que hacen y esa pasión se refleja en su trabajo."
+                                    }
+                                ]).map((testimonial, idx) => (
+                                    <div key={idx} className="flex-shrink-0 w-[280px] md:w-[380px] bg-navy-accent rounded-[1.5rem] p-6 md:p-8 border border-white/5 shadow-2xl flex flex-col justify-between transition-all duration-500 hover:border-primary/20 hover:bg-navy-accent/80 group/item">
                                         <div>
-                                            <p className="text-[11px] font-black uppercase text-navy">Nerio Mosqueda</p>
-                                            <p className="text-[10px] font-bold uppercase text-navy/30 leading-none">CEO de Click Productions</p>
+                                            <div className="flex items-center gap-4 mb-6">
+                                                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/20 group-hover/item:border-primary transition-colors">
+                                                    <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
+                                                </div>
+                                                <div>
+                                                    <h4 className="text-white text-base font-black uppercase tracking-tight leading-none mb-1">{testimonial.name}</h4>
+                                                    <p className="text-white/40 text-[9px] font-bold uppercase tracking-widest">{testimonial.role}</p>
+                                                </div>
+                                            </div>
+                                            <p className="text-white/70 text-xs md:text-sm font-medium leading-relaxed mb-6">
+                                                "{testimonial.content}"
+                                            </p>
+                                        </div>
+                                        <div className="flex gap-1">
+                                            {[1, 2, 3, 4, 5].map(star => (
+                                                <span key={star} className="material-symbols-outlined text-primary text-base notranslate" translate="no">star</span>
+                                            ))}
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div className="w-full md:w-[65%] p-0 relative bg-[#f7f8f9] min-h-[1000px]">
-                                <iframe
-                                    src="https://api.leadconnectorhq.com/widget/booking/58myzAfpJKhAYNOl22WJ"
-                                    style={{ width: '100%', height: '100%', minHeight: '1000px', border: 'none', overflow: 'hidden' }}
-                                    scrolling="no"
-                                    id="58myzAfpJKhAYNOl22WJ_1776451857130"
-                                    title="GoHighLevel Calendar"
-                                ></iframe>
-                            </div>
-                            </div>
+                                ))}
+                            </motion.div>
+                        </div>
+
+                        <div className="max-w-[1600px] mx-auto px-8 flex justify-center reveal reveal-up">
+                            <p className="text-white/20 text-[8px] font-black uppercase tracking-[0.5em] flex items-center gap-4">
+                                <span className="material-symbols-outlined text-xs notranslate" translate="no">drag_handle</span> Desliza para explorar testimonios
+                            </p>
                         </div>
                     </section>
 
@@ -593,21 +798,33 @@ function LandingPage() {
                                     <img src={clickLogo} alt="Click Productions Logo" className="h-10 w-auto object-contain" />
                                 </div>
                                 <p className="text-white/40 font-bold uppercase tracking-widest leading-loose max-w-sm text-[10px]">
-                                    Agencia creativa de alto impacto especializada en alcance masivo y outsourcing total.
+                                    ALIADO ESTRATÉGICO DE CRECIMIENTO ESPECIALIZADO EN POSICIONAMIENTO DE MERCADO Y GESTIÓN INTEGRAL.
                                 </p>
                             </div>
                             <div>
                                 <h4 className="font-black uppercase tracking-widest text-[10px] text-primary mb-6">Conectar</h4>
                                 <ul className="space-y-4">
-                                    {['Instagram', 'LinkedIn'].map(sm => (
-                                        <li key={sm}><a className="text-[10px] text-white hover:text-primary transition-colors font-black uppercase tracking-widest" href="#">{sm}</a></li>
+                                    {[
+                                        { name: 'Instagram', url: 'https://www.instagram.com/clickproductions/' },
+                                        { name: 'LinkedIn', url: '#' }
+                                    ].map(sm => (
+                                        <li key={sm.name}>
+                                            <a 
+                                                className="text-[10px] text-white hover:text-primary transition-colors font-black uppercase tracking-widest" 
+                                                href={sm.url}
+                                                target={sm.url !== '#' ? "_blank" : undefined}
+                                                rel={sm.url !== '#' ? "noopener noreferrer" : undefined}
+                                            >
+                                                {sm.name}
+                                            </a>
+                                        </li>
                                     ))}
                                 </ul>
                             </div>
                             <div>
                                 <h4 className="font-black uppercase tracking-widest text-[10px] text-primary mb-6">Contacto</h4>
-                                <p className="text-[10px] text-white font-black uppercase tracking-widest mb-2">hola@click.pro</p>
-                                <p className="text-[10px] text-white/40 font-medium uppercase tracking-widest">Disponible Globalmente</p>
+                                <p className="text-[10px] text-white font-black uppercase tracking-widest mb-2">Adm@productionsclick.com</p>
+                                <p className="text-[10px] text-white/40 font-medium uppercase tracking-widest">+58 4123152222</p>
                             </div>
                         </div>
                         <div className="max-w-[1600px] mx-auto pt-12 mt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
@@ -620,8 +837,8 @@ function LandingPage() {
                     </footer>
                 </div>
             </main>
-            </div>
-        );
-    }
+        </div>
+    );
+}
 
-    export default LandingPage;
+export default LandingPage;
