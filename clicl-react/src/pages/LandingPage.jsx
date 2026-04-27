@@ -434,21 +434,34 @@ function LandingPage() {
                     <div className="relative md:absolute md:bottom-0 left-0 w-full md:px-8 md:translate-y-1/2 z-20 mt-12 md:mt-0 px-2 lg:px-4">
                         <div className="max-w-[1600px] mx-auto bg-navy border border-white/10 border-t-2 border-t-primary shadow-2xl reveal reveal-up overflow-hidden rounded-2xl md:rounded-none">
                             <div className="grid grid-cols-1 md:grid-cols-3 py-8 md:py-8" ref={statsBarRef}>
-                                <div className="stat-card border-b md:border-b-0 md:border-r border-white/10 pb-8 md:pb-0 mb-8 md:mb-0">
+
+                                <div className="stat-card border-b md:border-b-0 md:border-r border-white/10 pb-8 md:pb-0 mb-8 md:mb-0 text-center">
                                     <span className="text-xs font-black tracking-[0.4em] text-white/30 uppercase mb-3 block">— 01 —</span>
-                                    <span className="stat-number text-5xl md:text-6xl font-black text-primary mb-3" data-target="70" data-suffix="+">70+</span>
-                                    <span className="text-[10px] font-bold tracking-[0.3em] text-white/40 uppercase">MARCAS HAN CONFIADO EN NUESTRO ADN </span>
+                                    <div className="flex items-center justify-center">
+                                        <span className="text-5xl md:text-6xl font-black text-primary mb-3">+</span>
+                                        <span className="stat-number text-5xl md:text-6xl font-black text-primary mb-3" data-target="70" data-suffix="">70</span>
+                                    </div>
+                                    <span className="text-[10px] font-bold tracking-[0.3em] text-white/40 uppercase block">MARCAS HAN CONFIADO EN NUESTRO ADN</span>
                                 </div>
-                                <div className="stat-card border-b md:border-b-0 md:border-r border-white/10 pb-8 md:pb-0 mb-8 md:mb-0">
+
+                                <div className="stat-card border-b md:border-b-0 md:border-r border-white/10 pb-8 md:pb-0 mb-8 md:mb-0 text-center">
                                     <span className="text-xs font-black tracking-[0.4em] text-white/30 uppercase mb-3 block">— 02 —</span>
-                                    <span className="stat-number text-5xl md:text-6xl font-black text-primary mb-3" data-target="08" data-suffix="M+">08+</span>
-                                    <span className="text-[10px] font-bold tracking-[0.3em] text-white/40 uppercase">SECTORES COMERCIALES VALIDADOS</span>
+                                    <div className="flex items-center justify-center">
+                                        <span className="text-5xl md:text-6xl font-black text-primary mb-3">+</span>
+                                        <span className="stat-number text-5xl md:text-6xl font-black text-primary mb-3" data-target="08" data-suffix="M">08</span>
+                                    </div>
+                                    <span className="text-[10px] font-bold tracking-[0.3em] text-white/40 uppercase block">SECTORES COMERCIALES VALIDADOS</span>
                                 </div>
-                                <div className="stat-card md:pb-0 md:mb-0">
+
+                                <div className="stat-card md:pb-0 md:mb-0 text-center">
                                     <span className="text-xs font-black tracking-[0.4em] text-white/30 uppercase mb-3 block">— 03 —</span>
-                                    <span className="stat-number text-5xl md:text-6xl font-black text-primary mb-3" data-target="100" data-suffix="%">100%</span>
-                                    <span className="text-[10px] font-bold tracking-[0.3em] text-white/40 uppercase">ENFONQUE EN RENTABILIDAD</span>
+                                    <div className="flex items-center justify-center">
+                                        <span className="stat-number text-5xl md:text-6xl font-black text-primary mb-3" data-target="100" data-suffix="%">100</span>
+                                        <span className="text-5xl md:text-6xl font-black text-primary mb-3"></span>
+                                    </div>
+                                    <span className="text-[10px] font-bold tracking-[0.3em] text-white/40 uppercase block">ENFOQUE EN RENTABILIDAD</span>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -473,7 +486,7 @@ function LandingPage() {
                             </div>
                             <div className="flex flex-col md:flex-row gap-4 md:gap-px bg-transparent md:bg-white/10 border-0 md:border md:border-white/10 shadow-none md:shadow-2xl reveal reveal-up overflow-hidden">
                                 {[
-                                    { id: '01', icon: 'groups_3', title: 'Departamento\nde\nMarketing', desc: 'Diseñamos, ejecutamos y medimos. Nos hacemos cargo de toda tu presencia digital para que tú te enfoques en lo más importante: tu producto o servicio.', items: ['Planificación estratégica', 'crecimiento Digital'] },
+                                    { id: '01', icon: 'groups_3', title: 'Departamento\nde\nMarketing', desc: 'Diseñamos, ejecutamos y medimos. Nos hacemos cargo de toda tu presencia digital para que tú te enfoques en lo más importante: tu producto o servicio.', items: ['Planificación estratégica', 'crecimiento Digital'], scrollId: 'auditoria' },
                                     { id: '02', icon: 'ads_click', title: 'Crecimiento\ny Ads', desc: 'Campañas publicitarias orientadas al rendimiento que aprovechan nuestra creatividad personalizada para maximizar el ROAS.', items: ['Adquisición de pago', 'Optimización de funnel'], link: '/crecimiento-ads' },
                                     { id: '03', icon: 'movie_edit', title: 'Creación de\nContenido', desc: 'Contenido de alto nivel que traduce la esecnia de tu empresa en una presencia digital imponente y diferenciada', items: ['Producción de video', 'Activos sociales'], link: '/creacion-contenido' },
                                 ].map(service => (
@@ -501,8 +514,8 @@ function LandingPage() {
                                             ))}
                                         </ul>
 
-                                        {service.link && (
-                                            <div className="mt-12">
+                                        <div className="mt-12">
+                                            {service.link ? (
                                                 <Link
                                                     to={service.link}
                                                     className="inline-flex items-center gap-2 px-6 py-3 border border-primary/30 text-primary text-[10px] font-black uppercase tracking-[0.2em] hover:bg-primary hover:text-white transition-all duration-300 rounded-sm"
@@ -510,8 +523,16 @@ function LandingPage() {
                                                     Ver Resultado
                                                     <span className="material-symbols-outlined text-sm notranslate" translate="no">arrow_forward</span>
                                                 </Link>
-                                            </div>
-                                        )}
+                                            ) : service.scrollId ? (
+                                                <button
+                                                    onClick={(e) => handleNavClick(e, service.scrollId)}
+                                                    className="inline-flex items-center gap-2 px-6 py-3 border border-primary/30 text-primary text-[10px] font-black uppercase tracking-[0.2em] hover:bg-primary hover:text-white transition-all duration-300 rounded-sm"
+                                                >
+                                                    Auditoría Gratuita
+                                                    <span className="material-symbols-outlined text-sm notranslate" translate="no">arrow_forward</span>
+                                                </button>
+                                            ) : null}
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -809,8 +830,8 @@ function LandingPage() {
                                         { name: 'LinkedIn', url: '#' }
                                     ].map(sm => (
                                         <li key={sm.name}>
-                                            <a 
-                                                className="text-[10px] text-white hover:text-primary transition-colors font-black uppercase tracking-widest" 
+                                            <a
+                                                className="text-[10px] text-white hover:text-primary transition-colors font-black uppercase tracking-widest"
                                                 href={sm.url}
                                                 target={sm.url !== '#' ? "_blank" : undefined}
                                                 rel={sm.url !== '#' ? "noopener noreferrer" : undefined}

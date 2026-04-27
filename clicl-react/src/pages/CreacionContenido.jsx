@@ -2,13 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { animate, stagger } from 'animejs';
 import clickLogo from '../assets/imagenes/logo click png N.png';
-import car1 from '../assets/imagenes/CARRUZEL 1.jpg';
-import car2 from '../assets/imagenes/CARRUZEL2.jpeg';
-import car3 from '../assets/imagenes/CARRUZEL3.jpeg';
-import car4 from '../assets/imagenes/CARRUZEL4.jpeg';
-import car5 from '../assets/imagenes/CARRUZEL5.jpg';
-import car6 from '../assets/imagenes/CARRUZEL6.jpg';
-import car7 from '../assets/imagenes/CARRUZEL 7.jpg';
+import { contentImages, contentVideos } from '../assets/utils/getContent.js';
 
 /**
  * Utility to split text into characters while preserving HTML structure
@@ -46,49 +40,162 @@ function splitText(element) {
 /**
  * Interactive Marquee with Drag/Touch Support
  */
-const InteractiveMarquee = ({ slides }) => {
+/**
+ * Interactive Marquee with Drag/Touch Support
+ * Now supports videos and manual-only mode
+ */
+/**
+ * LazyVideo Component to optimize loading
+ */
+const LazyVideo = React.memo(({ src, srcMp4, poster, className, isMuted, isPlaying, ...props }) => {
+    const videoRef = useRef(null);
+    const [hasLoaded, setHasLoaded] = useState(false);
+    const [shouldPlay, setShouldPlay] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        // Detect if mobile for video source selection
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setHasLoaded(true);
+                    setShouldPlay(true);
+                } else {
+                    setShouldPlay(false);
+                }
+            },
+            { threshold: 0.01 }
+        );
+
+        if (videoRef.current) {
+            observer.observe(videoRef.current);
+        }
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('resize', checkMobile);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!videoRef.current || !hasLoaded) return;
+
+        const video = videoRef.current;
+        if (shouldPlay && isPlaying) {
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => { });
+            }
+        } else {
+            video.pause();
+        }
+    }, [shouldPlay, isPlaying, hasLoaded]);
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.muted = isMuted;
+            videoRef.current.volume = isMuted ? 0 : 0.5;
+        }
+    }, [isMuted]);
+
+    const activeSrc = isMobile && srcMp4 ? srcMp4 : src;
+
+    return (
+        <video
+            ref={videoRef}
+            src={hasLoaded ? activeSrc : ''}
+            poster={poster}
+            className={`${className} transition-opacity duration-700 ${hasLoaded ? 'opacity-100' : 'opacity-0'}`}
+            playsInline
+            webkit-playsinline="true"
+            loop
+            muted={isMuted}
+            preload={isMuted ? "metadata" : "auto"}
+            {...props}
+        />
+    );
+});
+LazyVideo.displayName = 'LazyVideo';
+
+
+
+const InteractiveMarquee = ({ slides, autoPlay = true, showSwipeHint = false }) => {
     const marqueeRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
-    const [startX, setStartX] = useState(0);
-    const [scrollLeft, setScrollLeft] = useState(0);
-    const [velocity, setVelocity] = useState(-1); // Default speed
+    const [activeVideoIndex, setActiveVideoIndex] = useState(null); // Track if a video is playing with sound
+
+    // Use refs for high-frequency updates to avoid re-renders
+    const dragRef = useRef({
+        startX: 0,
+        isDown: false,
+        velocity: autoPlay ? -1 : 0,
+        hasDragged: false // to distinguish click vs drag
+    });
+
     const requestRef = useRef();
     const lastPosRef = useRef(0);
 
-    const animate = () => {
-        if (!isDragging && marqueeRef.current) {
-            lastPosRef.current += velocity;
+    const animateMarquee = () => {
+        if (!dragRef.current.isDown && marqueeRef.current && activeVideoIndex === null) {
+            lastPosRef.current += dragRef.current.velocity;
 
-            // Loop logic (approximate half of the content)
+            // Loop logic (approximate 1/3 of the content)
             const maxScroll = marqueeRef.current.scrollWidth / 3;
-            if (Math.abs(lastPosRef.current) >= maxScroll) {
-                lastPosRef.current = 0;
+
+            if (lastPosRef.current < -maxScroll) {
+                lastPosRef.current += maxScroll;
+            } else if (lastPosRef.current > 0) {
+                lastPosRef.current -= maxScroll;
             }
 
             marqueeRef.current.style.transform = `translate3d(${lastPosRef.current}px, 0, 0)`;
+
+            // Friction effect to slow down if not autoplaying
+            if (!autoPlay) {
+                dragRef.current.velocity *= 0.95;
+                if (Math.abs(dragRef.current.velocity) < 0.05) {
+                    dragRef.current.velocity = 0;
+                }
+            } else {
+                // Gradually return to default speed
+                const targetSpeed = -1.5;
+                dragRef.current.velocity += (targetSpeed - dragRef.current.velocity) * 0.05;
+            }
         }
-        requestRef.current = requestAnimationFrame(animate);
+        requestRef.current = requestAnimationFrame(animateMarquee);
     };
 
     useEffect(() => {
-        requestRef.current = requestAnimationFrame(animate);
+        requestRef.current = requestAnimationFrame(animateMarquee);
         return () => cancelAnimationFrame(requestRef.current);
-    }, [isDragging, velocity]);
+    }, [activeVideoIndex]);
 
     const handleStart = (e) => {
         setIsDragging(true);
-        const x = e.pageX || e.touches[0].pageX;
-        setStartX(x - lastPosRef.current);
+        dragRef.current.isDown = true;
+        dragRef.current.hasDragged = false;
+        const x = e.pageX || (e.touches && e.touches[0].pageX);
+        dragRef.current.startX = x - lastPosRef.current;
     };
 
     const handleMove = (e) => {
-        if (!isDragging) return;
-        const x = e.pageX || e.touches[0].pageX;
-        const walk = x - startX;
+        if (!dragRef.current.isDown) return;
+        const x = e.pageX || (e.touches && e.touches[0].pageX);
+        const walk = x - dragRef.current.startX;
 
         // Calculate velocity based on movement
         const delta = walk - lastPosRef.current;
-        setVelocity(delta * 0.1); // Adjust sensitivity
+        dragRef.current.velocity = delta * 0.5; // Adjusted for better momentum
+
+        if (Math.abs(delta) > 5) {
+            dragRef.current.hasDragged = true;
+        }
 
         lastPosRef.current = walk;
         if (marqueeRef.current) {
@@ -98,56 +205,133 @@ const InteractiveMarquee = ({ slides }) => {
 
     const handleEnd = () => {
         setIsDragging(false);
-        // Gradually return to default speed if velocity is too high/low
-        const normalizeSpeed = setInterval(() => {
-            setVelocity(prev => {
-                if (Math.abs(prev - (-1.5)) < 0.1) {
-                    clearInterval(normalizeSpeed);
-                    return -1.5;
-                }
-                return prev + ((-1.5) - prev) * 0.05;
-            });
-        }, 30);
+        dragRef.current.isDown = false;
+        // The momentum will be handled naturally by animateMarquee using the last velocity
+    };
+
+    const isVideo = (url) => {
+        return url.match(/\.(mp4|webm|ogg|mov|MOV)$/) || url.includes('video');
     };
 
     return (
-        <div
-            className="relative flex overflow-hidden group py-4 cursor-grab active:cursor-grabbing"
-            onMouseDown={handleStart}
-            onMouseMove={handleMove}
-            onMouseUp={handleEnd}
-            onMouseLeave={handleEnd}
-            onTouchStart={handleStart}
-            onTouchMove={handleMove}
-            onTouchEnd={handleEnd}
-        >
+        <div className="flex flex-col items-center">
             <div
-                ref={marqueeRef}
-                className="flex whitespace-nowrap gap-4 md:gap-8 will-change-transform translate-z-0"
+                className="relative w-full flex overflow-hidden group py-4 cursor-grab active:cursor-grabbing"
+                onMouseDown={handleStart}
+                onMouseMove={handleMove}
+                onMouseUp={handleEnd}
+                onMouseLeave={handleEnd}
+                onTouchStart={handleStart}
+                onTouchMove={handleMove}
+                onTouchEnd={handleEnd}
             >
-                {[...slides, ...slides, ...slides].map((slide, idx) => (
-                    <div
-                        key={idx}
-                        className="relative flex-shrink-0 w-[260px] sm:w-[380px] md:w-[450px] h-[340px] sm:h-[320px] md:h-[380px] group/item overflow-hidden rounded-2xl border border-navy/10 shadow-xl"
-                    >
-                        <img
-                            src={slide.url}
-                            alt={slide.title}
-                            className="w-full h-full object-cover pointer-events-none"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/10 to-transparent opacity-60"></div>
-                        <div className="absolute bottom-6 md:bottom-8 left-6 md:left-8">
-                            <span className="text-primary font-black uppercase tracking-[0.4em] text-[8px] md:text-[10px] mb-2 block">{slide.category}</span>
-                            <h3 className="text-lg md:text-2xl font-black uppercase tracking-tighter text-white">{slide.title}</h3>
+                <div
+                    ref={marqueeRef}
+                    className="flex whitespace-nowrap gap-4 md:gap-8 will-change-transform translate-z-0 pl-3"
+                >
+                    {[...slides, ...slides, ...slides].map((slide, idx) => (
+                        <div
+                            key={idx}
+                            className="relative flex-shrink-0 w-[260px] sm:w-[320px] md:w-[380px] h-[460px] sm:h-[500px] md:h-[480px] group/item overflow-hidden rounded-2xl border border-navy/10 shadow-xl bg-navy-accent cursor-pointer"
+                            onMouseEnter={(e) => {
+                                const video = e.currentTarget.querySelector('video');
+                                if (video && !video.muted) {
+                                    video.controls = true;
+                                }
+                            }}
+                            onMouseLeave={(e) => {
+                                const video = e.currentTarget.querySelector('video');
+                                if (video) {
+                                    video.controls = false;
+                                }
+                            }}
+                            onClick={(e) => {
+                                if (dragRef.current.hasDragged) return; // Ignore click if user was dragging
+                                const video = e.currentTarget.querySelector('video');
+
+                                const icon = e.currentTarget.querySelector('.play-icon');
+                                if (video) {
+                                    if (video.muted) {
+                                        // Pause/Mute all other videos
+                                        document.querySelectorAll('video').forEach(v => {
+                                            v.pause();
+                                            v.muted = true;
+                                            v.controls = false;
+                                            const otherIcon = v.parentNode.querySelector('.play-icon');
+                                            if (otherIcon) {
+                                                otherIcon.classList.remove('opacity-0');
+                                                otherIcon.classList.add('opacity-100');
+                                            }
+                                        });
+
+                                        video.muted = false;
+                                        video.volume = 0.5;
+                                        video.play();
+                                        setActiveVideoIndex(idx); // Pause marquee
+                                        if (icon) {
+                                            icon.classList.remove('opacity-100');
+                                            icon.classList.add('opacity-0');
+                                        }
+                                    } else {
+                                        video.pause();
+                                        video.muted = true;
+                                        setActiveVideoIndex(null); // Resume marquee
+                                        if (icon) {
+                                            icon.classList.remove('opacity-0');
+                                            icon.classList.add('opacity-100');
+                                        }
+                                    }
+                                }
+                            }}
+                        >
+                            {isVideo(slide.url) ? (
+                                <>
+                                    <LazyVideo
+                                        src={slide.url}
+                                        srcMp4={slide.urlMp4}
+                                        poster={slide.poster}
+                                        className="w-full h-full object-cover"
+                                        isMuted={activeVideoIndex !== idx}
+                                        isPlaying={activeVideoIndex === null || activeVideoIndex === idx}
+                                    />
+
+                                    <div className={`play-icon absolute inset-0 flex items-center justify-center bg-black/20 ${activeVideoIndex === idx ? 'opacity-0' : 'opacity-100'} transition-all duration-500 pointer-events-none z-10`}>
+                                        <div className="w-16 h-16 rounded-full border-2 border-white/50 flex items-center justify-center backdrop-blur-sm group-hover/item:scale-110 group-hover/item:border-primary transition-all">
+                                            <span className="material-symbols-outlined text-white text-4xl notranslate" translate="no">{activeVideoIndex === idx ? 'pause' : 'play_arrow'}</span>
+                                        </div>
+                                    </div>
+                                </>
+
+
+                            ) : (
+                                <img
+                                    src={slide.url}
+                                    alt={slide.title}
+                                    className="w-full h-full object-cover pointer-events-none"
+                                    loading="lazy"
+                                />
+                            )}
+                            <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent opacity-60 pointer-events-none"></div>
+                            <div className="absolute bottom-6 md:bottom-8 left-6 md:left-8 pointer-events-none">
+                                <span className="text-primary font-black uppercase tracking-[0.4em] text-[8px] md:text-[10px] mb-2 block">{slide.category}</span>
+                                <h3 className="text-lg md:text-2xl font-black uppercase tracking-tighter text-white">{slide.title}</h3>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
+            {showSwipeHint && (
+                <div className="flex items-center gap-2 mt-4 opacity-70 justify-center">
+                    <span className="material-symbols-outlined text-primary text-sm notranslate" translate="no">swipe</span>
+                    <span className="text-primary text-[10px] font-bold uppercase tracking-widest">Desliza para explorar</span>
+                </div>
+            )}
         </div>
     );
 };
 
 function CreacionContenido() {
+
     const [activeSlide, setActiveSlide] = useState(0);
     const [selectedPlan, setSelectedPlan] = useState(null);
     const [scrolled, setScrolled] = useState(false);
@@ -185,16 +369,6 @@ function CreacionContenido() {
         const waUrl = `https://wa.me/584123152222?text=${encodeURIComponent(message)}`;
         window.open(waUrl, '_blank');
     };
-
-    const slides = [
-        { url: car1, title: 'Producción Élite', category: 'Cinematografía' },
-        { url: car2, title: 'Storytelling Visual', category: 'Creative' },
-        { url: car3, title: 'Impacto Digital', category: 'Directing' },
-        { url: car4, title: 'Narrativa de Marca', category: 'Branding' },
-        { url: car5, title: 'Post-Producción', category: 'Editing' },
-        { url: car6, title: 'Diseño Sonoro', category: 'Audio' },
-        { url: car7, title: 'Estrategia Visual', category: 'Marketing' }
-    ];
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -323,7 +497,7 @@ function CreacionContenido() {
                     {/* Content scaled to 90% */}
                     <div className="page-scale-90">
                         {/* Unified Hero Section */}
-                        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center mb-40 pt-32 md:pt-48 reveal">
+                        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center mb-50 pt-30 md:pt-34 reveal">
                             <div className="flex-[1.2] text-center lg:text-left">
                                 <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-8 block border-l-4 border-primary pl-6 mx-auto lg:mx-0 w-fit lg:w-auto">Servicio 01</span>
                                 <h1 ref={heroTitleRef} className="text-4xl sm:text-6xl md:text-[5.5rem] lg:text-[6.2rem] xl:text-[7.2rem] font-black uppercase leading-[0.9] tracking-tighter mb-10">
@@ -344,11 +518,19 @@ function CreacionContenido() {
                         {/* Interactive Moving Carousel Portafolio */}
                         <section className="mb-32 reveal py-16 mesh-gradient-studio studio-texture border-y border-navy/5 -mx-8 overflow-hidden">
                             <div className="px-8 mb-12 text-center lg:text-left">
-                                <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 mx-auto lg:mx-0 w-fit">Portafolio Dinámico</span>
-                                <h2 className="text-3xl sm:text-5xl md:text-[5.5rem] font-black uppercase tracking-tighter text-navy leading-[1.1] md:leading-[0.8]">Nuestras <br /><span className="text-primary">Producciones</span></h2>
+                                <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 mx-auto lg:mx-0 w-fit">Portafolio de Fotografía</span>
+                                <h2 className="text-3xl sm:text-5xl md:text-[5.5rem] font-black uppercase tracking-tighter text-navy leading-[1.1] md:leading-[0.8]">Nuestra <br /><span className="text-primary">Producción</span></h2>
                             </div>
 
-                            <InteractiveMarquee slides={slides} />
+                            <InteractiveMarquee slides={contentImages} autoPlay={true} showSwipeHint={true} />
+
+                            <div className="px-8 mb-12 mt-24 text-center lg:text-left">
+                                <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 mx-auto lg:mx-0 w-fit">Portafolio de Video</span>
+                                <h2 className="text-3xl sm:text-5xl md:text-[5.5rem] font-black uppercase tracking-tighter text-navy leading-[1.1] md:leading-[0.8]">Impacto <br /><span className="text-primary">Audiovisual</span></h2>
+                            </div>
+
+                            <InteractiveMarquee slides={contentVideos} autoPlay={false} showSwipeHint={true} />
+
                         </section>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 mb-40 border border-white/10">
@@ -557,8 +739,9 @@ function CreacionContenido() {
                                     {[
                                         'Entrega de material en máximo 7 días hábiles.',
                                         'Horas adicionales se facturan aparte.',
+                                        'El pago debe realizarse en su totalidad al momento de la contratación.',
                                         'No incluye gestión de redes sociales.',
-                                        'No incluye pauta publicitaria ni estrategia integral.'
+                                        'No incluye imagen de marca y/o modelos'
                                     ].map((condition, i) => (
                                         <div key={i} className="flex gap-4 items-center group">
                                             <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
