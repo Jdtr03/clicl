@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import clickLogo from '../assets/imagenes/logo click png N.png'
 import { brands } from '../assets/utils/getLogos.js';
-import carruzel1 from '../assets/imagenes/CARRUZEL 1.jpg';
-import carruzel2 from '../assets/imagenes/CARRUZEL2.jpeg';
-import carruzel3 from '../assets/imagenes/CARRUZEL3.jpeg';
-import carruzel4 from '../assets/imagenes/CARRUZEL4.jpeg';
+import carruzel1 from '../assets/imagenes/Marcas/MAGDA.png';
+import carruzel3 from '../assets/imagenes/Marcas/16-BLUEXPRESS.png';
+import carruzel2 from '../assets/imagenes/Marcas/11-SHAWARMA-ZUZU.png';
+import carruzel4 from '../assets/imagenes/Marcas/08-ILUVENCA.PNG';
 
 
 /**
@@ -402,8 +402,8 @@ function LandingPage() {
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                             <div className="reveal reveal-left flex flex-col justify-center items-center h-full text-center">
                                 <div className="max-w-[100vw] px-4 md:px-0 md:max-w-3xl w-full flex flex-col items-center overflow-visible">
-                                    <h1 ref={heroTitleRef} className="text-primary text-[2rem] sm:text-[2.2rem] md:text-7xl lg:text-8xl xl:text-[7.2rem] font-black leading-tight md:leading-[0.9] tracking-tighter uppercase mb-6 md:mb-8 mx-auto whitespace-nowrap overflow-visible">
-                                        ESTRATEJICOS.<br />DISRUPTIVOS.<br /><span className="text-white">ESCALABLES.</span>
+                                    <h1 ref={heroTitleRef} className="text-primary text-[2rem] sm:text-[2.2rem] md:text-7xl lg:text-8xl xl:text-[6.2rem] font-black leading-tight md:leading-[0.9] tracking-tighter uppercase mb-6 md:mb-8 mx-auto whitespace-nowrap overflow-visible">
+                                        ESTRATÉGICOS.<br />DISRUPTIVOS.<br /><span className="text-white">ESCALABLES.</span>
                                     </h1>
                                     <p className="text-white/80 text-base md:text-xl font-bold leading-tight uppercase mb-8 md:mb-10 tracking-tight max-w-xl mx-auto">
                                         SOMOS CLICK PRODUCTIONS. NO HACEMOS RUIDO DIGITAL, TRANSFORMAMOS TU INVERSIÓN EN CRECIMIENTO COMERCIAL Y VENTAS.
@@ -448,7 +448,7 @@ function LandingPage() {
                                     <span className="text-xs font-black tracking-[0.4em] text-white/30 uppercase mb-3 block">— 02 —</span>
                                     <div className="flex items-center justify-center">
                                         <span className="text-5xl md:text-6xl font-black text-primary mb-3">+</span>
-                                        <span className="stat-number text-5xl md:text-6xl font-black text-primary mb-3" data-target="08" data-suffix="M">08</span>
+                                        <span className="stat-number text-5xl md:text-6xl font-black text-primary mb-3" data-target="08" data-suffix="">08</span>
                                     </div>
                                     <span className="text-[10px] font-bold tracking-[0.3em] text-white/40 uppercase block">SECTORES COMERCIALES VALIDADOS</span>
                                 </div>
@@ -549,9 +549,16 @@ function LandingPage() {
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8 border-t border-navy/10 pt-12 reveal reveal-up">
                                 {['Estrategia de Marca y Posicionamiento', 'Produccion audivisual', 'Gestión de Redes Sociales Media Multicanal', 'Publicidad Digital (ads)', 'diseño de embudo de ventas (funnels)', 'IMPLEMENTACIÓN Y CONFIGURACIÓN DE CRM', 'AUTOMATIZACIÓN DE PROCESOS Y RESPUESTAS', 'WHATSAPP Y EMAIL MARKETING', 'MARKETING DE INFLUENCERS', 'ASESORÍAS PERSONALIZADAS', 'PUBLICIDAD TRADICIONAL', 'GESTIÓN Y ORGANIZACIÓN DE EVENTOS'].map(service => (
-                                    <div key={service} className="service-item">
-                                        <span className="material-symbols-outlined text-primary font-bold text-3xl notranslate" translate="no">check_circle</span>
-                                        <span className="text-2xl md:text-3xl font-black  text-navy uppercase tracking-tighter mb-10">{service}</span>
+                                    /* Cambio 1: Añadimos flex, items-center y gap al contenedor */
+                                    <div key={service} className="service-item flex items-center gap-4 mb-10">
+                                        {/* Cambio 2: Añadimos flex-shrink-0 para que el check no se deforme */}
+                                        <span className="material-symbols-outlined text-primary font-bold text-3xl notranslate flex-shrink-0" translate="no">
+                                            check_circle
+                                        </span>
+                                        {/* El texto se mantiene exactamente igual */}
+                                        <span className="text-2xl md:text-3xl font-black text-navy uppercase tracking-tighter">
+                                            {service}
+                                        </span>
                                     </div>
                                 ))}
                             </div>
@@ -756,34 +763,34 @@ function LandingPage() {
                             >
                                 {[...Array(3)].flatMap((_, i) => [
                                     {
-                                        name: "Carolina Muñoz",
-                                        role: "Gerente de Marketing",
+                                        name: "Dra Magda Farnetano",
+                                        role: "Odontologa Protesista",
                                         avatar: carruzel1,
-                                        content: "Trabajar con Click Productions fue una experiencia increíble. Captaron la esencia de nuestra marca desde el primer momento y el video promocional superó nuestras expectativas. Gracias a su profesionalismo y creatividad, logramos conectar con nuestra audiencia como nunca antes."
+                                        content: "Gracias a su excelente trabajo, he logrado potenciar y liderar mi marca personal como Odontóloga e Implantóloga. Esto me ha permitido mantener una presencia constante, brindando información de valor y consejos útiles tanto a mis pacientes como a mi comunidad."
                                     },
                                     {
-                                        name: "Alejandro Pérez",
-                                        role: "CEO",
+                                        name: "Maher Mansour",
+                                        role: "Shawarma Zuzu - Gastronomia",
                                         avatar: carruzel2,
-                                        content: "El equipo de Click Productions transformó nuestras ideas en contenido visual que realmente generó impacto en redes sociales. Los clips cortos y las fotos de producto no solo se veían increíbles, sino que también incrementaron nuestro engagement un 40% en solo dos semanas."
+                                        content: "Nuestra meta siempre ha sido ser los mejores en lo que hacemos, brindando calidad y dedicación a cada comensal. Gracias al equipo de Click, logramos esa visibilidad que buscábamos en redes sociales. Su trabajo impecable y profesionalismo fueron la pieza clave para que más personas conocieran nuestra marca. ¡Totalmente agradecidos!"
                                     },
                                     {
-                                        name: "Sofía Torres",
-                                        role: "Directora de Eventos",
+                                        name: "Yaria Molina ",
+                                        role: "Bluexpress - Distribuidora e importadora",
                                         avatar: carruzel3,
-                                        content: "Nos encantó el profesionalismo y la dedicación de Click Productions. Desde la conceptualización hasta la entrega final, el proceso fue claro y organizado. El recap de nuestro evento corporativo fue dinámico y emocionante, y se convirtió en la pieza central de nuestra estrategia de redes."
+                                        content: "Apenas estamos comenzando, pero el futuro se ve increíble. Confiamos plenamente en su trayectoria y conocimiento técnico para lograr resultados extraordinarios. ¡Estamos listos para hacer cosas grandes!."
                                     },
                                     {
-                                        name: "Yuleisi Hernández",
-                                        role: "Directora de Eventos",
+                                        name: "George Djandi",
+                                        role: "Iluvenca - industria de iluminacion",
                                         avatar: carruzel4,
-                                        content: "¡Click Productions ha sido una bendición en mi vida! Desde el primer momento que los contacté tuvieron una combinación la cual sabía que serían los chicos perfectos para mi proyecto. Y eso es profesionalismo y empatía. Moisés y Laura son unos excelentes profesionales que aman lo que hacen y esa pasión se refleja en su trabajo."
+                                        content: "Felicito al equipo por su dedicación. Lograron transformar información técnica de iluminación en contenido ameno, informativo y promocional que realmente destaca frente a la competencia. Su capacidad para entender nuestro ramo y aplicarlo a las redes sociales ha sido clave para nuestro crecimiento digital."
                                     }
                                 ]).map((testimonial, idx) => (
                                     <div key={idx} className="flex-shrink-0 w-[280px] md:w-[380px] bg-navy-accent rounded-[1.5rem] p-6 md:p-8 border border-white/5 shadow-2xl flex flex-col justify-between transition-all duration-500 hover:border-primary/20 hover:bg-navy-accent/80 group/item">
                                         <div>
                                             <div className="flex items-center gap-4 mb-6">
-                                                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/20 group-hover/item:border-primary transition-colors">
+                                                <div className="w-16 h-16 bg-white rounded-full overflow-hidden border-2 border-primary/20 group-hover/item:border-primary transition-colors">
                                                     <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
                                                 </div>
                                                 <div>
@@ -827,7 +834,7 @@ function LandingPage() {
                                 <ul className="space-y-4">
                                     {[
                                         { name: 'Instagram', url: 'https://www.instagram.com/clickproductions/' },
-                                        { name: 'LinkedIn', url: '#' }
+                                        { name: 'WhatsApp', url: 'https://wa.me/584123152222' }
                                     ].map(sm => (
                                         <li key={sm.name}>
                                             <a
@@ -845,11 +852,11 @@ function LandingPage() {
                             <div>
                                 <h4 className="font-black uppercase tracking-widest text-[10px] text-primary mb-6">Contacto</h4>
                                 <p className="text-[10px] text-white font-black uppercase tracking-widest mb-2">Adm@productionsclick.com</p>
-                                <p className="text-[10px] text-white/40 font-medium uppercase tracking-widest">+58 4123152222</p>
+                                <p className="text-[10px] text-white/40 font-medium uppercase tracking-widest">+58 412-315-2222</p>
                             </div>
                         </div>
                         <div className="max-w-[1600px] mx-auto pt-12 mt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
-                            <p className="text-[9px] text-white/20 font-black uppercase tracking-[0.5em]">© 2024 CLICK PRODUCTIONS. BOLD MOVE.</p>
+                            <p className="text-[9px] text-white/20 font-black uppercase tracking-[0.5em]">© 2024 CLICK PRODUCTIONS.</p>
                             <div className="flex gap-12">
                                 <span className="text-[9px] text-primary font-black uppercase tracking-[0.4em]">EL IMPACTO PRIMERO</span>
                                 <span className="text-[9px] text-primary font-black uppercase tracking-[0.4em]">GUIADOS POR DATOS</span>

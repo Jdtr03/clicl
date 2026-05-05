@@ -13,7 +13,7 @@ const processModules = (modules, posters = null) => {
 
     return sortedEntries.map(([path, module]) => {
         const fileName = path.split('/').pop().split('.').shift();
-        
+
         let posterUrl = null;
         if (posters) {
             const posterPath = Object.keys(posters).find(p => p.includes(fileName));
@@ -26,14 +26,8 @@ const processModules = (modules, posters = null) => {
             url: module.default || module,
             fileName: fileName,
             poster: posterUrl,
-            title: fileName
-                .replace(/Copy of /g, '')
-                .replace(/^\d+[-_]*/, '')
-                .replace(/[_-]/g, ' ')
-                .split(' ')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                .join(' '),
-            category: 'Producción'
+            title: '', // Se deja vacío para que no se muestre el nombre en la interfaz
+            category: ''
         };
     });
 };
@@ -49,4 +43,3 @@ export const contentVideos = webmVideos.map(video => {
         urlMp4: mp4Url
     };
 });
-

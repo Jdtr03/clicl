@@ -174,7 +174,7 @@ function CrecimientoAds() {
                         {/* Unified Hero Section */}
                         <div className="flex flex-col lg:flex-row-reverse gap-16 lg:gap-24 items-center mb-40 pt-32 md:pt-48 reveal">
                             <div className="flex-[1.2] text-center lg:text-left">
-                                <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-8 block border-l-4 border-primary pl-6 mx-auto lg:mx-0 w-fit lg:w-auto">Servicio 03</span>
+                                <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-8 block border-l-4 border-primary pl-6 mx-auto lg:mx-0 w-fit lg:w-auto"></span>
                                 <h1 ref={heroTitleRef} className="text-[2.5rem] sm:text-5xl md:text-7xl lg:text-8xl xl:text-[7.2rem] font-black uppercase leading-[1.1] md:leading-[0.9] tracking-tighter mb-10">
                                     CRECIMIENTO<br />
                                     <span className="text-white">& </span>

@@ -499,7 +499,7 @@ function CreacionContenido() {
                         {/* Unified Hero Section */}
                         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center mb-50 pt-30 md:pt-34 reveal">
                             <div className="flex-[1.2] text-center lg:text-left">
-                                <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-8 block border-l-4 border-primary pl-6 mx-auto lg:mx-0 w-fit lg:w-auto">Servicio 01</span>
+                                <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-8 block border-l-4 border-primary pl-6 mx-auto lg:mx-0 w-fit lg:w-auto"></span>
                                 <h1 ref={heroTitleRef} className="text-4xl sm:text-6xl md:text-[5.5rem] lg:text-[6.2rem] xl:text-[7.2rem] font-black uppercase leading-[0.9] tracking-tighter mb-10">
                                     CREACIÓN DE<br />
                                     <span className="text-primary italic">CONTENIDO</span>
@@ -516,21 +516,44 @@ function CreacionContenido() {
 
                         {/* Carousel Section - Light Theme */}
                         {/* Interactive Moving Carousel Portafolio */}
-                        <section className="mb-32 reveal py-16 mesh-gradient-studio studio-texture border-y border-navy/5 -mx-8 overflow-hidden">
-                            <div className="px-8 mb-12 text-center lg:text-left">
-                                <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 mx-auto lg:mx-0 w-fit">Portafolio de Fotografía</span>
-                                <h2 className="text-3xl sm:text-5xl md:text-[5.5rem] font-black uppercase tracking-tighter text-navy leading-[1.1] md:leading-[0.8]">Nuestra <br /><span className="text-primary">Producción</span></h2>
+                        {/* SECCIÓN PORTAFOLIO - CORRECCIÓN PARA MONITORES GRANDES */}
+
+                        {/* SECCIÓN COMPLETA: PORTAFOLIO CON FONDO INFINITO */}
+                        {/* SECCIÓN PORTAFOLIO - MAXIMIZADA PARA MONITORES GRANDES */}
+                        <section className="relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen mb-32 reveal py-20 mesh-gradient-studio studio-texture border-y border-navy/5 overflow-hidden 2xl:scale-100 2xl:origin-center">
+
+                            {/* Contenedor de contenido: En monitores grandes (2xl) subimos el ancho a 1600px para aprovechar el espacio */}
+                            <div className="max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-8 lg:px-12">
+
+                                {/* --- BLOQUE FOTOGRAFÍA --- */}
+                                <div className="mb-12 text-center lg:text-left">
+                                    <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 mx-auto lg:mx-0 w-fit">
+                                        Portafolio de Fotografía
+                                    </span>
+                                    <h2 className="text-4xl sm:text-5xl md:text-[5.5rem] 2xl:text-[6.5rem] font-black uppercase tracking-tighter text-navy leading-[1.1] md:leading-[0.8]">
+                                        Nuestra <br /><span className="text-primary">Producción</span>
+                                    </h2>
+                                </div>
+
+                                <div className="w-full">
+                                    <InteractiveMarquee slides={contentImages} autoPlay={true} showSwipeHint={true} />
+                                </div>
+
+                                {/* --- BLOQUE VIDEO --- */}
+                                <div className="mb-12 mt-32 text-center lg:text-left">
+                                    <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 mx-auto lg:mx-0 w-fit">
+                                        Portafolio de Video
+                                    </span>
+                                    <h2 className="text-4xl sm:text-5xl md:text-[5.5rem] 2xl:text-[6.5rem] font-black uppercase tracking-tighter text-navy leading-[1.1] md:leading-[0.8]">
+                                        Impacto <br /><span className="text-primary">Audiovisual</span>
+                                    </h2>
+                                </div>
+
+                                <div className="w-full">
+                                    <InteractiveMarquee slides={contentVideos} autoPlay={false} showSwipeHint={true} />
+                                </div>
+
                             </div>
-
-                            <InteractiveMarquee slides={contentImages} autoPlay={true} showSwipeHint={true} />
-
-                            <div className="px-8 mb-12 mt-24 text-center lg:text-left">
-                                <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 mx-auto lg:mx-0 w-fit">Portafolio de Video</span>
-                                <h2 className="text-3xl sm:text-5xl md:text-[5.5rem] font-black uppercase tracking-tighter text-navy leading-[1.1] md:leading-[0.8]">Impacto <br /><span className="text-primary">Audiovisual</span></h2>
-                            </div>
-
-                            <InteractiveMarquee slides={contentVideos} autoPlay={false} showSwipeHint={true} />
-
                         </section>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 mb-40 border border-white/10">
