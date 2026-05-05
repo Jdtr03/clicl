@@ -7,7 +7,7 @@ import { brands } from '../assets/utils/getLogos.js';
 import carruzel1 from '../assets/imagenes/Marcas/MAGDA.png';
 import carruzel3 from '../assets/imagenes/Marcas/16-BLUEXPRESS.png';
 import carruzel2 from '../assets/imagenes/Marcas/11-SHAWARMA-ZUZU.png';
-import carruzel4 from '../assets/imagenes/Marcas/08-ILUVENCA.PNG';
+import carruzel4 from '../assets/imagenes/Marcas/08-ILUVENCA.png';
 
 
 /**
