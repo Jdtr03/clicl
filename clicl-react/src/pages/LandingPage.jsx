@@ -775,7 +775,7 @@ function LandingPage() {
                                         content: "Nuestra meta siempre ha sido ser los mejores en lo que hacemos, brindando calidad y dedicación a cada comensal. Gracias al equipo de Click, logramos esa visibilidad que buscábamos en redes sociales. Su trabajo impecable y profesionalismo fueron la pieza clave para que más personas conocieran nuestra marca. ¡Totalmente agradecidos!"
                                     },
                                     {
-                                        name: "Yaria Molina ",
+                                        name: "Yaira Molina ",
                                         role: "Bluexpress - Distribuidora e importadora",
                                         avatar: carruzel3,
                                         content: "Apenas estamos comenzando, pero el futuro se ve increíble. Confiamos plenamente en su trayectoria y conocimiento técnico para lograr resultados extraordinarios. ¡Estamos listos para hacer cosas grandes!."
@@ -802,11 +802,7 @@ function LandingPage() {
                                                 "{testimonial.content}"
                                             </p>
                                         </div>
-                                        <div className="flex gap-1">
-                                            {[1, 2, 3, 4, 5].map(star => (
-                                                <span key={star} className="material-symbols-outlined text-primary text-base notranslate" translate="no">star</span>
-                                            ))}
-                                        </div>
+
                                     </div>
                                 ))}
                             </motion.div>
