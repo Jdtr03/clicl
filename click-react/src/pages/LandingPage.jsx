@@ -2,11 +2,22 @@ import React, { useState, useEffect, useRef } from 'react';
 import { animate, stagger } from 'animejs';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import clickLogo from '../assets/imagenes/logo click png N.png'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, FreeMode } from 'swiper/modules';
+
+// Estilos de Swiper
+
+import 'swiper/css';
+import 'swiper/css/autoplay';
+import 'swiper/css/free-mode';
+
+
+// Assets e imágenes
+import clickLogo from '../assets/imagenes/logo click png N.png';
 import { brands } from '../assets/utils/getLogos.js';
 import carruzel1 from '../assets/imagenes/Marcas/MAGDA.png';
-import carruzel3 from '../assets/imagenes/Marcas/16-BLUEXPRESS.png';
 import carruzel2 from '../assets/imagenes/Marcas/11-SHAWARMA-ZUZU.png';
+import carruzel3 from '../assets/imagenes/Marcas/16-BLUEXPRESS.png';
 import carruzel4 from '../assets/imagenes/Marcas/08-ILUVENCA.png';
 
 
@@ -49,7 +60,6 @@ function splitText(element) {
 function LandingPage() {
     const [scrolled, setScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isBrandsExpanded, setIsBrandsExpanded] = useState(false);
     const [hoveredService, setHoveredService] = useState(null);
     const heroTitleRef = useRef(null);
     const brandsSectionRef = useRef(null);
@@ -66,24 +76,7 @@ function LandingPage() {
         window.scrollTo({ top, behavior: 'smooth' });
     };
 
-    const handleBrandsToggle = () => {
-        if (isBrandsExpanded) {
-            setIsBrandsExpanded(false);
 
-            // On mobile, the height change can confuse the scroll. 
-            // We scroll to the section's top after a tiny delay.
-            setTimeout(() => {
-                const section = brandsSectionRef.current;
-                if (section) {
-                    const yOffset = -120; // Navbar height
-                    const y = section.getBoundingClientRect().top + window.scrollY + yOffset;
-                    window.scrollTo({ top: y, behavior: 'smooth' });
-                }
-            }, 10);
-        } else {
-            setIsBrandsExpanded(true);
-        }
-    };
 
     // Scroll effect
     useEffect(() => {
@@ -174,11 +167,12 @@ function LandingPage() {
             }
         }, { threshold: 0.4 });
 
-        observer.observe(statsBarRef.current);
+        const currentStatsBarRef = statsBarRef.current;
+        observer.observe(currentStatsBarRef);
         return () => {
             observer.disconnect();
-            if (statsBarRef.current) {
-                statsBarRef.current.removeEventListener('mouseenter', runCountUp);
+            if (currentStatsBarRef) {
+                currentStatsBarRef.removeEventListener('mouseenter', runCountUp);
             }
         };
     }, []);
@@ -567,7 +561,7 @@ function LandingPage() {
 
                     <section
                         ref={brandsSectionRef}
-                        className="py-24 px-5 bg-off-white studio-texture border-b border-navy/5"
+                        className="py-24 px-5 bg-off-white studio-texture border-b border-navy/5 overflow-hidden"
                         id="clientes"
                     >
                         <div className="max-w-[1600px] mx-auto text-center relative z-10">
@@ -575,42 +569,70 @@ function LandingPage() {
                                 Marcas con las que hemos trabajado
                             </h2>
 
-                            <div
-                                className={`relative transition-all duration-1000 ease-in-out overflow-hidden ${isBrandsExpanded ? 'max-h-[3000px]' : 'max-h-[720px]'}`}
-                            >
-                                <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-10 md:gap-x-10 md:gap-y-10 reveal reveal-up">
-                                    {brands.map((brand) => (
-                                        <div
-                                            key={brand.alt}
-                                            className="flex justify-center items-center group w-[31%] md:w-[180px] lg:w-[180px]"
-                                        >
-                                            <img
-                                                src={brand.src}
-                                                alt={brand.alt}
-                                                className="h-35 md:h-50 w-auto object-contain transition-transform duration-500 ease-in-out group-hover:scale-110"
-                                            />
-                                        </div>
-                                    ))}
+                            <div className="flex flex-col gap-y-12">
+                                {/* Fila 1: Derecha a Izquierda */}
+                                <div className="relative flex overflow-hidden group mb-4">
+                                    <motion.div
+                                        className="flex gap-12 py-4 cursor-grab active:cursor-grabbing"
+                                        animate={{
+                                            x: [0, -3500],
+                                        }}
+                                        transition={{
+                                            x: {
+                                                repeat: Infinity,
+                                                repeatType: "loop",
+                                                duration: 60,
+                                                ease: "linear",
+                                            },
+                                        }}
+                                        drag="x"
+                                        dragConstraints={{ left: -3500, right: 0 }}
+                                        whileTap={{ cursor: "grabbing" }}
+                                    >
+                                        {[...Array(4)].flatMap(() => brands.slice(0, Math.ceil(brands.length / 2))).map((brand, idx) => (
+                                            <div key={idx} className="flex-shrink-0 w-[140px] md:w-[220px] flex justify-center items-center group/logo">
+                                                <img
+                                                    src={brand.src}
+                                                    alt={brand.alt}
+                                                    draggable="false"
+                                                    className="h-24 md:h-36 w-auto object-contain transition-transform duration-500 ease-in-out group-hover/logo:scale-110 select-none"
+                                                />
+                                            </div>
+                                        ))}
+                                    </motion.div>
                                 </div>
 
-                                {/* Gradient Overlay when collapsed */}
-                                {!isBrandsExpanded && (
-                                    <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-off-white via-off-white/80 to-transparent z-10 pointer-events-none"></div>
-                                )}
-                            </div>
-
-                            <div className="mt-12 reveal reveal-up">
-                                <button
-                                    onClick={handleBrandsToggle}
-                                    className="group inline-flex flex-col items-center gap-2"
-                                >
-                                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-navy/40 group-hover:text-primary transition-colors">
-                                        {isBrandsExpanded ? 'Ver Menos' : 'Ver Todos los Clientes'}
-                                    </span>
-                                    <div className={`w-10 h-10 rounded-full border border-navy/10 flex items-center justify-center group-hover:border-primary transition-all ${isBrandsExpanded ? 'rotate-180' : ''}`}>
-                                        <span className="material-symbols-outlined text-navy/20 group-hover:text-primary notranslate" translate="no">expand_more</span>
-                                    </div>
-                                </button>
+                                {/* Fila 2: Izquierda a Derecha */}
+                                <div className="relative flex overflow-hidden group">
+                                    <motion.div
+                                        className="flex gap-12 py-4 cursor-grab active:cursor-grabbing"
+                                        animate={{
+                                            x: [-3500, 0],
+                                        }}
+                                        transition={{
+                                            x: {
+                                                repeat: Infinity,
+                                                repeatType: "loop",
+                                                duration: 60,
+                                                ease: "linear",
+                                            },
+                                        }}
+                                        drag="x"
+                                        dragConstraints={{ left: -3500, right: 0 }}
+                                        whileTap={{ cursor: "grabbing" }}
+                                    >
+                                        {[...Array(4)].flatMap(() => brands.slice(Math.ceil(brands.length / 2))).map((brand, idx) => (
+                                            <div key={idx} className="flex-shrink-0 w-[140px] md:w-[220px] flex justify-center items-center group/logo">
+                                                <img
+                                                    src={brand.src}
+                                                    alt={brand.alt}
+                                                    draggable="false"
+                                                    className="h-24 md:h-36 w-auto object-contain transition-transform duration-500 ease-in-out group-hover/logo:scale-110 select-none"
+                                                />
+                                            </div>
+                                        ))}
+                                    </motion.div>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -761,7 +783,7 @@ function LandingPage() {
                                 dragConstraints={{ left: -1600, right: 0 }}
                                 whileTap={{ cursor: "grabbing" }}
                             >
-                                {[...Array(3)].flatMap((_, i) => [
+                                {[...Array(3)].flatMap(() => [
                                     {
                                         name: "Dra Magda Farnetano",
                                         role: "Odontologa Protesista",
@@ -791,7 +813,7 @@ function LandingPage() {
                                         <div>
                                             <div className="flex items-center gap-4 mb-6">
                                                 <div className="w-16 h-16 bg-white rounded-full overflow-hidden border-2 border-primary/20 group-hover/item:border-primary transition-colors">
-                                                    <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
+                                                    <img src={testimonial.avatar} alt={testimonial.name} draggable="false" className="w-full h-full object-cover select-none" />
                                                 </div>
                                                 <div>
                                                     <h4 className="text-white text-base font-black uppercase tracking-tight leading-none mb-1">{testimonial.name}</h4>

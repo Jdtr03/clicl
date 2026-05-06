@@ -127,7 +127,6 @@ LazyVideo.displayName = 'LazyVideo';
 
 const InteractiveMarquee = ({ slides, autoPlay = true, showSwipeHint = false }) => {
     const marqueeRef = useRef(null);
-    const [isDragging, setIsDragging] = useState(false);
     const [activeVideoIndex, setActiveVideoIndex] = useState(null); // Track if a video is playing with sound
 
     // Use refs for high-frequency updates to avoid re-renders
@@ -174,10 +173,9 @@ const InteractiveMarquee = ({ slides, autoPlay = true, showSwipeHint = false }) 
     useEffect(() => {
         requestRef.current = requestAnimationFrame(animateMarquee);
         return () => cancelAnimationFrame(requestRef.current);
-    }, [activeVideoIndex]);
+    }, [activeVideoIndex, animateMarquee]);
 
     const handleStart = (e) => {
-        setIsDragging(true);
         dragRef.current.isDown = true;
         dragRef.current.hasDragged = false;
         const x = e.pageX || (e.touches && e.touches[0].pageX);
@@ -204,7 +202,6 @@ const InteractiveMarquee = ({ slides, autoPlay = true, showSwipeHint = false }) 
     };
 
     const handleEnd = () => {
-        setIsDragging(false);
         dragRef.current.isDown = false;
         // The momentum will be handled naturally by animateMarquee using the last velocity
     };
@@ -332,7 +329,6 @@ const InteractiveMarquee = ({ slides, autoPlay = true, showSwipeHint = false }) 
 
 function CreacionContenido() {
 
-    const [activeSlide, setActiveSlide] = useState(0);
     const [selectedPlan, setSelectedPlan] = useState(null);
     const [scrolled, setScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
