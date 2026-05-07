@@ -481,7 +481,7 @@ function LandingPage() {
                             <div className="flex flex-col md:flex-row gap-4 md:gap-px bg-transparent md:bg-white/10 border-0 md:border md:border-white/10 shadow-none md:shadow-2xl reveal reveal-up overflow-hidden">
                                 {[
                                     { id: '01', icon: 'groups_3', title: 'Departamento\nde\nMarketing', desc: 'Diseñamos, ejecutamos y medimos. Nos hacemos cargo de toda tu presencia digital para que tú te enfoques en lo más importante: tu producto o servicio.', items: ['Planificación estratégica', 'crecimiento Digital'], scrollId: 'auditoria' },
-                                    { id: '02', icon: 'ads_click', title: 'Crecimiento\ny Ads', desc: 'Campañas publicitarias orientadas al rendimiento que aprovechan nuestra creatividad personalizada para maximizar el ROAS.', items: ['Adquisición de pago', 'Optimización de funnel'], link: '/crecimiento-ads' },
+                                    { id: '02', icon: 'ads_click', title: 'Embudos de \nVentas', desc: 'Diseñamos embudos de ventas adaptado 100% a tu modelo de negocios permitiendo filtrar, organizar y atender a tus clientes potenciales de manera automatizada  ', items: ['tasa de conversión', 'Escalabilidad '], link: '/crecimiento-ads' },
                                     { id: '03', icon: 'movie_edit', title: 'Creación de\nContenido', desc: 'Contenido de alto nivel que traduce la esecnia de tu empresa en una presencia digital imponente y diferenciada', items: ['Producción de video', 'Activos sociales'], link: '/creacion-contenido' },
                                 ].map(service => (
                                     <div
@@ -561,7 +561,7 @@ function LandingPage() {
 
                     <section
                         ref={brandsSectionRef}
-                        className="py-24 px-5 bg-off-white studio-texture border-b border-navy/5 overflow-hidden"
+                        className="py-24 px-1 bg-off-white studio-texture border-b border-navy/5 overflow-hidden"
                         id="clientes"
                     >
                         <div className="max-w-[1600px] mx-auto text-center relative z-10">
@@ -573,7 +573,7 @@ function LandingPage() {
                                 {/* Fila 1: Derecha a Izquierda */}
                                 <div className="relative flex overflow-hidden group mb-4">
                                     <motion.div
-                                        className="flex gap-12 py-4 cursor-grab active:cursor-grabbing"
+                                        className="flex gap-10 py-4 cursor-grab active:cursor-grabbing"
                                         animate={{
                                             x: [0, -3500],
                                         }}
@@ -595,7 +595,7 @@ function LandingPage() {
                                                     src={brand.src}
                                                     alt={brand.alt}
                                                     draggable="false"
-                                                    className="h-24 md:h-36 w-auto object-contain transition-transform duration-500 ease-in-out group-hover/logo:scale-110 select-none"
+                                                    className="h-40 md:h-55 w-auto object-contain transition-transform duration-500 ease-in-out group-hover/logo:scale-110 select-none"
                                                 />
                                             </div>
                                         ))}
@@ -627,7 +627,7 @@ function LandingPage() {
                                                     src={brand.src}
                                                     alt={brand.alt}
                                                     draggable="false"
-                                                    className="h-24 md:h-36 w-auto object-contain transition-transform duration-500 ease-in-out group-hover/logo:scale-110 select-none"
+                                                    className="h-40 md:h-55 w-auto object-contain transition-transform duration-500 ease-in-out group-hover/logo:scale-110 select-none"
                                                 />
                                             </div>
                                         ))}

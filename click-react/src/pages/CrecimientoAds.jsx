@@ -176,12 +176,13 @@ function CrecimientoAds() {
                             <div className="flex-[1.2] text-center lg:text-left">
                                 <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-8 block border-l-4 border-primary pl-6 mx-auto lg:mx-0 w-fit lg:w-auto"></span>
                                 <h1 ref={heroTitleRef} className="text-[2.5rem] sm:text-5xl md:text-7xl lg:text-8xl xl:text-[7.2rem] font-black uppercase leading-[1.1] md:leading-[0.9] tracking-tighter mb-10">
-                                    CRECIMIENTO<br />
-                                    <span className="text-white">& </span>
-                                    <span className="text-primary italic">ADS</span>
+                                    Embudo <br />
+                                    <span className="text-white">de </span>
+                                    <span className="text-primary italic">Venta</span>
                                 </h1>
                                 <p className="text-white/60 text-lg md:text-2xl uppercase max-w-2xl mx-auto lg:mx-0 leading-tight font-bold tracking-tight">
-                                    Escala tu facturación con campañas de alto rendimiento. Fusionamos creatividad disruptiva con análisis de datos avanzado para dominar Meta, Google y TikTok Ads.
+                                    Construye una Infraestructura de Ingresos y transforma tu marketing en un activo de facturación predecible.
+
                                 </p>
                             </div>
                             <div className="flex-1 w-full max-w-[600px] aspect-square bg-navy-accent rounded-2xl border border-white/5 flex items-center justify-center relative overflow-hidden group shadow-2xl">
@@ -189,81 +190,83 @@ function CrecimientoAds() {
                                 <span className="material-symbols-outlined text-[10rem] text-primary/20 group-hover:scale-110 transition-transform duration-700 notranslate" translate="no">ads_click</span>
                             </div>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 mb-40 reveal mesh-gradient-studio studio-texture border-y border-navy/10 mx-0 md:-mx-8">
-                            {[
-                                { title: 'Meta Ads', desc: 'Campañas en Facebook e Instagram diseñadas para capturar leads y ventas calificadas.' },
-                                { title: 'Funnel Ads', desc: 'Arquitectura de embudos de venta que guían al usuario desde el interés hasta la compra.' },
-                                { title: 'Analytics', desc: 'Medición de precisión para optimizar cada dólar invertido en publicidad.' }
-                            ].map((box, i) => (
-                                <div key={i} className="p-12 md:p-16 bg-transparent border-b md:border-b-0 md:border-r border-navy/10 last:border-r-0 border-t-4 border-transparent hover:border-primary hover:bg-navy/5 transition-all duration-500 group">
-                                    <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-4 group-hover:text-primary transition-colors text-navy">{box.title}</h3>
-                                    <p className="text-navy/40 text-xs uppercase leading-relaxed font-bold tracking-tight">{box.desc}</p>
-                                </div>
-                            ))}
-                        </div>
 
-                        {/* Casos de Éxito Section */}
-                        <div className="mb-32">
-                            <div className="flex items-center gap-4 mb-16 border-l-4 border-primary pl-6">
-                                <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">Casos de <span className="text-primary italic">Éxito</span></h2>
+                        <section className="py-20 px-8 bg-navy studio-texture relative overflow-hidden" id="problematicas">
+                            <div className="max-w-[1600px] mx-auto relative z-10">
+                                <div className="text-center mb-12 reveal reveal-up">
+                                    <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter">
+                                        Sabemos lo que esta pasando <span className="text-primary italic">en tu negocio hoy </span>
+                                    </h2>
+                                </div>
+
+                                <div className="max-w-3xl mx-auto bg-primary rounded-[1.5rem] p-6 md:p-12 shadow-[0_40px_100px_-20px_rgba(241,90,36,0.3)] reveal reveal-up border border-white/10 relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+                                        <span className="material-symbols-outlined text-[12rem] text-white notranslate" translate="no">help_center</span>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 gap-5 md:gap-6 relative z-10">
+                                        {[
+                                            "Pagas por anuncios, te llegan decenas de mensajes, pero el caos se apodera de tu bandeja de entrada.",
+                                            "Tu equipo comercial no se da abasto, responden tarde y los prospectos se enfrian.",
+                                            "No tienes datos claros: no sabes quién compró realmente ni cuánto retorno te diocada anuncio.",
+                                            "La trampa de la curiosidad: Recibes cientos de mensajes de personas que solopreguntan precio y desaparecen, agotando a tus vendedores en lugar depermitirles cerrar con clientes reales."
+                                        ].map((problem, idx) => (
+                                            <div key={idx} className="flex items-center gap-4 group">
+                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/40 transition-all duration-300 transform group-hover:rotate-12">
+                                                    <span className="material-symbols-outlined text-white text-lg md:text-xl notranslate" translate="no">cancel</span>
+                                                </div>
+                                                <p className="text-white text-base md:text-xl font-black uppercase tracking-tight leading-tight">
+                                                    {problem}
+                                                </p>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className="mt-12 text-center relative z-10">
+                                        <button
+                                            onClick={(e) => handleNavClick(e, 'auditoria')}
+                                            className="btn-premium bg-white text-navy px-8 py-4 md:px-12 md:py-6 text-xs md:text-sm font-black uppercase tracking-[0.2em] hover:bg-navy-accent hover:text-white transition-all shadow-2xl rounded-sm"
+                                        >
+                                            diagnostico gratuito
+                                            <span className="block text-[8px] mt-1 font-bold opacity-50 tracking-widest">Cupos limitados</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section className="relative w-full py-20"> {/* Contenedor padre para dar espacio */}
+
+                            {/* Título: Aseguramos que sea visible con text-white o el color de tu marca */}
+                            <div className="max-w-7xl mx-auto px-4 mb-16 text-center">
+                                <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-white">
+                                    pilares de exito
+                                </h2>
                             </div>
 
-                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                            {/* Tu Grid Original: No tocamos ni una sola clase */}
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 reveal mesh-gradient-studio studio-texture border-y border-navy/10 mx-0 md:-mx-8 text-center">
                                 {[
-                                    {
-                                        title: 'Alcance Masivo',
-                                        metrics: ['+582k Impresiones', '+226k Resultados'],
-                                        description: 'Campaña de captación con segmentación avanzada y optimización constante.',
-                                        img: case1
-                                    },
-                                    {
-                                        title: 'ROI Optimizado',
-                                        metrics: ['$0.002 Costo/Result', '+29k Alcance'],
-                                        description: 'Arquitectura de embudos (Funnels) logrando costos mínimos históricos.',
-                                        img: case2
-                                    },
-                                    {
-                                        title: 'Visualizacion de Marca',
-                                        metrics: ['+687k Views', '+3.6k Clics'],
-                                        description: 'Estrategia de contenido viral y ADS para posicionamiento de marca.',
-                                        img: case3
-                                    }
-                                ].map((caseStudy, i) => (
-                                    <div
-                                        key={i}
-                                        onClick={() => setSelectedImage(caseStudy.img)}
-                                        className="group bg-navy/20 border-t-4 border-white/10 overflow-hidden hover:border-primary transition-all duration-700 hover:-translate-y-2 cursor-pointer shadow-2xl"
-                                    >
-                                        <div className="aspect-[16/10] overflow-hidden relative">
-                                            <img
-                                                src={caseStudy.img}
-                                                alt={caseStudy.title}
-                                                className="w-full h-full object-cover transition-all duration-1000 scale-105 group-hover:scale-100"
-                                                onError={(e) => { e.target.src = 'https://placehold.co/800x500/111111/F15A24?text=Captura+Ads'; }}
-                                            />
-                                            <div className="absolute top-6 right-6 z-20">
-                                                <div className="bg-primary text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full shadow-xl">Real Results</div>
-                                            </div>
-                                        </div>
-                                        <div className="p-10 relative">
-                                            <h3 className="text-2xl font-black uppercase tracking-tighter mb-4 group-hover:text-primary transition-colors">{caseStudy.title}</h3>
-                                            <div className="flex flex-wrap gap-3 mb-6">
-                                                {caseStudy.metrics.map((metric, j) => (
-                                                    <span key={j} className="text-[10px] font-black uppercase tracking-widest bg-white/5 text-primary border border-primary/20 px-3 py-1 rounded-md">{metric}</span>
-                                                ))}
-                                            </div>
-                                            <p className="text-white/40 text-xs uppercase leading-relaxed font-medium">{caseStudy.description}</p>
-                                        </div>
+                                    { title: 'trafico de alta intencion', desc: 'Contenido estratégico diseñado para sacar al usuario de las redes y aterrizarlo en un entorno donde tú tienes el control total.' },
+                                    { title: 'velocidad ', desc: 'El tiempo es dinero, cada segundo de carga por encima de los 3s es una donación directa a la competencia. Blindamos tu negocio para que cada clic cuente.' },
+                                    { title: 'control hub', desc: 'sistema de seguimiento que automatiza el registro de leads y las alertas de WhatsApp, tu equipo podra saber cuanto dinero hay en la mesa. ' }
+                                ].map((box, i) => (
+                                    <div key={i} className="p-12 md:p-16 bg-transparent border-b md:border-b-0 md:border-r border-navy/10 last:border-r-0 border-t-4 border-transparent hover:border-primary hover:bg-navy/5 transition-all duration-500 group">
+                                        <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-4 group-hover:text-primary transition-colors text-navy">{box.title}</h3>
+                                        <p className="text-navy/40 text-xs uppercase leading-relaxed font-bold tracking-tight">{box.desc}</p>
                                     </div>
                                 ))}
                             </div>
-                        </div>
+                        </section>
+
+
+
 
                         <div className="mb-32 reveal mesh-gradient-studio studio-texture p-8 md:p-24 border-y border-navy/5 text-center -mx-8">
                             <span className="text-primary font-black uppercase tracking-[0.4em] text-sm mb-6 block border-l-4 border-primary pl-4 mx-auto w-fit">Conversión Total</span>
-                            <h2 className="text-4xl md:text-[5.5rem] font-black uppercase tracking-tighter mb-10 text-navy leading-[0.8]">Dominio Absoluto<br /><span className="text-primary">Digital.</span></h2>
+                            <h2 className="text-4xl md:text-[5.5rem] font-black uppercase tracking-tighter mb-10 text-navy leading-[0.8]">adquisicion<br /><span className="text-primary">de Clientes.</span></h2>
                             <p className="text-navy/60 text-lg md:text-xl uppercase max-w-2xl mx-auto mb-12 font-bold leading-relaxed">
-                                No competimos por clics. Competimos por el mercado. Si buscas resultados ordinarios, estás en el lugar equivocado.
+                                Si estás listo para dejar atrás el caos, dejar de desperdiciar presupuesto y tomar el
+                                control absoluto de tu facturación, hagamos click
                             </p>
                             <a href="https://wa.me/584123152222" target="_blank" rel="noopener noreferrer" className="inline-block btn-premium bg-primary text-white px-16 py-6 text-sm font-black uppercase tracking-widest hover:brightness-110 transition-all shadow-[0_20px_40px_-10px_rgba(241,90,36,0.4)]">
                                 Dominar Ahora
