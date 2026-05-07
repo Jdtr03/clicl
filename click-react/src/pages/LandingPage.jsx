@@ -564,75 +564,73 @@ function LandingPage() {
                         className="py-24 px-1 bg-off-white studio-texture border-b border-navy/5 overflow-hidden"
                         id="clientes"
                     >
-                        <div className="max-w-[1600px] mx-auto text-center relative z-10">
+                        <style>{`
+                            .swiper-brands .swiper-wrapper {
+                                transition-timing-function: linear !important;
+                            }
+                        `}</style>
+
+                        <div className="max-w-[1900px] mx-auto text-center relative z-10">
                             <h2 className="text-2xl md:text-6xl font-black text-navy uppercase tracking-tighter mb-12 reveal reveal-up">
                                 Marcas con las que hemos trabajado
                             </h2>
 
                             <div className="flex flex-col gap-y-12">
-                                {/* Fila 1: Derecha a Izquierda */}
-                                <div className="relative flex overflow-hidden group mb-4">
-                                    <motion.div
-                                        className="flex gap-10 py-4 cursor-grab active:cursor-grabbing"
-                                        animate={{
-                                            x: [0, -3500],
-                                        }}
-                                        transition={{
-                                            x: {
-                                                repeat: Infinity,
-                                                repeatType: "loop",
-                                                duration: 60,
-                                                ease: "linear",
-                                            },
-                                        }}
-                                        drag="x"
-                                        dragConstraints={{ left: -3500, right: 0 }}
-                                        whileTap={{ cursor: "grabbing" }}
-                                    >
-                                        {[...Array(4)].flatMap(() => brands.slice(0, Math.ceil(brands.length / 2))).map((brand, idx) => (
-                                            <div key={idx} className="flex-shrink-0 w-[140px] md:w-[220px] flex justify-center items-center group/logo">
-                                                <img
-                                                    src={brand.src}
-                                                    alt={brand.alt}
-                                                    draggable="false"
-                                                    className="h-40 md:h-55 w-auto object-contain transition-transform duration-500 ease-in-out group-hover/logo:scale-110 select-none"
-                                                />
-                                            </div>
-                                        ))}
-                                    </motion.div>
-                                </div>
+                                {/* Fila 1: Izquierda → Derecha (autoplay normal) */}
+                                <Swiper
+                                    className="swiper-brands w-full"
+                                    modules={[Autoplay, FreeMode]}
+                                    loop={true}
+                                    freeMode={{ enabled: true, momentum: false }}
+                                    autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: false }}
+                                    speed={5000}
+                                    slidesPerView="auto"
+                                    spaceBetween={40}
+                                    grabCursor={true}
+                                >
+                                    {brands.slice(0, Math.ceil(brands.length / 2)).map((brand, idx) => (
+                                        <SwiperSlide
+                                            key={idx}
+                                            style={{ width: 'auto' }}
+                                            className="!w-[140px] md:!w-[220px] flex justify-center items-center group/logo py-4"
+                                        >
+                                            <img
+                                                src={brand.src}
+                                                alt={brand.alt}
+                                                draggable="false"
+                                                className="h-40 w-auto object-contain transition-transform duration-500 ease-in-out group-hover/logo:scale-110 select-none"
+                                            />
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
 
-                                {/* Fila 2: Izquierda a Derecha */}
-                                <div className="relative flex overflow-hidden group">
-                                    <motion.div
-                                        className="flex gap-12 py-4 cursor-grab active:cursor-grabbing"
-                                        animate={{
-                                            x: [-3500, 0],
-                                        }}
-                                        transition={{
-                                            x: {
-                                                repeat: Infinity,
-                                                repeatType: "loop",
-                                                duration: 60,
-                                                ease: "linear",
-                                            },
-                                        }}
-                                        drag="x"
-                                        dragConstraints={{ left: -3500, right: 0 }}
-                                        whileTap={{ cursor: "grabbing" }}
-                                    >
-                                        {[...Array(4)].flatMap(() => brands.slice(Math.ceil(brands.length / 2))).map((brand, idx) => (
-                                            <div key={idx} className="flex-shrink-0 w-[140px] md:w-[220px] flex justify-center items-center group/logo">
-                                                <img
-                                                    src={brand.src}
-                                                    alt={brand.alt}
-                                                    draggable="false"
-                                                    className="h-40 md:h-55 w-auto object-contain transition-transform duration-500 ease-in-out group-hover/logo:scale-110 select-none"
-                                                />
-                                            </div>
-                                        ))}
-                                    </motion.div>
-                                </div>
+                                {/* Fila 2: Derecha → Izquierda (autoplay reverso) */}
+                                <Swiper
+                                    className="swiper-brands w-full"
+                                    modules={[Autoplay, FreeMode]}
+                                    loop={true}
+                                    freeMode={{ enabled: true, momentum: false }}
+                                    autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: false, reverseDirection: true }}
+                                    speed={5000}
+                                    slidesPerView="auto"
+                                    spaceBetween={40}
+                                    grabCursor={true}
+                                >
+                                    {brands.slice(Math.ceil(brands.length / 2)).map((brand, idx) => (
+                                        <SwiperSlide
+                                            key={idx}
+                                            style={{ width: 'auto' }}
+                                            className="!w-[140px] md:!w-[220px] flex justify-center items-center group/logo py-4"
+                                        >
+                                            <img
+                                                src={brand.src}
+                                                alt={brand.alt}
+                                                draggable="false"
+                                                className="h-40 w-auto object-contain transition-transform duration-500 ease-in-out group-hover/logo:scale-110 select-none"
+                                            />
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
                             </div>
                         </div>
                     </section>
