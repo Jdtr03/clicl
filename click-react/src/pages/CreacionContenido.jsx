@@ -496,7 +496,7 @@ function CreacionContenido() {
                         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center mb-50 pt-30 md:pt-34 reveal">
                             <div className="flex-[1.2] text-center lg:text-left">
                                 <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-8 block border-l-4 border-primary pl-6 mx-auto lg:mx-0 w-fit lg:w-auto"></span>
-                                <h1 ref={heroTitleRef} className="text-4xl sm:text-6xl md:text-[5.5rem] lg:text-[6.2rem] xl:text-[7.2rem] font-black uppercase leading-[0.9] tracking-tighter mb-10">
+                                <h1 ref={heroTitleRef} className="text-4xl sm:text-6xl md:text-[5.5rem] lg:text-[5.5rem] xl:text-[7.2rem] font-black uppercase leading-[0.9] tracking-tighter mb-10">
                                     CREACIÓN DE<br />
                                     <span className="text-primary italic">CONTENIDO</span>
                                 </h1>
@@ -504,7 +504,7 @@ function CreacionContenido() {
                                     CREAMOS IMPACTO VISUAL DE ALTO NIVEL. NUESTRA PRODUCCIÓN ESTÁ DISEÑADA PARA CAPTURAR LA ATENCIÓN DEL MERCADO Y CONSOLIDAR UNA PRESENCIA DE MARCA IMPONENTE Y DIFERENCIADA.
                                 </p>
                             </div>
-                            <div className="flex-1 w-full max-w-[600px] aspect-square bg-navy-accent rounded-2xl border border-white/5 flex items-center justify-center relative overflow-hidden group shadow-2xl">
+                            <div className="flex-1 w-full max-w-[600px] h-[400px] aspect-square bg-navy-accent rounded-2xl border border-white/5 flex items-center justify-center relative overflow-hidden group shadow-2xl">
                                 <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary/20 to-transparent pointer-events-none"></div>
                                 <span className="material-symbols-outlined text-[10rem] text-primary/20 group-hover:scale-110 transition-transform duration-700 notranslate" translate="no">movie_edit</span>
                             </div>
@@ -519,10 +519,10 @@ function CreacionContenido() {
                         <section className="relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen mb-32 reveal py-20 mesh-gradient-studio studio-texture border-y border-navy/5 overflow-hidden 2xl:scale-100 2xl:origin-center">
 
                             {/* Contenedor de contenido: En monitores grandes (2xl) subimos el ancho a 1600px para aprovechar el espacio */}
-                            <div className="max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-8 lg:px-12">
+                            <div className="max-w-[1900px] 2xl:max-w-[1900px] mx-auto ">
 
                                 {/* --- BLOQUE FOTOGRAFÍA --- */}
-                                <div className="mb-12 text-center lg:text-left">
+                                <div className="mb-5 text-center lg:text-left">
                                     <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 mx-auto lg:mx-0 w-fit">
                                         Portafolio de Fotografía
                                     </span>

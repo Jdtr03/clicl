@@ -19,6 +19,7 @@ import carruzel1 from '../assets/imagenes/Marcas/MAGDA.png';
 import carruzel2 from '../assets/imagenes/Marcas/11-SHAWARMA-ZUZU.png';
 import carruzel3 from '../assets/imagenes/Marcas/16-BLUEXPRESS.png';
 import carruzel4 from '../assets/imagenes/Marcas/08-ILUVENCA.png';
+import carruzel5 from '../assets/imagenes/Marcas/05-LA-BUFALA.png';
 
 
 /**
@@ -752,6 +753,12 @@ function LandingPage() {
                     </section>
 
                     <section className="py-16 bg-navy studio-texture relative overflow-hidden" id="testimonios">
+                        <style>{`
+                            .swiper-testimonios .swiper-wrapper {
+                                transition-timing-function: linear !important;
+                            }
+                        `}</style>
+
                         <div className="max-w-[1600px] mx-auto px-8 mb-10 reveal reveal-up">
                             <span className="text-primary font-black uppercase tracking-[0.4em] text-sm mb-4 block border-l-4 border-primary pl-4">Testimonios</span>
                             <h2 className="text-4xl md:text-5xl font-black leading-[0.8] tracking-tighter uppercase text-white mb-2">
@@ -759,79 +766,48 @@ function LandingPage() {
                             </h2>
                         </div>
 
-                        {/* Testimonials Marquee with Text Cards */}
-                        <div className="relative flex overflow-hidden group mb-8">
-                            <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-navy to-transparent z-20 pointer-events-none"></div>
-                            <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-navy to-transparent z-20 pointer-events-none"></div>
-
-                            <motion.div
-                                className="flex gap-6 py-6 cursor-grab active:cursor-grabbing"
-                                animate={{
-                                    x: [0, -1600],
-                                }}
-                                transition={{
-                                    x: {
-                                        repeat: Infinity,
-                                        repeatType: "loop",
-                                        duration: 60,
-                                        ease: "linear",
-                                    },
-                                }}
-                                drag="x"
-                                dragConstraints={{ left: -1600, right: 0 }}
-                                whileTap={{ cursor: "grabbing" }}
-                            >
-                                {[...Array(3)].flatMap(() => [
-                                    {
-                                        name: "Dra Magda Farnetano",
-                                        role: "Odontologa Protesista",
-                                        avatar: carruzel1,
-                                        content: "Gracias a su excelente trabajo, he logrado potenciar y liderar mi marca personal como Odontóloga e Implantóloga. Esto me ha permitido mantener una presencia constante, brindando información de valor y consejos útiles tanto a mis pacientes como a mi comunidad."
-                                    },
-                                    {
-                                        name: "Maher Mansour",
-                                        role: "Shawarma Zuzu - Gastronomia",
-                                        avatar: carruzel2,
-                                        content: "Nuestra meta siempre ha sido ser los mejores en lo que hacemos, brindando calidad y dedicación a cada comensal. Gracias al equipo de Click, logramos esa visibilidad que buscábamos en redes sociales. Su trabajo impecable y profesionalismo fueron la pieza clave para que más personas conocieran nuestra marca. ¡Totalmente agradecidos!"
-                                    },
-                                    {
-                                        name: "Yaira Molina ",
-                                        role: "Bluexpress - Distribuidora e importadora",
-                                        avatar: carruzel3,
-                                        content: "Apenas estamos comenzando, pero el futuro se ve increíble. Confiamos plenamente en su trayectoria y conocimiento técnico para lograr resultados extraordinarios. ¡Estamos listos para hacer cosas grandes!."
-                                    },
-                                    {
-                                        name: "George Djandi",
-                                        role: "Iluvenca - industria de iluminacion",
-                                        avatar: carruzel4,
-                                        content: "Felicito al equipo por su dedicación. Lograron transformar información técnica de iluminación en contenido ameno, informativo y promocional que realmente destaca frente a la competencia. Su capacidad para entender nuestro ramo y aplicarlo a las redes sociales ha sido clave para nuestro crecimiento digital."
-                                    }
-                                ]).map((testimonial, idx) => (
-                                    <div key={idx} className="flex-shrink-0 w-[280px] md:w-[380px] bg-navy-accent rounded-[1.5rem] p-6 md:p-8 border border-white/5 shadow-2xl flex flex-col justify-between transition-all duration-500 hover:border-primary/20 hover:bg-navy-accent/80 group/item">
-                                        <div>
-                                            <div className="flex items-center gap-4 mb-6">
-                                                <div className="w-16 h-16 bg-white rounded-full overflow-hidden border-2 border-primary/20 group-hover/item:border-primary transition-colors">
-                                                    <img src={testimonial.avatar} alt={testimonial.name} draggable="false" className="w-full h-full object-cover select-none" />
+                        <div className="flex flex-col gap-y-6">
+                            {/* Fila 1: Izquierda → Derecha */}
+                            <div className="relative">
+                                <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-navy to-transparent z-20 pointer-events-none"></div>
+                                <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-navy to-transparent z-20 pointer-events-none"></div>
+                                <Swiper
+                                    className="swiper-testimonios w-full"
+                                    modules={[Autoplay, FreeMode]}
+                                    loop={true}
+                                    freeMode={{ enabled: true, momentum: false }}
+                                    autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: false }}
+                                    speed={8000}
+                                    slidesPerView="auto"
+                                    spaceBetween={24}
+                                    grabCursor={true}
+                                >
+                                    {[
+                                        { name: "Dra Magda Farnetano", role: "Odontologa Protesista", avatar: carruzel1, content: "\t\tGracias a su excelente trabajo, he logrado potenciar y liderar mi marca personal como Odontóloga e Implantóloga. Esto me ha permitido mantener una presencia constante, brindando información de valor y consejos útiles tanto a mis pacientes como a mi comunidad." },
+                                        { name: "Maher Mansour", role: "Shawarma Zuzu - Gastronomia", avatar: carruzel2, content: "\t\tNuestra meta siempre ha sido ser los mejores en lo que hacemos, brindando calidad y dedicación a cada comensal. Gracias al equipo de Click, logramos esa visibilidad que buscábamos en redes sociales. Su trabajo impecable y profesionalismo fueron la pieza clave para que más personas conocieran nuestra marca. ¡Totalmente agradecidos!" },
+                                        { name: "Yaira Molina", role: "Bluexpress - Distribuidora e importadora", avatar: carruzel3, content: "\t\tApenas estamos comenzando, pero el futuro se ve increíble. Confiamos plenamente en su trayectoria y conocimiento técnico para lograr resultados extraordinarios. ¡Estamos listos para hacer cosas grandes!" },
+                                        { name: "George Djandi", role: "Iluvenca - industria de iluminacion", avatar: carruzel4, content: "\t\tFelicito al equipo por su dedicación. Lograron transformar información técnica de iluminación en contenido ameno, informativo y promocional que realmente destaca frente a la competencia. Su capacidad para entender nuestro ramo y aplicarlo a las redes sociales ha sido clave para nuestro crecimiento digital." },
+                                        { name: "Janay Hernandez", role: "Bufalo -Gastronomia", avatar: carruzel5, content: "\t\tClick ha sido clave para ayudarnos a plasmar y estructurar las ideas de nuestra cuenta de Instagram de una manera muy organizada. Para nosotros han cubierto un área fundamental en la promoción del local, \n \tLo que más nos ha gustado del proceso es su compromiso siempre están muy pendientes de hacer seguimiento a los resultados y enfocados en una mejora continua." }
+                                    ].map((t, idx) => (
+                                        <SwiperSlide key={idx} style={{ width: 'auto' }} className="!w-[280px] md:!w-[380px] py-4">
+                                            <div className="bg-navy-accent rounded-[1.5rem] p-6 md:p-8 border border-white/5 shadow-2xl flex flex-col h-full transition-all duration-500 hover:border-primary/20 hover:bg-navy-accent/80 group/item">
+                                                <div className="flex items-center gap-4 mb-6">
+                                                    <div className="w-20 h-20 bg-white rounded-full overflow-hidden border-2 border-primary/20 group-hover/item:border-primary transition-colors flex-shrink-0">
+                                                        <img src={t.avatar} alt={t.name} draggable="false" className="w-full h-full object-cover select-none" />
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="text-white text-base font-black uppercase tracking-tight leading-none mb-1">{t.name}</h4>
+                                                        <p className="text-white/40 text-[12px] font-bold uppercase tracking-widest">{t.role}</p>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <h4 className="text-white text-base font-black uppercase tracking-tight leading-none mb-1">{testimonial.name}</h4>
-                                                    <p className="text-white/40 text-[9px] font-bold uppercase tracking-widest">{testimonial.role}</p>
-                                                </div>
+                                                <p className="text-white/70 text-sm md:text-lg font-medium leading-relaxed">
+                                                    &ldquo;{t.content}&rdquo;
+                                                </p>
                                             </div>
-                                            <p className="text-white/70 text-xs md:text-sm font-medium leading-relaxed mb-6">
-                                                "{testimonial.content}"
-                                            </p>
-                                        </div>
-
-                                    </div>
-                                ))}
-                            </motion.div>
-                        </div>
-
-                        <div className="max-w-[1600px] mx-auto px-8 flex justify-center reveal reveal-up">
-                            <p className="text-white/20 text-[8px] font-black uppercase tracking-[0.5em] flex items-center gap-4">
-                                <span className="material-symbols-outlined text-xs notranslate" translate="no">drag_handle</span> Desliza para explorar testimonios
-                            </p>
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+                            </div>
                         </div>
                     </section>
 

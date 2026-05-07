@@ -172,22 +172,39 @@ function CrecimientoAds() {
                     {/* Content scaled to 90% */}
                     <div className="page-scale-90">
                         {/* Unified Hero Section */}
-                        <div className="flex flex-col lg:flex-row-reverse gap-16 lg:gap-24 items-center mb-40 pt-32 md:pt-48 reveal">
-                            <div className="flex-[1.2] text-center lg:text-left">
-                                <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-8 block border-l-4 border-primary pl-6 mx-auto lg:mx-0 w-fit lg:w-auto"></span>
-                                <h1 ref={heroTitleRef} className="text-[2.5rem] sm:text-5xl md:text-7xl lg:text-8xl xl:text-[7.2rem] font-black uppercase leading-[1.1] md:leading-[0.9] tracking-tighter mb-10">
-                                    Embudo <br />
-                                    <span className="text-white">de </span>
-                                    <span className="text-primary italic">Venta</span>
-                                </h1>
-                                <p className="text-white/60 text-lg md:text-2xl uppercase max-w-2xl mx-auto lg:mx-0 leading-tight font-bold tracking-tight">
-                                    Construye una Infraestructura de Ingresos y transforma tu marketing en un activo de facturación predecible.
 
+                        <div className="flex flex-col lg:flex-row-reverse gap-10 lg:gap-10 items-center mb-10 pt-32 md:pt-35 reveal">
+                            {/* Contenedor de Texto */}
+                            <div className="flex-[1.2] text-center lg:text-left">
+                                <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-6 block border-l-4 border-primary pl-6 mx-auto lg:mx-0 w-fit lg:w-auto">
+                                    {/* Subtítulo opcional */}
+                                </span>
+
+                                {/* Título con Tamaño Fluido y Reducido */}
+                                <h1
+                                    ref={heroTitleRef}
+                                    className="text-[clamp(1.8rem,5.2vw,5.2rem)] text-center font-black uppercase leading-[1.1] tracking-tighter mb-8"
+                                >
+                                    Implementación<br />
+                                    <span className="text-white">de embudo <br /> </span>
+                                    <span className="text-primary italic">digital</span>
+                                </h1>
+
+                                {/* Párrafo descriptivo - Ajustado para armonizar con el título más pequeño */}
+                                <p className="text-white/60 text-center text-base md:text-xl uppercase  mx-auto lg:mx-0 leading-snug font-bold tracking-tight">
+                                    Construye una Infraestructura de Ingresos y transforma tu marketing en un activo de facturación predecible.
                                 </p>
                             </div>
-                            <div className="flex-1 w-full max-w-[600px] aspect-square bg-navy-accent rounded-2xl border border-white/5 flex items-center justify-center relative overflow-hidden group shadow-2xl">
+
+                            {/* Contenedor de Imagen / Icono */}
+                            <div className="flex-1 w-full max-w-[500px] h-[400px] aspect-square bg-navy-accent rounded-2xl border border-white/5 flex items-center justify-center relative overflow-hidden group shadow-2xl">
                                 <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-primary/20 to-transparent pointer-events-none"></div>
-                                <span className="material-symbols-outlined text-[10rem] text-primary/20 group-hover:scale-110 transition-transform duration-700 notranslate" translate="no">ads_click</span>
+                                <span
+                                    className="material-symbols-outlined text-[8rem] text-primary/20 group-hover:scale-110 transition-transform duration-700 notranslate"
+                                    translate="no"
+                                >
+                                    ads_click
+                                </span>
                             </div>
                         </div>
 
