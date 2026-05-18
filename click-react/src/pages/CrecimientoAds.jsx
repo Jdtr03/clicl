@@ -100,7 +100,7 @@ function CrecimientoAds() {
                     <div className="hidden md:flex items-center gap-10">
                         <Link to="/" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Inicio</Link>
                         <Link to="/creacion-contenido" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Contenido</Link>
-                        <Link to="/crecimiento-ads" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Ads</Link>
+                        <Link to="/crecimiento-ads" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">embudo digital</Link>
                     </div>
 
                     <div className="flex items-center gap-4">
@@ -140,7 +140,7 @@ function CrecimientoAds() {
                         {[
                             { label: 'Inicio', target: '/' },
                             { label: 'Contenido', target: '/creacion-contenido' },
-                            { label: 'Ads', target: '/crecimiento-ads' }
+                            { label: 'Embudo Digital', target: '/crecimiento-ads' }
                         ].map((item, idx) => (
                             <Link
                                 key={item.label}
@@ -173,7 +173,7 @@ function CrecimientoAds() {
                     <div className="page-scale-90">
                         {/* Unified Hero Section */}
 
-                        <div className="flex flex-col lg:flex-row-reverse gap-10 lg:gap-10 items-center mb-10 pt-32 md:pt-35 reveal">
+                        <div className="flex flex-col lg:flex-row-reverse gap-10 lg:gap-10 items-center mb-10 pt-45 md:pt-45 reveal">
                             {/* Contenedor de Texto */}
                             <div className="flex-[1.2] text-center lg:text-left">
                                 <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-6 block border-l-4 border-primary pl-6 mx-auto lg:mx-0 w-fit lg:w-auto">
@@ -207,6 +207,58 @@ function CrecimientoAds() {
                                 </span>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                {/* Pilares de Éxito Section (Takes 100% viewport width) */}
+                <section className="relative w-full py-24 px-4 sm:px-8 bg-gradient-to-b from-[#F7F8FC] to-[#EFF1F6] studio-texture border-y border-black/5">
+                    {/* Título */}
+                    <div className="max-w-7xl mx-auto mb-16 text-center reveal reveal-up">
+                        <h2 className="text-[clamp(2rem,5.5vw,5.5rem)] font-black uppercase tracking-tighter text-navy font-display">
+                            pilares de éxito
+                        </h2>
+                    </div>
+
+                    {/* Re-designed Grid to match light premium visual system */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                        {[
+                            {
+                                icon: 'ads_click',
+                                title: 'tráfico de alta intención',
+                                desc: 'Contenido estratégico diseñado para sacar al usuario de las redes y aterrizarlo en un entorno donde tú tienes el control total.'
+                            },
+                            {
+                                icon: 'bolt',
+                                title: 'velocidad de respuesta',
+                                desc: 'El tiempo es dinero: cada segundo de carga es una donación directa a la competencia. Blindamos tu negocio para que cada clic cuente.'
+                            },
+                            {
+                                icon: 'hub',
+                                title: 'control hub centralizado',
+                                desc: 'Sistema de seguimiento que automatiza el registro de leads y alertas de WhatsApp para saber exactamente cuánto dinero hay en la mesa.'
+                            }
+                        ].map((box, i) => (
+                            <div
+                                key={i}
+                                className="bg-white border border-black/5 rounded-[1.5rem] p-10 md:p-12 flex flex-col items-start transition-all duration-500 hover:border-primary/20 hover:-translate-y-1 shadow-[0_20px_50px_-20px_rgba(1,5,33,0.06)] hover:shadow-[0_30px_60px_-15px_rgba(241,90,36,0.12)] relative overflow-hidden group border-t-4 border-t-transparent hover:border-t-primary"
+                            >
+                                <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/25 flex items-center justify-center mb-8 group-hover:bg-primary/20 group-hover:border-primary/30 transition-all duration-500">
+                                    <span className="material-symbols-outlined text-primary text-3xl notranslate" translate="no">{box.icon}</span>
+                                </div>
+                                <h3 className="text-xl md:text-2xl font-black text-navy uppercase tracking-tighter mb-4 group-hover:text-primary transition-colors font-display">
+                                    {box.title}
+                                </h3>
+                                <p className="text-navy/60 text-sm md:text-base leading-relaxed font-medium transition-colors group-hover:text-navy/80">
+                                    {box.desc}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* Reopen wrapping containers for the remaining sections */}
+                <div className="max-w-[1400px] mx-auto px-8">
+                    <div className="page-scale-90">
 
                         <section className="py-20 px-8 bg-navy studio-texture relative overflow-hidden" id="problematicas">
                             <div className="max-w-[1600px] mx-auto relative z-10">
@@ -216,24 +268,25 @@ function CrecimientoAds() {
                                     </h2>
                                 </div>
 
-                                <div className="max-w-3xl mx-auto bg-primary rounded-[1.5rem] p-6 md:p-12 shadow-[0_40px_100px_-20px_rgba(241,90,36,0.3)] reveal reveal-up border border-white/10 relative overflow-hidden">
+                                <div className="max-w-3xl mx-auto bg-gradient-to-br from-primary to-[#b83c10] rounded-[1.5rem] p-8 md:p-12 shadow-[0_40px_80px_-20px_rgba(241,90,36,0.25)] reveal reveal-up border border-white/10 relative overflow-hidden">
                                     <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
                                         <span className="material-symbols-outlined text-[12rem] text-white notranslate" translate="no">help_center</span>
                                     </div>
 
-                                    <div className="grid grid-cols-1 gap-5 md:gap-6 relative z-10">
+                                    <div className="grid grid-cols-1 gap-6 relative z-10">
                                         {[
-                                            "Pagas por anuncios, te llegan decenas de mensajes, pero el caos se apodera de tu bandeja de entrada.",
-                                            "Tu equipo comercial no se da abasto, responden tarde y los prospectos se enfrian.",
-                                            "No tienes datos claros: no sabes quién compró realmente ni cuánto retorno te diocada anuncio.",
-                                            "La trampa de la curiosidad: Recibes cientos de mensajes de personas que solopreguntan precio y desaparecen, agotando a tus vendedores en lugar depermitirles cerrar con clientes reales."
+                                            { text: "Pagas por anuncios, te llegan decenas de mensajes, pero ", highlight: "el caos se apodera de tu bandeja de entrada." },
+                                            { text: "Tu equipo comercial no se da abasto, ", highlight: "responden tarde y los prospectos se enfrían." },
+                                            { text: "No tienes datos claros: ", highlight: "no sabes quién compró realmente ni cuánto retorno te dio cada anuncio." },
+                                            { text: "La trampa de la curiosidad: ", highlight: "recibes cientos de mensajes de personas que solo preguntan precio y desaparecen, agotando a tus vendedores." }
                                         ].map((problem, idx) => (
-                                            <div key={idx} className="flex items-center gap-4 group">
-                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/40 transition-all duration-300 transform group-hover:rotate-12">
+                                            <div key={idx} className="flex items-start gap-4 group">
+                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/10 border border-white/10 flex items-center justify-center group-hover:bg-white/20 transition-all duration-300 transform group-hover:rotate-12 mt-1">
                                                     <span className="material-symbols-outlined text-white text-lg md:text-xl notranslate" translate="no">cancel</span>
                                                 </div>
-                                                <p className="text-white text-base md:text-xl font-black uppercase tracking-tight leading-tight">
-                                                    {problem}
+                                                <p className="text-white/85 text-base md:text-lg font-medium leading-relaxed tracking-tight text-left">
+                                                    {problem.text}
+                                                    <strong className="text-white font-black">{problem.highlight}</strong>
                                                 </p>
                                             </div>
                                         ))}
@@ -251,32 +304,85 @@ function CrecimientoAds() {
                                 </div>
                             </div>
                         </section>
-                        <section className="relative w-full py-20"> {/* Contenedor padre para dar espacio */}
 
-                            {/* Título: Aseguramos que sea visible con text-white o el color de tu marca */}
-                            <div className="max-w-7xl mx-auto px-4 mb-16 text-center">
-                                <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-white">
-                                    pilares de exito
+                        {/* Ingeniería de Procesos Section */}
+                        <section className="py-24 px-4 sm:px-8 reveal reveal-up relative z-10">
+                            <div className="max-w-[1400px] mx-auto">
+                                <h2 className="text-[clamp(1.8rem,3.8vw,3.8rem)] font-black text-white uppercase tracking-tighter mb-6 leading-[1.1] max-w-4xl text-left font-display">
+                                    Ingeniería de procesos al servicio de tu rentabilidad.
                                 </h2>
-                            </div>
+                                <p className="text-white/60 text-base md:text-xl font-bold uppercase tracking-tight max-w-3xl mb-16 text-left">
+                                    No es magia, es un sistema prácticamente automatizado diseñado para acoplarse y optimizar los procesos de venta que tu empresa ya tiene:
+                                </p>
 
-                            {/* Tu Grid Original: No tocamos ni una sola clase */}
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 reveal mesh-gradient-studio studio-texture border-y border-navy/10 mx-0 md:-mx-8 text-center">
-                                {[
-                                    { title: 'trafico de alta intencion', desc: 'Contenido estratégico diseñado para sacar al usuario de las redes y aterrizarlo en un entorno donde tú tienes el control total.' },
-                                    { title: 'velocidad ', desc: 'El tiempo es dinero, cada segundo de carga por encima de los 3s es una donación directa a la competencia. Blindamos tu negocio para que cada clic cuente.' },
-                                    { title: 'control hub', desc: 'sistema de seguimiento que automatiza el registro de leads y las alertas de WhatsApp, tu equipo podra saber cuanto dinero hay en la mesa. ' }
-                                ].map((box, i) => (
-                                    <div key={i} className="p-12 md:p-16 bg-transparent border-b md:border-b-0 md:border-r border-navy/10 last:border-r-0 border-t-4 border-transparent hover:border-primary hover:bg-navy/5 transition-all duration-500 group">
-                                        <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-4 group-hover:text-primary transition-colors text-navy">{box.title}</h3>
-                                        <p className="text-navy/40 text-xs uppercase leading-relaxed font-bold tracking-tight">{box.desc}</p>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                    {/* Card 1 */}
+                                    <div className="bg-navy-accent/50 border border-white/5 rounded-[1.5rem] p-8 md:p-10 flex flex-col items-start transition-all duration-500 hover:border-primary/20 hover:bg-navy-accent/70 shadow-2xl relative overflow-hidden group">
+                                        <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center mb-8 shadow-lg shadow-primary/20">
+                                            <span className="material-symbols-outlined text-white text-3xl notranslate" translate="no">sensors</span>
+                                        </div>
+                                        <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter mb-4 leading-none font-display">
+                                            Atracción con intención
+                                        </h3>
+                                        <p className="text-white/50 text-sm md:text-base leading-relaxed font-medium">
+                                            Activamos un sistema de pauta que no busca "likes", sino inyectar interesados calificados directamente en tu embudo.
+                                        </p>
                                     </div>
-                                ))}
+
+                                    {/* Card 2 */}
+                                    <div className="bg-navy-accent/50 border border-white/5 rounded-[1.5rem] p-8 md:p-10 flex flex-col items-start transition-all duration-500 hover:border-primary/20 hover:bg-navy-accent/70 shadow-2xl relative overflow-hidden group">
+                                        <div className="w-14 h-14 rounded-2xl bg-navy/40 border border-white/10 flex items-center justify-center mb-8 group-hover:border-primary/30 transition-colors">
+                                            <span className="material-symbols-outlined text-primary text-3xl notranslate" translate="no">psychology</span>
+                                        </div>
+                                        <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter mb-4 leading-none font-display">
+                                            Captación y educación
+                                        </h3>
+                                        <p className="text-white/50 text-sm md:text-base leading-relaxed font-medium">
+                                            El sistema atiende, informa y califica al interesado en milisegundos, asegurando que solo los prospectos con intención real lleguen a tu equipo humano.
+                                        </p>
+                                    </div>
+
+                                    {/* Card 3 */}
+                                    <div className="bg-navy-accent/50 border border-white/5 rounded-[1.5rem] p-8 md:p-10 flex flex-col items-start transition-all duration-500 hover:border-primary/20 hover:bg-navy-accent/70 shadow-2xl relative overflow-hidden group">
+                                        <div className="w-14 h-14 rounded-2xl bg-navy/40 border border-white/10 flex items-center justify-center mb-8 group-hover:border-primary/30 transition-colors">
+                                            <span className="material-symbols-outlined text-primary text-3xl notranslate" translate="no">precision_manufacturing</span>
+                                        </div>
+                                        <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter mb-4 leading-none font-display">
+                                            Control operativo
+                                        </h3>
+                                        <p className="text-white/50 text-sm md:text-base leading-relaxed font-medium">
+                                            Instalamos el centro de mando que organiza cada oportunidad. El sistema sabe qué paso sigue y se encarga de que nadie se quede en el olvido.
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </section>
 
+                        {/* 5 Minutos Statistics Section */}
+                        <section className="py-24 px-4 sm:px-8 reveal reveal-up relative z-10">
+                            <div className="max-w-[1400px] mx-auto text-center">
+                                <h2 className="text-[clamp(1.8rem,5vw,5vw)] font-black text-white uppercase tracking-tighter mb-12 leading-[1.0] max-w-5xl mx-auto font-display">
+                                    ¿Por qué estás perdiendo<br />
+                                    el <span className="text-primary">80%</span> de tus cierres?
+                                </h2>
 
+                                <div className="max-w-4xl mx-auto bg-navy-accent/50 border border-white/5 rounded-[1.5rem] p-8 md:p-12 shadow-[0_30px_80px_-20px_rgba(1,5,33,1)]">
+                                    <p className="text-white/80 text-base md:text-xl font-medium leading-relaxed mb-8">
+                                        La estadística es innegable: <strong className="text-white font-black">Si un prospecto no recibe respuesta en los primeros 5 minutos, la probabilidad de cerrar la venta cae un 80%.</strong>
+                                    </p>
 
+                                    <p className="text-white/50 text-sm md:text-base leading-relaxed font-medium mb-10 max-w-3xl mx-auto">
+                                        Nuestro sistema automatiza el trabajo pesado de atracción, filtrado y contacto inicial, asegurando que la ventana de oportunidad nunca se cierre. Así, tu equipo comercial solo se dedica a lo que realmente importa: <strong className="text-primary font-black">Cerrar ventas.</strong>
+                                    </p>
+
+                                    <div className="w-full h-px bg-white/10 my-8"></div>
+
+                                    <div className="text-[clamp(2.5rem,6vw,6rem)] font-black text-primary uppercase tracking-[0.1rem] font-display leading-none">
+                                        5 MINUTOS
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
 
                         <div className="mb-32 reveal mesh-gradient-studio studio-texture p-8 md:p-24 border-y border-navy/5 text-center -mx-8">
                             <span className="text-primary font-black uppercase tracking-[0.4em] text-sm mb-6 block border-l-4 border-primary pl-4 mx-auto w-fit">Conversión Total</span>
@@ -285,9 +391,9 @@ function CrecimientoAds() {
                                 Si estás listo para dejar atrás el caos, dejar de desperdiciar presupuesto y tomar el
                                 control absoluto de tu facturación, hagamos click
                             </p>
-                            <a href="https://wa.me/584123152222" target="_blank" rel="noopener noreferrer" className="inline-block btn-premium bg-primary text-white px-16 py-6 text-sm font-black uppercase tracking-widest hover:brightness-110 transition-all shadow-[0_20px_40px_-10px_rgba(241,90,36,0.4)]">
+                            <Link to="/#auditoria" className="inline-block btn-premium bg-primary text-white px-16 py-6 text-sm font-black uppercase tracking-widest hover:brightness-110 transition-all shadow-[0_20px_40px_-10px_rgba(241,90,36,0.4)]">
                                 Dominar Ahora
-                            </a>
+                            </Link>
                         </div>
 
                         <footer className="bg-navy-accent/50 py-8 px-8 border-t border-white/5 text-center mt-12">

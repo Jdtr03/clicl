@@ -421,7 +421,7 @@ function CreacionContenido() {
                     <div className="hidden md:flex items-center gap-10">
                         <Link to="/" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Inicio</Link>
                         <Link to="/creacion-contenido" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Contenido</Link>
-                        <Link to="/crecimiento-ads" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Ads</Link>
+                        <Link to="/crecimiento-ads" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">embudo digital</Link>
                     </div>
 
                     <div className="flex items-center gap-4">
@@ -461,7 +461,7 @@ function CreacionContenido() {
                         {[
                             { label: 'Inicio', target: '/' },
                             { label: 'Contenido', target: '/creacion-contenido' },
-                            { label: 'Ads', target: '/crecimiento-ads' }
+                            { label: 'Embudo Digital', target: '/crecimiento-ads' }
                         ].map((item, idx) => (
                             <Link
                                 key={item.label}
@@ -494,13 +494,13 @@ function CreacionContenido() {
                     <div className="page-scale-90">
                         {/* Unified Hero Section */}
                         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center mb-50 pt-30 md:pt-34 reveal">
-                            <div className="flex-[1.2] text-center lg:text-left">
-                                <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-8 block border-l-4 border-primary pl-6 mx-auto lg:mx-0 w-fit lg:w-auto"></span>
-                                <h1 ref={heroTitleRef} className="text-4xl sm:text-6xl md:text-[5.5rem] lg:text-[5.5rem] xl:text-[7.2rem] font-black uppercase leading-[0.9] tracking-tighter mb-10">
+                            <div className="flex-[1.2] text-left">
+                                <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-8 block border-l-4 border-primary pl-6 w-fit">CREATIVIDAD</span>
+                                <h1 ref={heroTitleRef} className="text-4xl sm:text-6xl md:text-[5.5rem] lg:text-[5.5rem] xl:text-[7.2rem] font-black uppercase leading-[0.9] tracking-tighter mb-10 text-left">
                                     CREACIÓN DE<br />
                                     <span className="text-primary italic">CONTENIDO</span>
                                 </h1>
-                                <p className="text-white/60 text-lg md:text-2xl uppercase max-w-2xl mx-auto lg:mx-0 leading-tight font-bold tracking-tight">
+                                <p className="text-white/60 text-lg md:text-2xl uppercase max-w-2xl leading-tight font-bold tracking-tight text-left">
                                     CREAMOS IMPACTO VISUAL DE ALTO NIVEL. NUESTRA PRODUCCIÓN ESTÁ DISEÑADA PARA CAPTURAR LA ATENCIÓN DEL MERCADO Y CONSOLIDAR UNA PRESENCIA DE MARCA IMPONENTE Y DIFERENCIADA.
                                 </p>
                             </div>
@@ -522,8 +522,8 @@ function CreacionContenido() {
                             <div className="max-w-[1900px] 2xl:max-w-[1900px] mx-auto ">
 
                                 {/* --- BLOQUE FOTOGRAFÍA --- */}
-                                <div className="mb-5 text-center lg:text-left">
-                                    <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 mx-auto lg:mx-0 w-fit">
+                                <div className="mb-5 text-left px-8 sm:px-12 lg:px-16">
+                                    <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 w-fit">
                                         Portafolio de Fotografía
                                     </span>
                                     <h2 className="text-4xl sm:text-5xl md:text-[5.5rem] 2xl:text-[6.5rem] font-black uppercase tracking-tighter text-navy leading-[1.1] md:leading-[0.8]">
@@ -536,8 +536,8 @@ function CreacionContenido() {
                                 </div>
 
                                 {/* --- BLOQUE VIDEO --- */}
-                                <div className="mb-12 mt-32 text-center lg:text-left">
-                                    <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 mx-auto lg:mx-0 w-fit">
+                                <div className="mb-12 mt-32 text-left px-8 sm:px-12 lg:px-16">
+                                    <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 w-fit">
                                         Portafolio de Video
                                     </span>
                                     <h2 className="text-4xl sm:text-5xl md:text-[5.5rem] 2xl:text-[6.5rem] font-black uppercase tracking-tighter text-navy leading-[1.1] md:leading-[0.8]">

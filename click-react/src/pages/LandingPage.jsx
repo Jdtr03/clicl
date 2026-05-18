@@ -301,7 +301,7 @@ function LandingPage() {
                     <div className="hidden md:flex items-center gap-10 text-white">
                         <Link to="/" className="text-[11px] font-black hover:text-primary transition-colors uppercase tracking-[0.3em] cursor-pointer">Inicio</Link>
                         <Link to="/creacion-contenido" className="text-[11px] font-black hover:text-primary transition-colors uppercase tracking-[0.3em] cursor-pointer">Contenido</Link>
-                        <Link to="/crecimiento-ads" className="text-[11px] font-black hover:text-primary transition-colors uppercase tracking-[0.3em] cursor-pointer">Ads</Link>
+                        <Link to="/crecimiento-ads" className="text-[11px] font-black hover:text-primary transition-colors uppercase tracking-[0.3em] cursor-pointer">embudo digital</Link>
                     </div>
 
                     <div className="flex items-center gap-6">
@@ -345,7 +345,7 @@ function LandingPage() {
                         {[
                             { label: 'Inicio', target: '/', type: 'link' },
                             { label: 'Contenido', target: '/creacion-contenido', type: 'link' },
-                            { label: 'Ads', target: '/crecimiento-ads', type: 'link' }
+                            { label: 'Embudo Digital', target: '/crecimiento-ads', type: 'link' }
                         ].map((item, idx) => (
                             <React.Fragment key={item.label}>
                                 {item.type === 'link' ? (
