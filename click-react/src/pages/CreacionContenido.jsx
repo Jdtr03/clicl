@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { animate, stagger } from 'animejs';
 import clickLogo from '../assets/imagenes/logo click png N.png';
+import contenidoImg from '../assets/imagenes/contenido.webp';
 import { contentImages, contentVideos } from '../assets/utils/getContent.js';
 
 /**
@@ -489,7 +490,7 @@ function CreacionContenido() {
             </div>
 
             <main className="pb-20">
-                <div className="max-w-[1400px] mx-auto px-8">
+                <div className="max-w-[1400px] mx-auto px-20">
                     {/* Content scaled to 90% */}
                     <div className="page-scale-90">
                         {/* Unified Hero Section */}
@@ -504,9 +505,13 @@ function CreacionContenido() {
                                     CREAMOS IMPACTO VISUAL DE ALTO NIVEL. NUESTRA PRODUCCIÓN ESTÁ DISEÑADA PARA CAPTURAR LA ATENCIÓN DEL MERCADO Y CONSOLIDAR UNA PRESENCIA DE MARCA IMPONENTE Y DIFERENCIADA.
                                 </p>
                             </div>
-                            <div className="flex-1 w-full max-w-[600px] h-[400px] aspect-square bg-navy-accent rounded-2xl border border-white/5 flex items-center justify-center relative overflow-hidden group shadow-2xl">
-                                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-primary/20 to-transparent pointer-events-none"></div>
-                                <span className="material-symbols-outlined text-[10rem] text-primary/20 group-hover:scale-110 transition-transform duration-700 notranslate" translate="no">movie_edit</span>
+                            <div className="flex-1 w-full max-w-[600px] h-auto aspect-square bg-navy-accent rounded-2xl border border-white/5 flex items-center justify-center relative overflow-hidden group shadow-2xl">
+                                <img
+                                    src={contenidoImg}
+                                    alt="Creación de Contenido"
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                />
+                                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/60 to-transparent pointer-events-none"></div>
                             </div>
                         </div>
 
