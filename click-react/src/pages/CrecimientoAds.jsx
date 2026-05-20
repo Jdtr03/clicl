@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { animate, stagger } from 'animejs';
-import clickLogo from '../assets/imagenes/logo click png N.png';
+import clickLogo from '../assets/imagenes/logo-click-n.png';
 import proceso1 from '../assets/imagenes/proceso-1.webp';
 import proceso2 from '../assets/imagenes/proceso-2.webp';
 import proceso3 from '../assets/imagenes/proceso-3.webp';

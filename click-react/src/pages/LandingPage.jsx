@@ -13,7 +13,7 @@ import 'swiper/css/free-mode';
 
 
 // Assets e imágenes
-import clickLogo from '../assets/imagenes/logo click png N.png';
+import clickLogo from '../assets/imagenes/logo-click-n.png';
 import { brands } from '../assets/utils/getLogos.js';
 import carruzel1 from '../assets/imagenes/Marcas/MAGDA.png';
 import carruzel2 from '../assets/imagenes/Marcas/11-SHAWARMA-ZUZU.png';

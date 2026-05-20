@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { animate, stagger } from 'animejs';
-import clickLogo from '../assets/imagenes/logo click png N.png';
+import clickLogo from '../assets/imagenes/logo-click-n.png';
 import contenidoImg from '../assets/imagenes/contenido.webp';
 import { contentImages, contentVideos } from '../assets/utils/getContent.js';
 
