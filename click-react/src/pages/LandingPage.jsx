@@ -301,7 +301,7 @@ function LandingPage() {
                     <div className="hidden md:flex items-center gap-10 text-white">
                         <Link to="/" className="text-[11px] font-black hover:text-primary transition-colors uppercase tracking-[0.3em] cursor-pointer">Inicio</Link>
                         <Link to="/creacion-contenido" className="text-[11px] font-black hover:text-primary transition-colors uppercase tracking-[0.3em] cursor-pointer">Contenido</Link>
-                        <Link to="/crecimiento-ads" className="text-[11px] font-black hover:text-primary transition-colors uppercase tracking-[0.3em] cursor-pointer">embudo digital</Link>
+                        <Link to="/crecimiento-ads" className="text-[11px] font-black hover:text-primary transition-colors uppercase tracking-[0.3em] cursor-pointer">Embudo Digital</Link>
                     </div>
 
                     <div className="flex items-center gap-6">
@@ -389,7 +389,8 @@ function LandingPage() {
                 </div>
             </div>
 
-            <main className="md:pt-8" style={{ zoom: 0.9, MozTransform: 'scale(0.9)', MozTransformOrigin: 'top center' }}>
+            <main className="md:pt-8">
+                <div className="page-scale-90">
                 {/* Desktop and original structure remains unaffected down here */}
                 {/* Hero Section at 100% scale for stability */}
                 <section className="min-h-[80vh] flex flex-col justify-center px-6 sm:px-8 pt-36 md:pt-48 pb-20 md:pb-40 bg-navy relative overflow-x-clip overflow-y-visible">
@@ -397,10 +398,10 @@ function LandingPage() {
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                             <div className="reveal reveal-left flex flex-col justify-center items-center h-full text-center">
                                 <div className="max-w-[100vw] px-4 md:px-0 md:max-w-3xl w-full flex flex-col items-center overflow-visible">
-                                    <h1 ref={heroTitleRef} className="text-primary text-[2rem] sm:text-[2.2rem] md:text-7xl lg:text-8xl xl:text-[6.2rem] font-black leading-tight md:leading-[0.9] tracking-tighter uppercase mb-6 md:mb-8 mx-auto whitespace-nowrap overflow-visible">
+                                    <h1 ref={heroTitleRef} className="text-primary text-[2.5rem] sm:text-[3rem] md:text-7xl lg:text-8xl xl:text-[6.2rem] font-black leading-[1.1] md:leading-[0.9] tracking-tighter uppercase mb-6 md:mb-8 mx-auto xl:whitespace-nowrap overflow-visible text-center">
                                         ESTRATÉGICOS.<br />DISRUPTIVOS.<br /><span className="text-white">ESCALABLES.</span>
                                     </h1>
-                                    <p className="text-white/80 text-base md:text-xl font-bold leading-tight uppercase mb-8 md:mb-10 tracking-tight max-w-xl mx-auto">
+                                    <p className="text-white/80 text-base md:text-xl font-bold leading-tight uppercase mb-8 md:mb-10 tracking-tight max-w-xl mx-auto text-center">
                                         SOMOS CLICK PRODUCTIONS. NO HACEMOS RUIDO DIGITAL, TRANSFORMAMOS TU INVERSIÓN EN CRECIMIENTO COMERCIAL Y VENTAS.
                                     </p>
                                     <div className="flex gap-4 justify-center">
@@ -426,7 +427,7 @@ function LandingPage() {
                             </div>
                         </div>
                     </div>
-                    <div className="relative md:absolute md:bottom-0 left-0 w-full md:px-8 md:translate-y-1/2 z-20 mt-12 md:mt-0 px-2 lg:px-4">
+                    <div className="relative md:absolute md:bottom-0 left-0 w-full md:px-8 md:translate-y-1/2 z-20 mt-12 md:mt-0 px-6 lg:px-4">
                         <div className="max-w-[1600px] mx-auto bg-navy border border-white/10 border-t-2 border-t-primary shadow-2xl reveal reveal-up overflow-hidden rounded-2xl md:rounded-none">
                             <div className="grid grid-cols-1 md:grid-cols-3 py-8 md:py-8" ref={statsBarRef}>
 
@@ -481,8 +482,8 @@ function LandingPage() {
                             </div>
                             <div className="flex flex-col md:flex-row gap-4 md:gap-px bg-transparent md:bg-white/10 border-0 md:border md:border-white/10 shadow-none md:shadow-2xl reveal reveal-up overflow-hidden">
                                 {[
-                                    { id: '01', icon: 'groups_3', title: 'Departamento\nde\nMarketing', desc: 'Diseñamos, ejecutamos y medimos. Nos hacemos cargo de toda tu presencia digital para que tú te enfoques en lo más importante: tu producto o servicio.', items: ['Planificación estratégica', 'crecimiento Digital'], scrollId: 'auditoria' },
-                                    { id: '02', icon: 'ads_click', title: 'Embudos de \nVentas', desc: 'Diseñamos embudos de ventas adaptado 100% a tu modelo de negocios permitiendo filtrar, organizar y atender a tus clientes potenciales de manera automatizada  ', items: ['tasa de conversión', 'Escalabilidad '], link: '/crecimiento-ads' },
+                                    { id: '01', icon: 'groups_3', title: 'Departamento\nde\nMarketing', desc: 'Diseñamos, ejecutamos y medimos. Nos hacemos cargo de toda tu presencia digital para que tú te enfoques en lo más importante: tu producto o servicio.', items: ['Planificación estratégica', 'Crecimiento Digital'], scrollId: 'auditoria' },
+                                    { id: '02', icon: 'ads_click', title: 'Embudos de \nVentas', desc: 'Diseñamos embudos de ventas adaptados 100% a tu modelo de negocio permitiendo filtrar, organizar y atender a tus clientes potenciales de manera automatizada  ', items: ['tasa de conversión', 'Escalabilidad '], link: '/crecimiento-ads' },
                                     { id: '03', icon: 'movie_edit', title: 'Creación de\nContenido', desc: 'Contenido de alto nivel que traduce la esecnia de tu empresa en una presencia digital imponente y diferenciada', items: ['Producción de video', 'Activos sociales'], link: '/creacion-contenido' },
                                 ].map(service => (
                                     <div
@@ -543,7 +544,7 @@ function LandingPage() {
                                 </h2>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8 border-t border-navy/10 pt-12 reveal reveal-up">
-                                {['Estrategia de Marca y Posicionamiento', 'Produccion audivisual', 'Gestión de Redes Sociales Media Multicanal', 'Publicidad Digital (ads)', 'diseño de embudo de ventas (funnels)', 'IMPLEMENTACIÓN Y CONFIGURACIÓN DE CRM', 'AUTOMATIZACIÓN DE PROCESOS Y RESPUESTAS', 'WHATSAPP Y EMAIL MARKETING', 'MARKETING DE INFLUENCERS', 'ASESORÍAS PERSONALIZADAS', 'PUBLICIDAD TRADICIONAL', 'GESTIÓN Y ORGANIZACIÓN DE EVENTOS'].map(service => (
+                                {['Estrategia de Marca y Posicionamiento', 'Producción Audiovisual', 'Gestión de Redes Sociales Media Multicanal', 'Publicidad Digital (ads)', 'Diseño de Embudo de ventas (funnels)', 'IMPLEMENTACIÓN Y CONFIGURACIÓN DE CRM', 'AUTOMATIZACIÓN DE PROCESOS Y RESPUESTAS', 'WHATSAPP Y EMAIL MARKETING', 'MARKETING DE INFLUENCERS', 'ASESORÍAS PERSONALIZADAS', 'PUBLICIDAD TRADICIONAL', 'GESTIÓN Y ORGANIZACIÓN DE EVENTOS'].map(service => (
                                     /* Cambio 1: Añadimos flex, items-center y gap al contenedor */
                                     <div key={service} className="service-item flex items-center gap-4 mb-10">
                                         {/* Cambio 2: Añadimos flex-shrink-0 para que el check no se deforme */}
@@ -783,11 +784,11 @@ function LandingPage() {
                                     grabCursor={true}
                                 >
                                     {[
-                                        { name: "Dra Magda Farnetano", role: "Odontologa Protesista", avatar: carruzel1, content: "\t\tGracias a su excelente trabajo, he logrado potenciar y liderar mi marca personal como Odontóloga e Implantóloga. Esto me ha permitido mantener una presencia constante, brindando información de valor y consejos útiles tanto a mis pacientes como a mi comunidad." },
-                                        { name: "Maher Mansour", role: "Shawarma Zuzu - Gastronomia", avatar: carruzel2, content: "\t\tNuestra meta siempre ha sido ser los mejores en lo que hacemos, brindando calidad y dedicación a cada comensal. Gracias al equipo de Click, logramos esa visibilidad que buscábamos en redes sociales. Su trabajo impecable y profesionalismo fueron la pieza clave para que más personas conocieran nuestra marca. ¡Totalmente agradecidos!" },
+                                        { name: "Dra Magda Farnetano", role: "Odontóloga Protesista", avatar: carruzel1, content: "\t\tGracias a su excelente trabajo, he logrado potenciar y liderar mi marca personal como Odontóloga e Implantóloga. Esto me ha permitido mantener una presencia constante, brindando información de valor y consejos útiles tanto a mis pacientes como a mi comunidad." },
+                                        { name: "Maher Mansour", role: "Shawarma Zuzu - Gastronomía", avatar: carruzel2, content: "\t\tNuestra meta siempre ha sido ser los mejores en lo que hacemos, brindando calidad y dedicación a cada comensal. Gracias al equipo de Click, logramos esa visibilidad que buscábamos en redes sociales. Su trabajo impecable y profesionalismo fueron la pieza clave para que más personas conocieran nuestra marca. ¡Totalmente agradecidos!" },
                                         { name: "Yaira Molina", role: "Bluexpress - Distribuidora e importadora", avatar: carruzel3, content: "\t\tApenas estamos comenzando, pero el futuro se ve increíble. Confiamos plenamente en su trayectoria y conocimiento técnico para lograr resultados extraordinarios. ¡Estamos listos para hacer cosas grandes!" },
-                                        { name: "George Djandi", role: "Iluvenca - industria de iluminacion", avatar: carruzel4, content: "\t\tFelicito al equipo por su dedicación. Lograron transformar información técnica de iluminación en contenido ameno, informativo y promocional que realmente destaca frente a la competencia. Su capacidad para entender nuestro ramo y aplicarlo a las redes sociales ha sido clave para nuestro crecimiento digital." },
-                                        { name: "Janay Hernandez", role: "Bufalo -Gastronomia", avatar: carruzel5, content: "\t\tClick ha sido clave para ayudarnos a plasmar y estructurar las ideas de nuestra cuenta de Instagram de una manera muy organizada. Para nosotros han cubierto un área fundamental en la promoción del local, \n \tLo que más nos ha gustado del proceso es su compromiso siempre están muy pendientes de hacer seguimiento a los resultados y enfocados en una mejora continua." }
+                                        { name: "George Djandi", role: "Iluvenca - industria de iluminación", avatar: carruzel4, content: "\t\tFelicito al equipo por su dedicación. Lograron transformar información técnica de iluminación en contenido ameno, informativo y promocional que realmente destaca frente a la competencia. Su capacidad para entender nuestro ramo y aplicarlo a las redes sociales ha sido clave para nuestro crecimiento digital." },
+                                        { name: "Janay Hernandez", role: "Bufalo -Gastronomía", avatar: carruzel5, content: "\t\tClick ha sido clave para ayudarnos a plasmar y estructurar las ideas de nuestra cuenta de Instagram de una manera muy organizada. Para nosotros han cubierto un área fundamental en la promoción del local, \n \tLo que más nos ha gustado del proceso es su compromiso siempre están muy pendientes de hacer seguimiento a los resultados y enfocados en una mejora continua." }
                                     ].map((t, idx) => (
                                         <SwiperSlide key={idx} style={{ width: 'auto' }} className="!w-[280px] md:!w-[380px] py-4">
                                             <div className="bg-navy-accent rounded-[1.5rem] p-6 md:p-8 border border-white/5 shadow-2xl flex flex-col h-full transition-all duration-500 hover:border-primary/20 hover:bg-navy-accent/80 group/item">
@@ -855,6 +856,7 @@ function LandingPage() {
                             </div>
                         </div>
                     </footer>
+                </div>
                 </div>
             </main>
         </div>

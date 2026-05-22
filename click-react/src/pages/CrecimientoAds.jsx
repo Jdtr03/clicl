@@ -43,7 +43,7 @@ function CrecimientoAds() {
     const [selectedImage, setSelectedImage] = useState(null);
     const [scrolled, setScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [showCalendar, setShowCalendar] = useState(false);
+    const [showCalendar, setShowCalendar] = useState(true);
     const heroTitleRef = useRef(null);
 
     const handleNavClick = (e, id) => {
@@ -125,11 +125,11 @@ function CrecimientoAds() {
                     <div className="hidden md:flex items-center gap-10">
                         <Link to="/" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Inicio</Link>
                         <Link to="/creacion-contenido" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Contenido</Link>
-                        <Link to="/crecimiento-ads" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">embudo digital</Link>
+                        <Link to="/crecimiento-ads" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Embudo Digital</Link>
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button 
+                        <button
                             onClick={(e) => handleNavClick(e, 'auditoria')}
                             className="hidden sm:block btn-premium border border-white/20 text-white px-8 py-3.5 text-[11px] font-black transition-all uppercase tracking-[0.3em] hover:border-primary hover:bg-primary text-center"
                         >
@@ -196,10 +196,10 @@ function CrecimientoAds() {
                 </div>
             </div>
 
-            <main className="md:pt-8" style={{ zoom: 0.9, MozTransform: 'scale(0.9)', MozTransformOrigin: 'top center' }}>
-                {/* Hero section at 100% scale */}
-                <div className="max-w-[1400px] mx-auto px-8">
-                    <div className="flex flex-col items-center mb-20 pt-50 md:pt-50 reveal">
+            <main className="md:pt-8">
+                <div className="page-scale-90">
+                    {/* Hero section */}
+                    <div className="flex flex-col items-center mb-10 md:mb-20 pt-32 md:pt-50 reveal px-8">
                         <div className="w-full max-w-5xl text-center">
                             <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-6 block border-l-4 border-primary pl-6 mx-auto w-fit">
                                 ESTRATEGIA
@@ -217,14 +217,12 @@ function CrecimientoAds() {
                             </p>
                         </div>
                     </div>
-                </div>
 
-                {/* Rest of Page in 90% scale wrapper */}
-                <div className="page-scale-90">
+                    {/* Content sections */}
                     <section className="relative w-full py-24 px-4 sm:px-8 bg-gradient-to-b from-[#F7F8FC] to-[#EFF1F6] studio-texture border-y border-black/5">
                         <div className="max-w-7xl mx-auto mb-16 text-center reveal reveal-up">
                             <h2 className="text-[clamp(2rem,5.5vw,5.5rem)] font-black uppercase tracking-tighter text-navy font-display">
-                                pilares de éxito
+                                Pilares de Éxito
                             </h2>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -268,7 +266,7 @@ function CrecimientoAds() {
                             <div className="max-w-[1600px] mx-auto relative z-10 px-8">
                                 <div className="text-center mb-12 reveal reveal-up">
                                     <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter">
-                                        Sabemos lo que esta pasando <span className="text-primary italic">en tu negocio hoy </span>
+                                        Sabemos lo que está pasando <span className="text-primary italic">en tu negocio hoy </span>
                                     </h2>
                                 </div>
                                 <div className="max-w-3xl mx-auto bg-gradient-to-br from-primary to-[#b83c10] rounded-[1.5rem] p-8 md:p-12 shadow-[0_40px_80px_-20px_rgba(241,90,36,0.25)] reveal reveal-up border border-white/10 relative overflow-hidden">
@@ -305,7 +303,7 @@ function CrecimientoAds() {
                             </div>
                         </section>
 
-                        <section className="py-24 reveal reveal-up">
+                        <section className="py-24 reveal reveal-up px-8">
                             <h2 className="text-[clamp(1.8rem,3.8vw,3.8rem)] font-black text-white uppercase tracking-tighter mb-6 leading-[1.1] max-w-4xl text-left font-display">
                                 Ingeniería de procesos al servicio de tu rentabilidad.
                             </h2>
@@ -316,7 +314,7 @@ function CrecimientoAds() {
                                 {[
                                     { icon: 'sensors', title: 'Atracción con intención', desc: 'Activamos un sistema de pauta que no busca "likes", sino inyectar interesados calificados directamente en tu embudo.' },
                                     { icon: 'psychology', title: 'Captación y educación', desc: 'El sistema atiende, informa y califica al interesado en milisegundos, asegurando que solo los prospectos con intención real lleguen a tu equipo humano.' },
-                                    { icon: 'precision_manufacturing', title: 'Control operativo', desc: 'Instalamos el centro de mando que organiza cada oportunidad. El sistema sabe qué paso sigue y se encarga de que nadie se quede en el olvido.' }
+                                    { icon: 'precision_manufacturing', title: 'Control operativo', desc: 'Instalamos el centro de mando que organiza cada oportunidad. El sistema sabe qué paso sigue y se encarga de que nadie se encuentre en el olvido.' }
                                 ].map((box, i) => (
                                     <div key={i} className="bg-navy-accent/50 border border-white/5 rounded-[1.5rem] p-8 md:p-10 flex flex-col items-start transition-all duration-500 hover:border-primary/20 hover:bg-navy-accent/70 shadow-2xl relative overflow-hidden group">
                                         <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center mb-8 shadow-lg shadow-primary/20">
@@ -329,7 +327,7 @@ function CrecimientoAds() {
                             </div>
                         </section>
 
-                        <section className="py-20 reveal reveal-up">
+                        <section className="py-20 reveal reveal-up px-8">
                             <div className="text-center mb-16">
                                 <h2 className="text-[clamp(1.8rem,4vw,4rem)] font-black text-white uppercase tracking-tighter font-display">
                                     muestra de proceso de <span className="text-primary italic">embudos digitales</span>
@@ -337,9 +335,9 @@ function CrecimientoAds() {
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                                 {[
-                                    { img: proceso1, title: 'Formulario de Conversión' },
-                                    { img: proceso2, title: 'CRM de Seguimiento' },
-                                    { img: proceso3, title: 'Tráfico de Meta Ads' }
+                                    { img: proceso3, title: 'Anuncios y manejo de tráfico meta ads' },
+                                    { img: proceso1, title: 'Landing Page de conversión ' },
+                                    { img: proceso2, title: 'CRM de seguimiento y automatización' }
                                 ].map((p, i) => (
                                     <div key={i} className="group overflow-hidden rounded-2xl border border-white/10 bg-navy-accent shadow-2xl cursor-pointer" onClick={() => setSelectedImage(p.img)}>
                                         <div className="aspect-video md:aspect-[16/10] overflow-hidden bg-navy/40 flex items-center justify-center">
@@ -354,7 +352,7 @@ function CrecimientoAds() {
                             </div>
                         </section>
 
-                        <section className="py-24 reveal reveal-up">
+                        <section className="py-24 reveal reveal-up px-8">
                             <div className="text-center">
                                 <h2 className="text-[clamp(1.8rem,5vw,5vw)] font-black text-white uppercase tracking-tighter mb-12 leading-[1.0] max-w-5xl mx-auto font-display text-center">
                                     ¿Por qué estás perdiendo<br />el <span className="text-primary">80%</span> de tus cierres?
@@ -374,74 +372,71 @@ function CrecimientoAds() {
 
                         <div className="reveal mesh-gradient-studio studio-texture p-8 md:p-24 border-t border-navy/5 text-center -mx-8">
                             <span className="text-primary font-black uppercase tracking-[0.4em] text-sm mb-6 block border-l-4 border-primary pl-4 mx-auto w-fit">Conversión Total</span>
-                            <h2 className="text-4xl md:text-[5.5rem] font-black uppercase tracking-tighter mb-10 text-navy leading-[0.8]">adquisicion<br /><span className="text-primary">de Clientes.</span></h2>
+                            <h2 className="text-4xl md:text-[5.5rem] font-black uppercase tracking-tighter mb-10 text-navy leading-[0.8]">adquisición<br /><span className="text-primary">de Clientes.</span></h2>
                             <p className="text-navy/60 text-lg md:text-xl uppercase max-w-2xl mx-auto mb-12 font-bold leading-relaxed">
-                                Si estás listo para dejar atrás el caos, dejar de desperdiciar presupuesto y tomar el control absoluto de tu facturación, hagamos click
+                                Si estás listo para dejar atrás el caos, dejar de desperdiciar presupuesto y tomar el control absoluto de tu facturación, hagamos clic
                             </p>
-                            <button onClick={handleDominarAhora} className="inline-block btn-premium bg-primary text-white px-16 py-6 text-sm font-black uppercase tracking-widest hover:brightness-110 transition-all shadow-[0_20px_40px_-10px_rgba(241,90,36,0.4)]">
-                                {showCalendar ? 'Cerrar Calendario' : 'Dominar Ahora'}
-                            </button>
                         </div>
                     </div>
-                </div>
 
-                {/* Auditoria Section - Seamless Integration */}
-                <div className={`transition-all duration-1000 ease-in-out overflow-hidden ${showCalendar ? 'max-h-[2000px] opacity-100 mb-40' : 'max-h-0 opacity-0 pointer-events-none'}`}>
-                    <section className="px-8 pt-10 pb-20 mesh-gradient-studio studio-texture overflow-hidden" id="auditoria">
-                        <div className="max-w-[1600px] mx-auto relative z-10">
-                            <div className="bg-white shadow-[0_40px_80px_-20px_rgba(1,5,33,0.1)] max-w-7xl mx-auto flex flex-col md:flex-row min-h-[1000px] overflow-hidden rounded-2xl">
-                                <div className="w-full md:w-[35%] bg-white p-10 md:p-12 border-r border-navy/5 flex flex-col">
-                                    <div className="space-y-8">
-                                        <h3 className="text-4xl font-black text-navy uppercase leading-[0.9] tracking-tighter">Auditoría de<br />Negocio</h3>
-                                        <div className="flex items-center gap-4 text-navy/40 font-bold uppercase tracking_widest text-xs">
-                                            <span className="material-symbols-outlined text-base notranslate" translate="no">calendar_today</span> 30 min
+                    {/* Auditoria Section */}
+                    <div className={`transition-all duration-1000 ease-in-out overflow-hidden ${showCalendar ? 'max-h-[2000px] opacity-100 mb-40' : 'max-h-0 opacity-0 pointer-events-none'}`}>
+                        <section className="px-8 pt-10 pb-20 mesh-gradient-studio studio-texture overflow-hidden" id="auditoria">
+                            <div className="max-w-[1600px] mx-auto relative z-10">
+                                <div className="bg-white shadow-[0_40px_80px_-20px_rgba(1,5,33,0.1)] max-w-7xl mx-auto flex flex-col md:flex-row min-h-[1000px] overflow-hidden rounded-2xl">
+                                    <div className="w-full md:w-[35%] bg-white p-10 md:p-12 border-r border-navy/5 flex flex-col">
+                                        <div className="space-y-8">
+                                            <h3 className="text-4xl font-black text-navy uppercase leading-[0.9] tracking-tighter">Auditoría de<br />Negocio</h3>
+                                            <div className="flex items-center gap-4 text-navy/40 font-bold uppercase tracking_widest text-xs">
+                                                <span className="material-symbols-outlined text-base notranslate" translate="no">calendar_today</span> 30 min
+                                            </div>
+                                            <div className="space-y-6 pt-8 border-t border-navy/5 text-left">
+                                                <p className="text-navy/70 text-sm font-medium uppercase leading-relaxed">Selecciona una fecha y hora para tu auditoría. Vamos a trazar el plan para escalar tu marca.</p>
+                                                <div className="pt-8">
+                                                    <p className="text-navy/80 text-xs font-black uppercase tracking-wider mb-6">¿Qué te vas a llevar?</p>
+                                                    <ul className="space-y-6">
+                                                        {[
+                                                            { icon: 'support_agent', text: '30 min con un experto' },
+                                                            { icon: 'analytics', text: 'Diagnóstico de estrategia' },
+                                                            { icon: 'search_check', text: 'Auditoría de Ads, Web y RRSS' }
+                                                        ].map(item => (
+                                                            <li key={item.text} className="flex items-start gap-5 text-navy/60 text-xs font-bold uppercase tracking-tight">
+                                                                <span className="material-symbols-outlined text-primary text-2xl flex-shrink-0 leading-none notranslate" translate="no">{item.icon}</span>
+                                                                <span className="pt-1">{item.text}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="space-y-6 pt-8 border-t border-navy/5 text-left">
-                                            <p className="text-navy/70 text-sm font-medium uppercase leading-relaxed">Selecciona una fecha y hora para su auditoría. Vamos a trazar el plan para escalar su marca.</p>
-                                            <div className="pt-8">
-                                                <p className="text-navy/80 text-xs font-black uppercase tracking-wider mb-6">¿Qué te vas a llevar?</p>
-                                                <ul className="space-y-6">
-                                                    {[
-                                                        { icon: 'support_agent', text: '30 min con un experto' },
-                                                        { icon: 'analytics', text: 'Diagnóstico de estrategia' },
-                                                        { icon: 'search_check', text: 'Auditoría de Ads, Web y RRSS' }
-                                                    ].map(item => (
-                                                        <li key={item.text} className="flex items-start gap-5 text-navy/60 text-xs font-bold uppercase tracking-tight">
-                                                            <span className="material-symbols-outlined text-primary text-2xl flex-shrink-0 leading-none notranslate" translate="no">{item.icon}</span>
-                                                            <span className="pt-1">{item.text}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
+                                        <div className="mt-auto pt-10">
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-10 h-10 rounded-full bg-studio-gray opacity-20"></div>
+                                                <div className="text-left">
+                                                    <p className="text-[11px] font-black uppercase text-navy">Nerio Mosquera</p>
+                                                    <p className="text-[10px] font-bold uppercase text-navy/30 leading-none">CEO de Click Productions</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="mt-auto pt-10">
-                                        <div className="flex items-center gap-4">
-                                            <div className="w-10 h-10 rounded-full bg-studio-gray opacity-20"></div>
-                                            <div className="text-left">
-                                                <p className="text-[11px] font-black uppercase text-navy">Nerio Mosquera</p>
-                                                <p className="text-[10px] font-bold uppercase text-navy/30 leading-none">CEO de Click Productions</p>
-                                            </div>
-                                        </div>
+                                    <div className="w-full md:w-[65%] p-0 relative bg-[#f7f8f9] min-h-[1000px]">
+                                        <iframe
+                                            src="https://api.leadconnectorhq.com/widget/booking/58myzAfpJKhAYNOl22WJ"
+                                            style={{ width: '100%', height: '100%', minHeight: '1000px', border: 'none', overflow: 'hidden' }}
+                                            scrolling="no"
+                                            id="58myzAfpJKhAYNOl22WJ_1776451857130"
+                                            title="GoHighLevel Calendar"
+                                        ></iframe>
                                     </div>
-                                </div>
-                                <div className="w-full md:w-[65%] p-0 relative bg-[#f7f8f9] min-h-[1000px]">
-                                    <iframe
-                                        src="https://api.leadconnectorhq.com/widget/booking/58myzAfpJKhAYNOl22WJ"
-                                        style={{ width: '100%', height: '100%', minHeight: '1000px', border: 'none', overflow: 'hidden' }}
-                                        scrolling="no"
-                                        id="58myzAfpJKhAYNOl22WJ_1776451857130"
-                                        title="GoHighLevel Calendar"
-                                    ></iframe>
                                 </div>
                             </div>
-                        </div>
-                    </section>
-                </div>
+                        </section>
+                    </div>
 
-                <footer className="py-8 px-8 border-t border-white/5 text-center mt-12 bg-navy">
-                    <p className="text-[9px] text-white/20 font-black uppercase tracking-[0.5em]">© 2024 CLICK PRODUCTIONS. DATA DRIVEN. RESULT FOCUSED.</p>
-                </footer>
+                    <footer className="py-8 px-8 border-t border-white/5 text-center mt-12 bg-navy">
+                        <p className="text-[9px] text-white/20 font-black uppercase tracking-[0.5em]">© 2024 CLICK PRODUCTIONS. DATA DRIVEN. RESULT FOCUSED.</p>
+                    </footer>
+                </div>
             </main>
 
             {/* Lightbox Modal */}

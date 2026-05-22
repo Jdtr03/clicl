@@ -422,7 +422,7 @@ function CreacionContenido() {
                     <div className="hidden md:flex items-center gap-10">
                         <Link to="/" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Inicio</Link>
                         <Link to="/creacion-contenido" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Contenido</Link>
-                        <Link to="/crecimiento-ads" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">embudo digital</Link>
+                        <Link to="/crecimiento-ads" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Embudo Digital</Link>
                     </div>
 
                     <div className="flex items-center gap-4">
@@ -490,7 +490,7 @@ function CreacionContenido() {
             </div>
 
             <main className="pb-20">
-                <div className="max-w-[1400px] mx-auto px-20">
+                <div className="max-w-[1400px] mx-auto px-6 md:px-20">
                     {/* Content scaled to 90% */}
                     <div className="page-scale-90">
                         {/* Unified Hero Section */}
@@ -587,7 +587,7 @@ function CreacionContenido() {
                                         price: '195',
                                         desc: 'Para marcas en crecimiento',
                                         recording: '1. jornada de rodaje',
-                                        videos: '2 horas de grabacion',
+                                        videos: '2 horas de grabación',
                                         features: [
                                             'Grabación profesional (2h)',
                                             'Entrega de guiones o estructura de videos',
@@ -601,7 +601,7 @@ function CreacionContenido() {
                                         price: '290',
                                         desc: 'El equilibrio perfecto',
                                         recording: '1.  jornada de rodaje',
-                                        videos: '3 horas de grabacion',
+                                        videos: '3 horas de grabación',
                                         features: [
                                             'Grabación profesional (3h)',
                                             'Entrega de guiones o estructura de videos',
@@ -617,7 +617,7 @@ function CreacionContenido() {
                                         recording: '2.  jornadas de rodaje',
                                         videos: '4 horas de grabacion',
                                         features: [
-                                            'grabación profesional (4 horas dividas en dos jornadas)',
+                                            'grabación profesional (4 horas divididas en dos jornadas)',
                                             'Entrega de guiones o estructura de videos',
                                             '3 rondas de correcciones',
                                             '2 correcciones de material',
@@ -781,7 +781,7 @@ function CreacionContenido() {
                         <div className="bg-primary/10 border border-primary/20 p-12 md:p-20 text-center rounded-[3rem]">
                             <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-8">¿Listo para escalar tu contenido?</h2>
                             <Link to="#paquetes-contenido" className="inline-block btn-premium bg-primary text-white px-12 py-5 text-sm font-black uppercase tracking-widest hover:brightness-110 transition-all shadow-[0_20px_40px_-10px_rgba(241,90,36,0.4)]">
-                                selecciona el paquete que mas se adapte a ti
+                                selecciona el paquete que más se adapte a ti
                             </Link>
                         </div>
 
