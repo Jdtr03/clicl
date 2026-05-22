@@ -291,7 +291,7 @@ function LandingPage() {
 
 
     return (
-        <div className="text-navy antialiased font-sans bg-navy min-h-screen overflow-x-hidden">
+        <div className="page-content-scaled text-navy antialiased font-sans bg-navy min-h-screen overflow-x-hidden">
             {/* Header / Navbar at 100% */}
             <header className={`fixed top-0 w-full z-[100] transition-all duration-500 ${scrolled ? 'bg-navy/95 backdrop-blur-xl border-b border-white/5 py-4' : 'bg-navy/40 backdrop-blur-sm py-6 md:py-8'}`}>
                 <nav className="max-w-[1600px] mx-auto px-6 sm:px-8 flex items-center justify-between">
@@ -390,15 +390,14 @@ function LandingPage() {
             </div>
 
             <main className="md:pt-8">
-                <div className="page-scale-90">
                 {/* Desktop and original structure remains unaffected down here */}
                 {/* Hero Section at 100% scale for stability */}
                 <section className="min-h-[80vh] flex flex-col justify-center px-6 sm:px-8 pt-36 md:pt-48 pb-20 md:pb-40 bg-navy relative overflow-x-clip overflow-y-visible">
                     <div className="max-w-[1400px] mx-auto w-full relative z-10 flex-grow flex flex-col justify-center mt-10 md:mt-0">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
                             <div className="reveal reveal-left flex flex-col justify-center items-center h-full text-center">
-                                <div className="max-w-[100vw] px-4 md:px-0 md:max-w-3xl w-full flex flex-col items-center overflow-visible">
-                                    <h1 ref={heroTitleRef} className="text-primary text-[2.5rem] sm:text-[3rem] md:text-7xl lg:text-8xl xl:text-[6.2rem] font-black leading-[1.1] md:leading-[0.9] tracking-tighter uppercase mb-6 md:mb-8 mx-auto xl:whitespace-nowrap overflow-visible text-center">
+                                <div className="max-w-[100vw] px-4 md:px-0 md:max-w-4xl w-full flex flex-col items-center overflow-visible">
+                                    <h1 ref={heroTitleRef} className="text-primary text-[2.5rem] sm:text-[3rem] md:text-7xl lg:text-7xl xl:text-[6.2rem] font-black leading-[1.1] md:leading-[0.9] tracking-tighter uppercase mb-6 md:mb-8 mx-auto xl:whitespace-nowrap overflow-visible text-center">
                                         ESTRATÉGICOS.<br />DISRUPTIVOS.<br /><span className="text-white">ESCALABLES.</span>
                                     </h1>
                                     <p className="text-white/80 text-base md:text-xl font-bold leading-tight uppercase mb-8 md:mb-10 tracking-tight max-w-xl mx-auto text-center">
@@ -464,11 +463,11 @@ function LandingPage() {
                 </section>
 
                 {/* Rest of content remains scaled to 90% if preferred */}
-                <div className="page-scale-90">
+                <div className="contents">
                     <section className="pt-40 pb-20 px-8 mesh-gradient-studio studio-texture overflow-hidden" id="ejecucion">
                         <div className="max-w-[1600px] mx-auto relative z-10">
                             <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16 reveal reveal-up">
-                                <div className="max-w-4xl">
+                                <div className="max-w-2xl">
                                     <span className="text-primary font-black uppercase tracking-[0.4em] text-sm mb-6 block border-l-4 border-primary pl-4">Especialistas</span>
                                     <h2 className="text-4xl md:text-[5.5rem] font-black leading-[0.8] tracking-tighter uppercase text-navy">
                                         Lo Que<br /><span className="text-primary italic">Ejecutamos.</span>
@@ -537,7 +536,7 @@ function LandingPage() {
 
                     <section className="py-20 px-8 mesh-gradient-studio studio-texture border-t border-navy/5" id="servicios">
                         <div className="max-w-[1600px] mx-auto relative z-10">
-                            <div className="max-w-4xl mb-12 reveal reveal-left">
+                            <div className="max-w-2xl mb-12 reveal reveal-left">
                                 <span className="text-primary font-black uppercase tracking-[0.4em] text-sm mb-6 block border-l-4 border-primary pl-4">Ecosistema Completo</span>
                                 <h2 className="text-4xl md:text-[5.5rem] font-black leading-[0.8] tracking-tighter uppercase text-navy">
                                     Nuestros<br /><span className="text-primary italic">Servicios.</span>
@@ -856,7 +855,6 @@ function LandingPage() {
                             </div>
                         </div>
                     </footer>
-                </div>
                 </div>
             </main>
         </div>

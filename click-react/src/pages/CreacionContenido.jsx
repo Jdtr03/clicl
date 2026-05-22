@@ -411,7 +411,7 @@ function CreacionContenido() {
     }, []);
 
     return (
-        <div className="bg-navy min-h-screen text-white font-sans selection:bg-primary/30">
+        <div className="page-content-scaled bg-navy min-h-screen text-white font-sans selection:bg-primary/30">
             {/* Header / Navigation */}
             <header className={`fixed top-0 w-full z-[100] transition-all duration-500 ${scrolled ? 'bg-navy/95 backdrop-blur-xl border-b border-white/5 py-4' : 'bg-navy/40 backdrop-blur-sm py-6 md:py-8'}`}>
                 <nav className="max-w-[1600px] mx-auto px-6 sm:px-8 flex items-center justify-between">
@@ -492,7 +492,7 @@ function CreacionContenido() {
             <main className="pb-20">
                 <div className="max-w-[1400px] mx-auto px-6 md:px-20">
                     {/* Content scaled to 90% */}
-                    <div className="page-scale-90">
+                    <div className="contents">
                         {/* Unified Hero Section */}
                         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center mb-50 pt-30 md:pt-34 reveal">
                             <div className="flex-[1.2] text-left">

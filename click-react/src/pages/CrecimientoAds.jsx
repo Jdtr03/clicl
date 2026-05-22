@@ -114,7 +114,7 @@ function CrecimientoAds() {
     }, []);
 
     return (
-        <div className="bg-navy min-h-screen text-white font-sans selection:bg-primary/30">
+        <div className="page-content-scaled bg-navy min-h-screen text-white font-sans selection:bg-primary/30">
             {/* Header / Navigation */}
             <header className={`fixed top-0 w-full z-[100] transition-all duration-500 ${scrolled ? 'bg-navy/95 backdrop-blur-xl border-b border-white/5 py-4' : 'bg-navy/40 backdrop-blur-sm py-6 md:py-8'}`}>
                 <nav className="max-w-[1600px] mx-auto px-6 sm:px-8 flex items-center justify-between">
@@ -197,9 +197,9 @@ function CrecimientoAds() {
             </div>
 
             <main className="md:pt-8">
-                <div className="page-scale-90">
+                <div className="contents">
                     {/* Hero section */}
-                    <div className="flex flex-col items-center mb-10 md:mb-20 pt-32 md:pt-50 reveal px-8">
+                    <div className="flex flex-col items-center mb-10 md:mb-20 pt-32 md:pt-40 reveal px-8">
                         <div className="w-full max-w-5xl text-center">
                             <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-6 block border-l-4 border-primary pl-6 mx-auto w-fit">
                                 ESTRATEGIA

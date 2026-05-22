@@ -215,12 +215,24 @@ button {
     @apply absolute -top-3 left-1/2 -translate-x-1/2 text-[6px] font-black bg-primary text-white px-1 py-0.5 rounded-sm;
 }
 
-@media (min-width: 1280px) {
-    .page-scale-90 {
+@media (min-width: 1024px) {
+    /* Scale only the containers, not the whole page width */
+    .page-content-scaled .max-w-\[1400px\],
+    .page-content-scaled nav.max-w-\[1600px\],
+    .page-content-scaled .max-w-7xl,
+    .page-content-scaled .max-w-5xl,
+    .page-content-scaled .max-w-4xl,
+    .page-content-scaled .max-w-3xl {
         zoom: 0.9;
-        -moz-transform: scale(0.9);
-        -moz-transform-origin: top center;
+        margin-left: auto;
+        margin-right: auto;
     }
+}
+
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 /* Ensure background is consistent */
