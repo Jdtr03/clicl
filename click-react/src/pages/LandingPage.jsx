@@ -27,34 +27,35 @@ import carruzel5 from '../assets/imagenes/Marcas/05-LA-BUFALA.png';
  */
 function splitText(element) {
     if (!element) return { chars: [] };
-
     const charElements = [];
+    const childNodes = Array.from(element.childNodes);
+    element.innerHTML = '';
 
-    function processNode(node) {
+    childNodes.forEach(node => {
         if (node.nodeType === Node.TEXT_NODE) {
-            const text = node.textContent;
-            const fragment = document.createDocumentFragment();
-            [...text].forEach(char => {
-                if (char.trim() === '') {
-                    fragment.appendChild(document.createTextNode(char));
+            const words = node.textContent.split(/(\s+)/);
+            words.forEach(word => {
+                if (word === '') return;
+                if (word.trim() === '') {
+                    element.appendChild(document.createTextNode(word));
                 } else {
-                    const span = document.createElement('span');
-                    span.textContent = char;
-                    span.className = 'char';
-                    fragment.appendChild(span);
-                    charElements.push(span);
+                    const wordSpan = document.createElement('span');
+                    wordSpan.className = 'inline-block whitespace-nowrap';
+                    [...word].forEach(char => {
+                        const charSpan = document.createElement('span');
+                        charSpan.textContent = char;
+                        charSpan.className = 'char';
+                        wordSpan.appendChild(charSpan);
+                        charElements.push(charSpan);
+                    });
+                    element.appendChild(wordSpan);
                 }
             });
-            node.parentNode.replaceChild(fragment, node);
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-            if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
-                const children = Array.from(node.childNodes);
-                children.forEach(processNode);
-            }
+        } else {
+            element.appendChild(node);
         }
-    }
+    });
 
-    processNode(element);
     return { chars: charElements };
 }
 

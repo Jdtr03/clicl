@@ -12,30 +12,34 @@ import proceso3 from '../assets/imagenes/proceso-3.webp';
 function splitText(element) {
     if (!element) return { chars: [] };
     const charElements = [];
-    function processNode(node) {
+    const childNodes = Array.from(element.childNodes);
+    element.innerHTML = '';
+
+    childNodes.forEach(node => {
         if (node.nodeType === Node.TEXT_NODE) {
-            const text = node.textContent;
-            const fragment = document.createDocumentFragment();
-            [...text].forEach(char => {
-                if (char.trim() === '') {
-                    fragment.appendChild(document.createTextNode(char));
+            const words = node.textContent.split(/(\s+)/);
+            words.forEach(word => {
+                if (word === '') return;
+                if (word.trim() === '') {
+                    element.appendChild(document.createTextNode(word));
                 } else {
-                    const span = document.createElement('span');
-                    span.textContent = char;
-                    span.className = 'char';
-                    fragment.appendChild(span);
-                    charElements.push(span);
+                    const wordSpan = document.createElement('span');
+                    wordSpan.className = 'inline-block whitespace-nowrap';
+                    [...word].forEach(char => {
+                        const charSpan = document.createElement('span');
+                        charSpan.textContent = char;
+                        charSpan.className = 'char';
+                        wordSpan.appendChild(charSpan);
+                        charElements.push(charSpan);
+                    });
+                    element.appendChild(wordSpan);
                 }
             });
-            node.parentNode.replaceChild(fragment, node);
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-            if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
-                const children = Array.from(node.childNodes);
-                children.forEach(processNode);
-            }
+        } else {
+            element.appendChild(node);
         }
-    }
-    processNode(element);
+    });
+
     return { chars: charElements };
 }
 
@@ -197,26 +201,25 @@ function CrecimientoAds() {
             </div>
 
             <main className="md:pt-8">
-                <div className="contents">
-                    {/* Hero section */}
-                    <div className="flex flex-col items-center mb-10 md:mb-20 pt-32 md:pt-40 reveal px-8">
-                        <div className="w-full max-w-5xl text-center">
-                            <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-6 block border-l-4 border-primary pl-6 mx-auto w-fit">
-                                ESTRATEGIA
-                            </span>
-                            <h1
-                                ref={heroTitleRef}
-                                className="text-[clamp(2.5rem,7vw,7rem)] text-center font-black uppercase leading-[1.0] tracking-tighter mb-10"
-                            >
-                                Implementación<br />
-                                <span className="text-white">de embudo <br /> </span>
-                                <span className="text-primary italic">digital</span>
-                            </h1>
-                            <p className="text-white/60 text-center text-lg md:text-2xl uppercase mx-auto leading-tight font-bold tracking-tight max-w-3xl">
-                                Construye una Infraestructura de Ingresos y transforma tu marketing en un activo de facturación predecible.
-                            </p>
-                        </div>
+                {/* Hero section */}
+                <section className="flex flex-col items-center mb-10 md:mb-20 pt-32 md:pt-48 reveal px-8">
+                    <div className="w-full max-w-[1400px] mx-auto text-center">
+                        <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-6 block border-l-4 border-primary pl-6 mx-auto w-fit">
+                            ESTRATEGIA
+                        </span>
+                        <h1
+                            ref={heroTitleRef}
+                            className="text-[clamp(2.5rem,7.5vw,9rem)] text-center font-black uppercase leading-[0.9] tracking-tighter mb-10"
+                        >
+                            Implementación<br />
+                            <span className="text-white">de embudo <br /> </span>
+                            <span className="text-primary italic">digital</span>
+                        </h1>
+                        <p className="text-white/60 text-center text-lg md:text-2xl lg:text-3xl uppercase mx-auto leading-tight font-bold tracking-tight max-w-4xl">
+                            Construye una Infraestructura de Ingresos y transforma tu marketing en un activo de facturación predecible.
+                        </p>
                     </div>
+                </section>
 
                     {/* Content sections */}
                     <section className="relative w-full py-24 px-4 sm:px-8 bg-gradient-to-b from-[#F7F8FC] to-[#EFF1F6] studio-texture border-y border-black/5">
@@ -436,8 +439,7 @@ function CrecimientoAds() {
                     <footer className="py-8 px-8 border-t border-white/5 text-center mt-12 bg-navy">
                         <p className="text-[9px] text-white/20 font-black uppercase tracking-[0.5em]">© 2024 CLICK PRODUCTIONS. DATA DRIVEN. RESULT FOCUSED.</p>
                     </footer>
-                </div>
-            </main>
+                </main>
 
             {/* Lightbox Modal */}
             {selectedImage && (

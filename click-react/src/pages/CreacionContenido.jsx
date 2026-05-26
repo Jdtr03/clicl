@@ -11,30 +11,35 @@ import { contentImages, contentVideos } from '../assets/utils/getContent.js';
 function splitText(element) {
     if (!element) return { chars: [] };
     const charElements = [];
-    function processNode(node) {
+    const childNodes = Array.from(element.childNodes);
+    element.innerHTML = '';
+
+    childNodes.forEach(node => {
         if (node.nodeType === Node.TEXT_NODE) {
-            const text = node.textContent;
-            const fragment = document.createDocumentFragment();
-            [...text].forEach(char => {
-                if (char.trim() === '') {
-                    fragment.appendChild(document.createTextNode(char));
+            const words = node.textContent.split(/(\s+)/);
+            words.forEach(word => {
+                if (word === '') return;
+                if (word.trim() === '') {
+                    element.appendChild(document.createTextNode(word));
                 } else {
-                    const span = document.createElement('span');
-                    span.textContent = char;
-                    span.className = 'char';
-                    fragment.appendChild(span);
-                    charElements.push(span);
+                    const wordSpan = document.createElement('span');
+                    wordSpan.className = 'inline-block whitespace-nowrap';
+                    [...word].forEach(char => {
+                        const charSpan = document.createElement('span');
+                        charSpan.textContent = char;
+                        charSpan.className = 'char';
+                        wordSpan.appendChild(charSpan);
+                        charElements.push(charSpan);
+                    });
+                    element.appendChild(wordSpan);
                 }
             });
-            node.parentNode.replaceChild(fragment, node);
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-            if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
-                const children = Array.from(node.childNodes);
-                children.forEach(processNode);
-            }
+        } else {
+            // Re-append elements like <br />
+            element.appendChild(node);
         }
-    }
-    processNode(element);
+    });
+
     return { chars: charElements };
 }
 
@@ -489,75 +494,63 @@ function CreacionContenido() {
                 </div>
             </div>
 
-            <main className="pb-20">
-                <div className="max-w-[1400px] mx-auto px-6 md:px-20">
-                    {/* Content scaled to 90% */}
-                    <div className="contents">
-                        {/* Unified Hero Section */}
-                        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center mb-50 pt-30 md:pt-34 reveal">
-                            <div className="flex-[1.2] text-left">
-                                <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-8 block border-l-4 border-primary pl-6 w-fit">CREATIVIDAD</span>
-                                <h1 ref={heroTitleRef} className="text-4xl sm:text-6xl md:text-[5.5rem] lg:text-[5.5rem] xl:text-[7.2rem] font-black uppercase leading-[0.9] tracking-tighter mb-10 text-left">
-                                    CREACIÓN DE<br />
-                                    <span className="text-primary italic">CONTENIDO</span>
-                                </h1>
-                                <p className="text-white/60 text-lg md:text-2xl uppercase max-w-2xl leading-tight font-bold tracking-tight text-left">
-                                    CREAMOS IMPACTO VISUAL DE ALTO NIVEL. NUESTRA PRODUCCIÓN ESTÁ DISEÑADA PARA CAPTURAR LA ATENCIÓN DEL MERCADO Y CONSOLIDAR UNA PRESENCIA DE MARCA IMPONENTE Y DIFERENCIADA.
-                                </p>
-                            </div>
-                            <div className="flex-1 w-full max-w-[600px] h-auto aspect-square bg-navy-accent rounded-2xl border border-white/5 flex items-center justify-center relative overflow-hidden group shadow-2xl">
-                                <img
-                                    src={contenidoImg}
-                                    alt="Creación de Contenido"
-                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                                />
-                                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/60 to-transparent pointer-events-none"></div>
-                            </div>
+            <main className="pb-20 pt-32 md:pt-40">
+                {/* Unified Hero Section - Full width container, centered content */}
+                <section className="max-w-[1500px] mx-auto px-6 md:px-20 mb-32 md:mb-50 reveal">
+                    <div className="flex flex-col lg:grid lg:grid-cols-[1.5fr_1fr] xl:grid-cols-[1.7fr_1fr] gap-12 lg:gap-20 items-center">
+                        <div className="text-center lg:text-left w-full">
+                            <span className="text-primary font-black uppercase tracking-[0.5em] text-xs mb-8 block border-l-4 border-primary pl-6 w-fit mx-auto lg:mx-0">CREATIVIDAD</span>
+                            <h1 ref={heroTitleRef} className="text-4xl sm:text-6xl md:text-[5.5rem] lg:text-[5.5rem] xl:text-[6.5rem] 2xl:text-[7.5rem] font-black uppercase leading-[0.9] tracking-tighter mb-10">
+                                CREACIÓN DE<br />
+                                <span className="text-primary italic">CONTENIDO</span>
+                            </h1>
+                            <p className="text-white/60 text-lg md:text-2xl uppercase max-w-2xl leading-tight font-bold tracking-tight mx-auto lg:mx-0">
+                                CREAMOS IMPACTO VISUAL DE ALTO NIVEL. NUESTRA PRODUCCIÓN ESTÁ DISEÑADA PARA CAPTURAR LA ATENCIÓN DEL MERCADO Y CONSOLIDAR UNA PRESENCIA DE MARCA IMPONENTE Y DIFERENCIADA.
+                            </p>
+                        </div>
+                        <div className="w-full max-w-[600px] lg:max-w-none h-auto aspect-square bg-navy-accent rounded-2xl border border-white/5 flex items-center justify-center relative overflow-hidden group shadow-2xl">
+                            <img
+                                src={contenidoImg}
+                                alt="Creación de Contenido"
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            />
+                            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/60 to-transparent pointer-events-none"></div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Carousel Section - True Full Width */}
+                <section className="w-full mb-32 reveal py-20 mesh-gradient-studio studio-texture border-y border-navy/5 overflow-hidden">
+                    <div className="max-w-[1900px] mx-auto">
+                        <div className="mb-5 text-left px-8 sm:px-12 lg:px-16">
+                            <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 w-fit">
+                                Portafolio de Fotografía
+                            </span>
+                            <h2 className="text-4xl sm:text-5xl md:text-[5.5rem] 2xl:text-[6.5rem] font-black uppercase tracking-tighter text-navy leading-[1.1] md:leading-[0.8]">
+                                Nuestra <br /><span className="text-primary">Producción</span>
+                            </h2>
+                        </div>
+                        <div className="w-full relative">
+                            <InteractiveMarquee slides={contentImages} autoPlay={true} showSwipeHint={true} />
                         </div>
 
-                        {/* Carousel Section - Light Theme */}
-                        {/* Interactive Moving Carousel Portafolio */}
-                        {/* SECCIÓN PORTAFOLIO - CORRECCIÓN PARA MONITORES GRANDES */}
+                        <div className="mb-12 mt-32 text-left px-8 sm:px-12 lg:px-16">
+                            <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 w-fit">
+                                Portafolio de Video
+                            </span>
+                            <h2 className="text-4xl sm:text-5xl md:text-[5.5rem] 2xl:text-[6.5rem] font-black uppercase tracking-tighter text-navy leading-[1.1] md:leading-[0.8]">
+                                Impacto <br /><span className="text-primary">Audiovisual</span>
+                            </h2>
+                        </div>
+                        <div className="w-full relative">
+                            <InteractiveMarquee slides={contentVideos} autoPlay={false} showSwipeHint={true} />
+                        </div>
+                    </div>
+                </section>
 
-                        {/* SECCIÓN COMPLETA: PORTAFOLIO CON FONDO INFINITO */}
-                        {/* SECCIÓN PORTAFOLIO - MAXIMIZADA PARA MONITORES GRANDES */}
-                        <section className="relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen mb-32 reveal py-20 mesh-gradient-studio studio-texture border-y border-navy/5 overflow-hidden 2xl:scale-100 2xl:origin-center">
-
-                            {/* Contenedor de contenido: En monitores grandes (2xl) subimos el ancho a 1600px para aprovechar el espacio */}
-                            <div className="max-w-[1900px] 2xl:max-w-[1900px] mx-auto ">
-
-                                {/* --- BLOQUE FOTOGRAFÍA --- */}
-                                <div className="mb-5 text-left px-8 sm:px-12 lg:px-16">
-                                    <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 w-fit">
-                                        Portafolio de Fotografía
-                                    </span>
-                                    <h2 className="text-4xl sm:text-5xl md:text-[5.5rem] 2xl:text-[6.5rem] font-black uppercase tracking-tighter text-navy leading-[1.1] md:leading-[0.8]">
-                                        Nuestra <br /><span className="text-primary">Producción</span>
-                                    </h2>
-                                </div>
-
-                                <div className="w-full">
-                                    <InteractiveMarquee slides={contentImages} autoPlay={true} showSwipeHint={true} />
-                                </div>
-
-                                {/* --- BLOQUE VIDEO --- */}
-                                <div className="mb-12 mt-32 text-left px-8 sm:px-12 lg:px-16">
-                                    <span className="text-primary font-black uppercase tracking-[0.4em] text-[10px] md:text-sm mb-6 block border-l-4 border-primary pl-4 w-fit">
-                                        Portafolio de Video
-                                    </span>
-                                    <h2 className="text-4xl sm:text-5xl md:text-[5.5rem] 2xl:text-[6.5rem] font-black uppercase tracking-tighter text-navy leading-[1.1] md:leading-[0.8]">
-                                        Impacto <br /><span className="text-primary">Audiovisual</span>
-                                    </h2>
-                                </div>
-
-                                <div className="w-full">
-                                    <InteractiveMarquee slides={contentVideos} autoPlay={false} showSwipeHint={true} />
-                                </div>
-
-                            </div>
-                        </section>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 mb-40 border border-white/10">
+                {/* Rest of the content wrapped in container */}
+                <div className="max-w-[1400px] mx-auto px-6 md:px-20 px-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-0 mb-40 border border-white/10">
                             {[
                                 { title: 'Video Vertical', desc: 'Optimizado para TikTok, Reels y Shorts con edición de alta retención.' },
                                 { title: 'Storytelling', desc: 'Narrativa de marca que conecta emocionalmente con tu cliente ideal.' },
@@ -789,9 +782,8 @@ function CreacionContenido() {
                             <p className="text-[9px] text-white/20 font-black uppercase tracking-[0.5em]">© 2024 CLICK PRODUCTIONS. VALIENTE. CREATIVO. IMPARABLE.</p>
                         </footer>
                     </div>
-                </div>
-            </main>
-        </div>
+                </main>
+            </div>
     );
 }
 
