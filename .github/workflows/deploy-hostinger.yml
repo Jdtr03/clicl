@@ -1,0 +1,49 @@
+name: 🚀 Deploy a Hostinger
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Descargar el código del repositorio
+      - name: 📥 Checkout del repo
+        uses: actions/checkout@v4
+
+      # 2. Configurar Node.js
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: click-react/package-lock.json
+
+      # 3. Instalar dependencias
+      - name: 📦 Instalar dependencias
+        working-directory: ./click-react
+        run: npm ci
+
+      # 4. Compilar el proyecto React (genera la carpeta dist/)
+      - name: 🏗️ Build del proyecto
+        working-directory: ./click-react
+        run: npm run build
+
+      # 5. Subir el contenido de dist/ a Hostinger via FTP
+      - name: 📤 Deploy a Hostinger via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./click-react/dist/
+          server-dir: /public_html/
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
