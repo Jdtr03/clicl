@@ -6,11 +6,17 @@ import CrecimientoAds from './pages/CrecimientoAds';
 
 /**
  * Helper component to scroll to top on route change
+ * and fire Meta Pixel PageView on each navigation
  */
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    // Fire Meta Pixel PageView on every route change
+    if (typeof window.fbq === 'function') {
+      window.fbq('track', 'PageView');
+    }
+
     // If there is a hash (e.g. #auditoria), scroll to that element
     if (hash) {
         const id = hash.replace('#', '');
