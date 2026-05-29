@@ -350,6 +350,15 @@ function CreacionContenido() {
 
     const handlePlanSelect = (plan) => {
         setSelectedPlan(plan);
+        // Meta Pixel: user viewed a specific plan (high purchase intent)
+        if (typeof window.fbq === 'function') {
+            window.fbq('track', 'ViewContent', {
+                content_name: plan.name,
+                content_category: 'Plan Creación de Contenido',
+                value: parseFloat(plan.price),
+                currency: 'USD'
+            });
+        }
         setTimeout(() => {
             if (formRef.current) {
                 const offset = 120;
@@ -361,6 +370,20 @@ function CreacionContenido() {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
+        // Meta Pixel: user submitted the contact form (highest intent - Lead + InitiateCheckout)
+        if (typeof window.fbq === 'function') {
+            window.fbq('track', 'Lead', {
+                content_name: selectedPlan?.name,
+                content_category: 'Creación de Contenido',
+                value: parseFloat(selectedPlan?.price),
+                currency: 'USD'
+            });
+            window.fbq('track', 'InitiateCheckout', {
+                content_name: selectedPlan?.name,
+                value: parseFloat(selectedPlan?.price),
+                currency: 'USD'
+            });
+        }
         const message = `Hola Click Productions, mi nombre es ${formData.nombre}. Estoy interesado en contratar el Plan *${selectedPlan.name}* ($${selectedPlan.price}/mes) para mi marca o empresa *${formData.empresa}*.
 
 *Detalles adicionales:*

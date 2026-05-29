@@ -58,11 +58,19 @@ function CrecimientoAds() {
         const offset = 96;
         const top = section.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
+        // Meta Pixel: track intent to book an audit
+        if (id === 'auditoria' && typeof window.fbq === 'function') {
+            window.fbq('track', 'Lead', { content_name: 'Diagnóstico Gratuito - Embudo Digital' });
+        }
     };
 
     const handleDominarAhora = () => {
         if (!showCalendar) {
             setShowCalendar(true);
+            // Meta Pixel: user clicked to open the calendar (Schedule intent)
+            if (typeof window.fbq === 'function') {
+                window.fbq('track', 'Schedule', { content_name: 'Calendario Auditoría - Embudo Digital' });
+            }
             setTimeout(() => {
                 const section = document.getElementById('auditoria');
                 if (section) {

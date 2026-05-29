@@ -76,6 +76,10 @@ function LandingPage() {
         const offset = 96; // navbar height
         const top = section.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
+        // Meta Pixel: track intent to book an audit
+        if (id === 'auditoria' && typeof window.fbq === 'function') {
+            window.fbq('track', 'Lead', { content_name: 'Auditoría Gratuita' });
+        }
     };
 
 
@@ -835,6 +839,11 @@ function LandingPage() {
                                                 href={sm.url}
                                                 target={sm.url !== '#' ? "_blank" : undefined}
                                                 rel={sm.url !== '#' ? "noopener noreferrer" : undefined}
+                                                onClick={() => {
+                                                    if (sm.name === 'WhatsApp' && typeof window.fbq === 'function') {
+                                                        window.fbq('track', 'Contact', { content_name: 'WhatsApp Footer' });
+                                                    }
+                                                }}
                                             >
                                                 {sm.name}
                                             </a>
