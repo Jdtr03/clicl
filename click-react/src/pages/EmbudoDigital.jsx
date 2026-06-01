@@ -43,7 +43,7 @@ function splitText(element) {
     return { chars: charElements };
 }
 
-function CrecimientoAds() {
+function EmbudoDigital() {
     const [selectedImage, setSelectedImage] = useState(null);
     const [scrolled, setScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -137,7 +137,7 @@ function CrecimientoAds() {
                     <div className="hidden md:flex items-center gap-10">
                         <Link to="/" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Inicio</Link>
                         <Link to="/creacion-contenido" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Contenido</Link>
-                        <Link to="/crecimiento-ads" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Embudo Digital</Link>
+                        <Link to="/embudo-digital" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Embudo Digital</Link>
                     </div>
 
                     <div className="flex items-center gap-4">
@@ -179,7 +179,7 @@ function CrecimientoAds() {
                         {[
                             { label: 'Inicio', target: '/' },
                             { label: 'Contenido', target: '/creacion-contenido' },
-                            { label: 'Embudo Digital', target: '/crecimiento-ads' }
+                            { label: 'Embudo Digital', target: '/embudo-digital' }
                         ].map((item, idx) => (
                             <Link
                                 key={item.label}
@@ -468,4 +468,4 @@ function CrecimientoAds() {
     );
 }
 
-export default CrecimientoAds;
+export default EmbudoDigital;

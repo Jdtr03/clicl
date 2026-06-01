@@ -68,17 +68,19 @@ function LandingPage() {
     const statsBarRef = useRef(null);
     const playerRef = useRef(null);
 
+    const PIXEL_AUDITORIA = '1490197068692617';
+
     const handleNavClick = (e, id) => {
         e.preventDefault();
         const section = document.getElementById(id);
         if (!section) return;
-        setIsMenuOpen(false); // Close menu if open
-        const offset = 96; // navbar height
+        setIsMenuOpen(false);
+        const offset = 96;
         const top = section.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
-        // Meta Pixel: track intent to book an audit
+        // Meta Pixel: registrar intención de reservar auditoría (solo al píxel de clientes potenciales)
         if (id === 'auditoria' && typeof window.fbq === 'function') {
-            window.fbq('track', 'Lead', { content_name: 'Auditoría Gratuita' });
+            window.fbq('trackSingle', PIXEL_AUDITORIA, 'Lead', { content_name: 'Auditoría Gratuita' });
         }
     };
 
@@ -202,6 +204,36 @@ function LandingPage() {
         }
     }, []);
 
+    // Meta Pixel: Clientes Potenciales (solo LandingPage - Sección Auditoría)
+    useEffect(() => {
+        const PIXEL_ID = '1490197068692617';
+
+        // Inicializar fbq si aún no existe
+        if (!window.fbq) {
+            const n = window.fbq = function() {
+                n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+            };
+            if (!window._fbq) window._fbq = n;
+            n.push = n;
+            n.loaded = true;
+            n.version = '2.0';
+            n.queue = [];
+        }
+
+        // Cargar el SDK de fbevents.js si no está ya en el DOM
+        if (!document.getElementById('fb-pixel-sdk')) {
+            const script = document.createElement('script');
+            script.id = 'fb-pixel-sdk';
+            script.async = true;
+            script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+            const firstScript = document.getElementsByTagName('script')[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+        }
+
+        window.fbq('init', PIXEL_ID);
+        window.fbq('trackSingle', PIXEL_ID, 'PageView');
+    }, []);
+
     // GoHighLevel Script Loading
     useEffect(() => {
         const script = document.createElement('script');
@@ -306,7 +338,7 @@ function LandingPage() {
                     <div className="hidden md:flex items-center gap-10 text-white">
                         <Link to="/" className="text-[11px] font-black hover:text-primary transition-colors uppercase tracking-[0.3em] cursor-pointer">Inicio</Link>
                         <Link to="/creacion-contenido" className="text-[11px] font-black hover:text-primary transition-colors uppercase tracking-[0.3em] cursor-pointer">Contenido</Link>
-                        <Link to="/crecimiento-ads" className="text-[11px] font-black hover:text-primary transition-colors uppercase tracking-[0.3em] cursor-pointer">Embudo Digital</Link>
+                        <Link to="/embudo-digital" className="text-[11px] font-black hover:text-primary transition-colors uppercase tracking-[0.3em] cursor-pointer">Embudo Digital</Link>
                     </div>
 
                     <div className="flex items-center gap-6">
@@ -350,7 +382,7 @@ function LandingPage() {
                         {[
                             { label: 'Inicio', target: '/', type: 'link' },
                             { label: 'Contenido', target: '/creacion-contenido', type: 'link' },
-                            { label: 'Embudo Digital', target: '/crecimiento-ads', type: 'link' }
+                            { label: 'Embudo Digital', target: '/embudo-digital', type: 'link' }
                         ].map((item, idx) => (
                             <React.Fragment key={item.label}>
                                 {item.type === 'link' ? (
@@ -487,7 +519,7 @@ function LandingPage() {
                             <div className="flex flex-col md:flex-row gap-4 md:gap-px bg-transparent md:bg-white/10 border-0 md:border md:border-white/10 shadow-none md:shadow-2xl reveal reveal-up overflow-hidden">
                                 {[
                                     { id: '01', icon: 'groups_3', title: 'Departamento\nde\nMarketing', desc: 'Diseñamos, ejecutamos y medimos. Nos hacemos cargo de toda tu presencia digital para que tú te enfoques en lo más importante: tu producto o servicio.', items: ['Planificación estratégica', 'Crecimiento Digital'], scrollId: 'auditoria' },
-                                    { id: '02', icon: 'ads_click', title: 'Embudos de \nVentas', desc: 'Diseñamos embudos de ventas adaptados 100% a tu modelo de negocio permitiendo filtrar, organizar y atender a tus clientes potenciales de manera automatizada  ', items: ['tasa de conversión', 'Escalabilidad '], link: '/crecimiento-ads' },
+                                    { id: '02', icon: 'ads_click', title: 'Embudos de \nVentas', desc: 'Diseñamos embudos de ventas adaptados 100% a tu modelo de negocio permitiendo filtrar, organizar y atender a tus clientes potenciales de manera automatizada  ', items: ['tasa de conversión', 'Escalabilidad '], link: '/embudo-digital' },
                                     { id: '03', icon: 'movie_edit', title: 'Creación de\nContenido', desc: 'Contenido de alto nivel que traduce la esecnia de tu empresa en una presencia digital imponente y diferenciada', items: ['Producción de video', 'Activos sociales'], link: '/creacion-contenido' },
                                 ].map(service => (
                                     <div

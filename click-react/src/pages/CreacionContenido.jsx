@@ -348,11 +348,13 @@ function CreacionContenido() {
         whatsapp: ''
     });
 
+    const PIXEL_CONTENIDO = '673387272426495';
+
     const handlePlanSelect = (plan) => {
         setSelectedPlan(plan);
-        // Meta Pixel: user viewed a specific plan (high purchase intent)
+        // Meta Pixel: usuario vio un plan específico (alta intención de compra)
         if (typeof window.fbq === 'function') {
-            window.fbq('track', 'ViewContent', {
+            window.fbq('trackSingle', PIXEL_CONTENIDO, 'ViewContent', {
                 content_name: plan.name,
                 content_category: 'Plan Creación de Contenido',
                 value: parseFloat(plan.price),
@@ -370,15 +372,15 @@ function CreacionContenido() {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        // Meta Pixel: user submitted the contact form (highest intent - Lead + InitiateCheckout)
+        // Meta Pixel: usuario envió el formulario de contacto (máxima intención - Lead + InitiateCheckout)
         if (typeof window.fbq === 'function') {
-            window.fbq('track', 'Lead', {
+            window.fbq('trackSingle', PIXEL_CONTENIDO, 'Lead', {
                 content_name: selectedPlan?.name,
                 content_category: 'Creación de Contenido',
                 value: parseFloat(selectedPlan?.price),
                 currency: 'USD'
             });
-            window.fbq('track', 'InitiateCheckout', {
+            window.fbq('trackSingle', PIXEL_CONTENIDO, 'InitiateCheckout', {
                 content_name: selectedPlan?.name,
                 value: parseFloat(selectedPlan?.price),
                 currency: 'USD'
@@ -394,6 +396,36 @@ function CreacionContenido() {
         const waUrl = `https://wa.me/584123152222?text=${encodeURIComponent(message)}`;
         window.open(waUrl, '_blank');
     };
+
+    // Meta Pixel: Suscripciones Audiovisuales (solo CreacionContenido)
+    useEffect(() => {
+        const PIXEL_ID = '673387272426495';
+
+        // Inicializar fbq si aún no existe
+        if (!window.fbq) {
+            const n = window.fbq = function() {
+                n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+            };
+            if (!window._fbq) window._fbq = n;
+            n.push = n;
+            n.loaded = true;
+            n.version = '2.0';
+            n.queue = [];
+        }
+
+        // Cargar el SDK de fbevents.js si no está ya en el DOM
+        if (!document.getElementById('fb-pixel-sdk')) {
+            const script = document.createElement('script');
+            script.id = 'fb-pixel-sdk';
+            script.async = true;
+            script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+            const firstScript = document.getElementsByTagName('script')[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+        }
+
+        window.fbq('init', PIXEL_ID);
+        window.fbq('trackSingle', PIXEL_ID, 'PageView');
+    }, []);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -450,7 +482,7 @@ function CreacionContenido() {
                     <div className="hidden md:flex items-center gap-10">
                         <Link to="/" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Inicio</Link>
                         <Link to="/creacion-contenido" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Contenido</Link>
-                        <Link to="/crecimiento-ads" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Embudo Digital</Link>
+                        <Link to="/embudo-digital" className="text-[11px] font-black uppercase tracking-[0.3em] text-white hover:text-primary transition-colors">Embudo Digital</Link>
                     </div>
 
                     <div className="flex items-center gap-4">
@@ -490,7 +522,7 @@ function CreacionContenido() {
                         {[
                             { label: 'Inicio', target: '/' },
                             { label: 'Contenido', target: '/creacion-contenido' },
-                            { label: 'Embudo Digital', target: '/crecimiento-ads' }
+                            { label: 'Embudo Digital', target: '/embudo-digital' }
                         ].map((item, idx) => (
                             <Link
                                 key={item.label}
