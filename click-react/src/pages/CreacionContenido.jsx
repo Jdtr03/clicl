@@ -400,31 +400,10 @@ function CreacionContenido() {
     // Meta Pixel: Suscripciones Audiovisuales (solo CreacionContenido)
     useEffect(() => {
         const PIXEL_ID = '673387272426495';
-
-        // Inicializar fbq si aún no existe
-        if (!window.fbq) {
-            const n = window.fbq = function() {
-                n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-            };
-            if (!window._fbq) window._fbq = n;
-            n.push = n;
-            n.loaded = true;
-            n.version = '2.0';
-            n.queue = [];
+        if (typeof window.fbq === 'function') {
+            window.fbq('init', PIXEL_ID);
+            window.fbq('trackSingle', PIXEL_ID, 'PageView');
         }
-
-        // Cargar el SDK de fbevents.js si no está ya en el DOM
-        if (!document.getElementById('fb-pixel-sdk')) {
-            const script = document.createElement('script');
-            script.id = 'fb-pixel-sdk';
-            script.async = true;
-            script.src = 'https://connect.facebook.net/en_US/fbevents.js';
-            const firstScript = document.getElementsByTagName('script')[0];
-            firstScript.parentNode.insertBefore(script, firstScript);
-        }
-
-        window.fbq('init', PIXEL_ID);
-        window.fbq('trackSingle', PIXEL_ID, 'PageView');
     }, []);
 
     useEffect(() => {
