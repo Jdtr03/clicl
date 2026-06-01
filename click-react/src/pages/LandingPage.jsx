@@ -208,7 +208,12 @@ function LandingPage() {
     useEffect(() => {
         const PIXEL_ID = '1490197068692617';
         if (typeof window.fbq === 'function') {
-            window.fbq('init', PIXEL_ID);
+            // Guard: evitar doble init al navegar entre páginas en SPA
+            window.__metaPixelsInited = window.__metaPixelsInited || {};
+            if (!window.__metaPixelsInited[PIXEL_ID]) {
+                window.fbq('init', PIXEL_ID);
+                window.__metaPixelsInited[PIXEL_ID] = true;
+            }
             window.fbq('trackSingle', PIXEL_ID, 'PageView');
         }
     }, []);
